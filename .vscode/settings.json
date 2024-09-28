@@ -1,3 +1,4 @@
 {
-  "editor.defaultFormatter": "ms-python.autopep8"
+  "editor.defaultFormatter": "ms-python.autopep8",
+  "indentRainbow.includedLanguages": ["python"]
 }
