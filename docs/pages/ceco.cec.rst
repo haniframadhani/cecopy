@@ -10,3 +10,10 @@ ceco.cec.sphere module
    :members:
    :undoc-members:
    :show-inheritance:
+
+ceco.cec.schwefel1_2 module
+---------------------------
+.. automodule:: ceco.cec.schwefel1_2
+   :members:
+   :undoc-members:
+   :show-inheritance:
