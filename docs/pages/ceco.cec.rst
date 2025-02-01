@@ -17,3 +17,10 @@ ceco.cec.schwefel1_2 module
    :members:
    :undoc-members:
    :show-inheritance:
+
+ceco.cec.schwefel2_13 module
+----------------------------
+.. automodule:: ceco.cec.schwefel2_13
+   :members:
+   :undoc-members:
+   :show-inheritance:
