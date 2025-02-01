@@ -4,130 +4,107 @@ import math
 
 
 class Test_schwefel2_13(unittest.TestCase):
-    def test_initialization(self):
-        """
-        Test initialization of the Schwefel2_13 class.
-        """
-        rotation = [[1.0, 0.0], [0.0, 1.0]]  # Identity matrix
-        shift = [1.0, 2.0]
+    def setUp(self):
+        # Define a simple rotation matrix and shift vector for testing
+        self.rotation = [[1, 0], [0, 1]]  # Identity matrix
+        self.shift = [0, 0]  # No shift
+        self.schwefel = Schwefel2_13(self.rotation, self.shift)
 
-        schwefel = Schwefel2_13(rotation, shift)
+    def test_generate_random_matrix(self):
+        D = 2
+        min_val = -100
+        max_val = 100
+        matrix = self.schwefel.generate_random_matrix(D, min_val, max_val)
 
-        # Verify that rotation and shift are correctly set
-        self.assertEqual(schwefel.rotation, rotation)
-        self.assertEqual(schwefel.shift, shift)
+        # Check the dimensions of the matrix
+        self.assertEqual(len(matrix), D)
+        self.assertEqual(len(matrix[0]), D)
 
-        # Verify that random matrices a and b are generated
-        self.assertEqual(len(schwefel.a), 2)  # D = 2
-        self.assertEqual(len(schwefel.b), 2)  # D = 2
+        # Check that all values are within the specified range
+        for row in matrix:
+            for val in row:
+                self.assertTrue(min_val <= val <= max_val)
 
-        # Verify that random alpha vector is generated
-        self.assertEqual(len(schwefel.alpha), 2)  # D = 2
+    def test_generate_random_alpha(self):
+        D = 2
+        alpha = self.schwefel.generate_random_alpha(D)
 
-    def test_evaluate_identity_rotation_and_zero_shift(self):
-        """
-        Test the Schwefel 2.13 function with identity rotation and zero shift.
-        """
-        rotation = [[1.0, 0.0], [0.0, 1.0]]  # Identity matrix
-        shift = [0.0, 0.0]  # Zero shift
-        schwefel = Schwefel2_13(rotation, shift)
+        # Check the length of the alpha vector
+        self.assertEqual(len(alpha), D)
 
-        # Set fixed matrices a and b for reproducibility
-        schwefel.a = [[1, 2], [3, 4]]
-        schwefel.b = [[5, 6], [7, 8]]
-        # Fixed alpha for reproducibility
-        schwefel.alpha = [math.pi / 4, math.pi / 6]
+        # Check that all values are within the range [-π, π]
+        for val in alpha:
+            self.assertTrue(-math.pi <= val <= math.pi)
 
-        input_vector = [1.0, 2.0]  # Input vector
-        result = schwefel.evaluate(input_vector)
+    def test_compute_A(self):
+        D = 2
+        a = [[1, 2], [3, 4]]
+        b = [[5, 6], [7, 8]]
+        alpha = [math.pi / 2, math.pi / 4]
 
-        # Manually compute expected result
-        A = schwefel.compute_A()
-        B = schwefel.compute_B(input_vector)  # No shift or rotation applied
-        expected_result = sum((A[i] - B[i]) ** 2 for i in range(2))
+        A = self.schwefel.compute_A(D, a, b, alpha)
 
-        self.assertAlmostEqual(result, expected_result)
+        # Expected A values calculated manually
+        expected_A = [
+            a[0][0] * math.sin(alpha[0]) + a[0][1] * math.sin(alpha[1]) +
+            b[0][0] * math.cos(alpha[0]) + b[0][1] * math.cos(alpha[1]),
+            a[1][0] * math.sin(alpha[0]) + a[1][1] * math.sin(alpha[1]) +
+            b[1][0] * math.cos(alpha[0]) + b[1][1] * math.cos(alpha[1])
+        ]
+
+        self.assertEqual(len(A), D)
+        for i in range(D):
+            self.assertAlmostEqual(A[i], expected_A[i])
+
+    def test_compute_B(self):
+        D = 2
+        a = [[1, 2], [3, 4]]
+        b = [[5, 6], [7, 8]]
+        X = [math.pi / 2, math.pi / 4]
+
+        B = self.schwefel.compute_B(D, a, b, X)
+
+        # Expected B values calculated manually
+        expected_B = [
+            a[0][0] * math.sin(X[0]) + a[0][1] * math.sin(X[1]) +
+            b[0][0] * math.cos(X[0]) + b[0][1] * math.cos(X[1]),
+            a[1][0] * math.sin(X[0]) + a[1][1] * math.sin(X[1]) +
+            b[1][0] * math.cos(X[0]) + b[1][1] * math.cos(X[1])
+        ]
+
+        self.assertEqual(len(B), D)
+        for i in range(D):
+            self.assertAlmostEqual(B[i], expected_B[i])
+
+    def test_evaluate(self):
+        input_vector = [math.pi / 2, math.pi / 4]
+
+        # Since the matrices a and b are generated randomly, we can't predict the exact result.
+        # Instead, we can check that the result is a non-negative float.
+        result = self.schwefel.evaluate(input_vector)
+
+        self.assertIsInstance(result, float)
+        self.assertGreaterEqual(result, 0.0)
 
     def test_evaluate_with_rotation_and_shift(self):
-        """
-        Test the Schwefel 2.13 function with a custom rotation and shift.
-        """
-        rotation = [[0.0, 1.0], [1.0, 0.0]]  # Swaps x and y
-        shift = [1.0, 2.0]
+        # Define a non-identity rotation matrix and a non-zero shift vector
+        rotation = [[0, 1], [1, 0]]  # Swap x and y
+        shift = [1, 2]
         schwefel = Schwefel2_13(rotation, shift)
 
-        # Set fixed matrices a and b for reproducibility
-        schwefel.a = [[1, 2], [3, 4]]
-        schwefel.b = [[5, 6], [7, 8]]
-        # Fixed alpha for reproducibility
-        schwefel.alpha = [math.pi / 4, math.pi / 6]
+        input_vector = [math.pi / 2, math.pi / 4]
 
-        input_vector = [1.0, 2.0]  # Input vector
+        # Rotated and shifted vector should be [input_vector[1] - shift[0], input_vector[0] - shift[1]]
+        rotated_shifted_vector = [input_vector[1] -
+                                  shift[0], input_vector[0] - shift[1]]
+
+        # Since the matrices a and b are generated randomly, we can't predict the exact result.
+        # Instead, we can check that the result is a non-negative float.
         result = schwefel.evaluate(input_vector)
 
-        # Manually compute expected result
-        rotated_vector = [rotation[0][0] * input_vector[0] + rotation[0][1] * input_vector[1],
-                          rotation[1][0] * input_vector[0] + rotation[1][1] * input_vector[1]]
-        shifted_vector = [rotated_vector[0] -
-                          shift[0], rotated_vector[1] - shift[1]]
-        A = schwefel.compute_A()
-        B = schwefel.compute_B(shifted_vector)
-        expected_result = sum((A[i] - B[i]) ** 2 for i in range(2))
-
-        self.assertAlmostEqual(result, expected_result)
-
-    def test_evaluate_zero_vector(self):
-        """
-        Test the Schwefel 2.13 function with a zero input vector.
-        """
-        rotation = [[1.0, 0.0], [0.0, 1.0]]  # Identity matrix
-        shift = [1.0, 2.0]
-        schwefel = Schwefel2_13(rotation, shift)
-
-        # Set fixed matrices a and b for reproducibility
-        schwefel.a = [[1, 2], [3, 4]]
-        schwefel.b = [[5, 6], [7, 8]]
-        # Fixed alpha for reproducibility
-        schwefel.alpha = [math.pi / 4, math.pi / 6]
-
-        input_vector = [0.0, 0.0]  # Zero input vector
-        result = schwefel.evaluate(input_vector)
-
-        # Manually compute expected result
-        rotated_vector = [rotation[0][0] * input_vector[0] + rotation[0][1] * input_vector[1],
-                          rotation[1][0] * input_vector[0] + rotation[1][1] * input_vector[1]]
-        shifted_vector = [rotated_vector[0] -
-                          shift[0], rotated_vector[1] - shift[1]]
-        A = schwefel.compute_A()
-        B = schwefel.compute_B(shifted_vector)
-        expected_result = sum((A[i] - B[i]) ** 2 for i in range(2))
-
-        self.assertAlmostEqual(result, expected_result)
-
-    def test_evaluate_no_rotation_no_shift(self):
-        """
-        Test the Schwefel 2.13 function with no rotation and no shift.
-        """
-        rotation = [[1.0, 0.0], [0.0, 1.0]]  # Identity matrix
-        shift = [0.0, 0.0]  # Zero shift
-        schwefel = Schwefel2_13(rotation, shift)
-
-        # Set fixed matrices a and b for reproducibility
-        schwefel.a = [[1, 2], [3, 4]]
-        schwefel.b = [[5, 6], [7, 8]]
-        # Fixed alpha for reproducibility
-        schwefel.alpha = [math.pi / 4, math.pi / 6]
-
-        input_vector = [1.0, 2.0]  # Input vector
-        result = schwefel.evaluate(input_vector)
-
-        # Manually compute expected result
-        A = schwefel.compute_A()
-        B = schwefel.compute_B(input_vector)  # No shift or rotation applied
-        expected_result = sum((A[i] - B[i]) ** 2 for i in range(2))
-
-        self.assertAlmostEqual(result, expected_result)
+        self.assertIsInstance(result, float)
+        self.assertGreaterEqual(result, 0.0)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

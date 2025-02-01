@@ -15,32 +15,17 @@ class Schwefel2_13(Benchmark):
     Attributes:
         rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
-        D (int): The dimensionality of the problem, inferred from the length of the shift vector.
-        a (list of list of int): A D x D matrix of random integers in the range [-100, 100].
-        b (list of list of int): A D x D matrix of random integers in the range [-100, 100].
-        alpha (list of float): A vector of D random numbers in the range [-π, π].
     """
 
     def __init__(self, rotation: list[list[float]], shift: list[float]) -> None:
         """
         Initializes the Schwefel2_13 class with a rotation matrix and a shift vector.
 
-        During initialization, random matrices `a` and `b` and a random vector `alpha` are
-        generated. These are used to define the Schwefel 2.13 function.
-
         Parameters:
             rotation (list of list of float): The rotation matrix for transforming the input vector.
             shift (list of float): The shift vector for adjusting the input vector.
         """
         super().__init__(rotation, shift)
-
-        # Generate random matrices a and b
-        self.D = len(shift)  # Dimension of the problem
-        self.a = self.generate_random_matrix(self.D, -100, 100)
-        self.b = self.generate_random_matrix(self.D, -100, 100)
-
-        # Generate random alpha vector
-        self.alpha = self.generate_random_alpha(self.D)
 
     def generate_random_matrix(self, D: int, min_val: int, max_val: int) -> list[list[int]]:
         """
@@ -68,43 +53,45 @@ class Schwefel2_13(Benchmark):
         """
         return [random.uniform(-math.pi, math.pi) for _ in range(D)]
 
-    def compute_A(self) -> list[float]:
+    def compute_A(self, D: int, a: list[list[int]], b: list[list[int]], alpha: list[float]) -> list[float]:
         """
         Computes the A vector using the formula:
         A_i = sum_{j=1 to D} (a_{ij} * sin(alpha_j) + b_{ij} * cos(alpha_j)).
 
-        The A vector is a fixed vector computed using the random matrices `a` and `b`
-        and the random vector `alpha`.
+        Parameters:
+            D (int): The dimension of the problem.
+            a (list of list of int): The a matrix.
+            b (list of list of int): The b matrix.
+            alpha (list of float): The alpha vector.
 
         Returns:
             list of float: The computed A vector.
         """
-        A = [0.0] * self.D
-        for i in range(self.D):
-            for j in range(self.D):
-                A[i] += self.a[i][j] * \
-                    math.sin(self.alpha[j]) + \
-                    self.b[i][j] * math.cos(self.alpha[j])
+        A = [0.0] * D
+        for i in range(D):
+            for j in range(D):
+                A[i] += a[i][j] * math.sin(alpha[j]) + \
+                    b[i][j] * math.cos(alpha[j])
         return A
 
-    def compute_B(self, X: list[float]) -> list[float]:
+    def compute_B(self, D: int, a: list[list[int]], b: list[list[int]], X: list[float]) -> list[float]:
         """
         Computes the B vector using the formula:
         B_i(X) = sum_{j=1 to D} (a_{ij} * sin(x_j) + b_{ij} * cos(x_j)).
 
-        The B vector is computed for a given input vector X using the random matrices `a` and `b`.
-
         Parameters:
-            X (list of float): The input vector [x1, x2, ..., xD].
+            D (int): The dimension of the problem.
+            a (list of list of int): The a matrix.
+            b (list of list of int): The b matrix.
+            X (list of float): The input vector.
 
         Returns:
             list of float: The computed B vector.
         """
-        B = [0.0] * self.D
-        for i in range(self.D):
-            for j in range(self.D):
-                B[i] += self.a[i][j] * \
-                    math.sin(X[j]) + self.b[i][j] * math.cos(X[j])
+        B = [0.0] * D
+        for i in range(D):
+            for j in range(D):
+                B[i] += a[i][j] * math.sin(X[j]) + b[i][j] * math.cos(X[j])
         return B
 
     def evaluate(self, input_vector: list[float]) -> float:
@@ -122,23 +109,32 @@ class Schwefel2_13(Benchmark):
         Returns:
             float: The result of the Schwefel 2.13 function after applying rotation and shift.
         """
+        # Infer dimension from the input vector
+        D = len(input_vector)
+
+        # Generate random matrices a and b
+        a = self.generate_random_matrix(D, -100, 100)
+        b = self.generate_random_matrix(D, -100, 100)
+
+        # Generate random alpha vector
+        alpha = self.generate_random_alpha(D)
+
         # Apply rotation
-        rotated_vector = [0.0] * len(input_vector)
-        for i in range(len(input_vector)):
-            for j in range(len(input_vector)):
+        rotated_vector = [0.0] * D
+        for i in range(D):
+            for j in range(D):
                 rotated_vector[i] += self.rotation[i][j] * input_vector[j]
 
         # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(len(rotated_vector))]
+        shifted_vector = [rotated_vector[i] - self.shift[i] for i in range(D)]
 
         # Compute A and B
-        A = self.compute_A()
-        B = self.compute_B(shifted_vector)
+        A = self.compute_A(D, a, b, alpha)
+        B = self.compute_B(D, a, b, shifted_vector)
 
         # Compute the Schwefel 2.13 function
         total_sum = 0.0
-        for i in range(self.D):
+        for i in range(D):
             total_sum += (A[i] - B[i]) ** 2
 
         return total_sum
