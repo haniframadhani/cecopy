@@ -12,20 +12,42 @@ class Schwefel2_13(Benchmark):
     and multi-modal nature. The class inherits from the `Benchmark` class and applies
     rotation and shift transformations to the input vector before evaluating the function.
 
+    The Schwefel 2.13 function is defined as:
+    F(X) = sum_{i=1 to D} (A_i - B_i(X))^2,
+    where:
+    - A_i = sum_{j=1 to D} (a_{ij} * sin(alpha_j) + b_{ij} * cos(alpha_j)),
+    - B_i(X) = sum_{j=1 to D} (a_{ij} * sin(x_j) + b_{ij} * cos(x_j)).
+
     Attributes:
         rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
+        dimension (int): The dimensionality of the problem.
+        a (list of list of int): A D x D matrix of random integers in the range [-100, 100].
+        b (list of list of int): A D x D matrix of random integers in the range [-100, 100].
+        alpha (list of float): A vector of D random numbers in the range [-π, π].
     """
 
-    def __init__(self, rotation: list[list[float]], shift: list[float]) -> None:
+    def __init__(self, rotation: list[list[float]], shift: list[float], dimension: int) -> None:
         """
-        Initializes the Schwefel2_13 class with a rotation matrix and a shift vector.
+        Initializes the Schwefel2_13 class with a rotation matrix, shift vector, and dimension.
+
+        During initialization, random matrices `a` and `b` and a random vector `alpha` are
+        generated. These are used to define the Schwefel 2.13 function.
 
         Parameters:
             rotation (list of list of float): The rotation matrix for transforming the input vector.
             shift (list of float): The shift vector for adjusting the input vector.
+            dimension (int): The dimensionality of the problem.
         """
         super().__init__(rotation, shift)
+        self.dimension = dimension
+
+        # Generate random matrices a and b
+        self.a = self.generate_random_matrix(self.dimension, -100, 100)
+        self.b = self.generate_random_matrix(self.dimension, -100, 100)
+
+        # Generate random alpha vector
+        self.alpha = self.generate_random_alpha(self.dimension)
 
     def generate_random_matrix(self, D: int, min_val: int, max_val: int) -> list[list[int]]:
         """
@@ -109,32 +131,23 @@ class Schwefel2_13(Benchmark):
         Returns:
             float: The result of the Schwefel 2.13 function after applying rotation and shift.
         """
-        # Infer dimension from the input vector
-        D = len(input_vector)
-
-        # Generate random matrices a and b
-        a = self.generate_random_matrix(D, -100, 100)
-        b = self.generate_random_matrix(D, -100, 100)
-
-        # Generate random alpha vector
-        alpha = self.generate_random_alpha(D)
-
         # Apply rotation
-        rotated_vector = [0.0] * D
-        for i in range(D):
-            for j in range(D):
+        rotated_vector = [0.0] * self.dimension
+        for i in range(self.dimension):
+            for j in range(self.dimension):
                 rotated_vector[i] += self.rotation[i][j] * input_vector[j]
 
         # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i] for i in range(D)]
+        shifted_vector = [rotated_vector[i] - self.shift[i]
+                          for i in range(self.dimension)]
 
         # Compute A and B
-        A = self.compute_A(D, a, b, alpha)
-        B = self.compute_B(D, a, b, shifted_vector)
+        A = self.compute_A(self.dimension, self.a, self.b, self.alpha)
+        B = self.compute_B(self.dimension, self.a, self.b, shifted_vector)
 
         # Compute the Schwefel 2.13 function
         total_sum = 0.0
-        for i in range(D):
+        for i in range(self.dimension):
             total_sum += (A[i] - B[i]) ** 2
 
         return total_sum
