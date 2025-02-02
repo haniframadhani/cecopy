@@ -24,11 +24,17 @@ ceco.cec.schwefel2_13 module
    :members:
    :undoc-members:
    :show-inheritance:
-
    
 ceco.cec.elliptic module
 ------------------------
 .. automodule:: ceco.cec.elliptic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+      
+ceco.cec.ellipsoid module
+-------------------------
+.. automodule:: ceco.cec.ellipsoid
    :members:
    :undoc-members:
    :show-inheritance:
