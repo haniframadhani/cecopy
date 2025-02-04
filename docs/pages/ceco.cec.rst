@@ -38,3 +38,10 @@ ceco.cec.ellipsoid module
    :members:
    :undoc-members:
    :show-inheritance:
+      
+ceco.cec.rosenbrock module
+--------------------------
+.. automodule:: ceco.cec.rosenbrock
+   :members:
+   :undoc-members:
+   :show-inheritance:
