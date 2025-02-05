@@ -45,3 +45,10 @@ ceco.cec.rosenbrock module
    :members:
    :undoc-members:
    :show-inheritance:
+         
+ceco.cec.griewank module
+------------------------
+.. automodule:: ceco.cec.griewank
+   :members:
+   :undoc-members:
+   :show-inheritance:
