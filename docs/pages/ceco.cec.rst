@@ -52,3 +52,10 @@ ceco.cec.griewank module
    :members:
    :undoc-members:
    :show-inheritance:
+
+ceco.cec.ackley module
+----------------------
+.. automodule:: ceco.cec.ackley
+   :members:
+   :undoc-members:
+   :show-inheritance:
