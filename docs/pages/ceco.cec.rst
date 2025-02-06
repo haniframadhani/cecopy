@@ -59,3 +59,10 @@ ceco.cec.ackley module
    :members:
    :undoc-members:
    :show-inheritance:
+   
+ceco.cec.rastrigin module
+-------------------------
+.. automodule:: ceco.cec.rastrigin
+   :members:
+   :undoc-members:
+   :show-inheritance:
