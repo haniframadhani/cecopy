@@ -66,3 +66,10 @@ ceco.cec.rastrigin module
    :members:
    :undoc-members:
    :show-inheritance:
+   
+ceco.cec.weierstrass module
+---------------------------
+.. automodule:: ceco.cec.weierstrass
+   :members:
+   :undoc-members:
+   :show-inheritance:
