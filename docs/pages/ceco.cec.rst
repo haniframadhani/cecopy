@@ -25,6 +25,13 @@ ceco.cec.elliptic module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.expanded_schaffer_f6 module
+------------------------------------
+.. automodule:: ceco.cec.expanded_schaffer_f6
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.griewank module
 ------------------------
 .. automodule:: ceco.cec.griewank

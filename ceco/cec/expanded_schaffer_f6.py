@@ -1,0 +1,111 @@
+from ceco.benchmark import Benchmark
+import math
+
+
+class Expanded_schaffer_f6(Benchmark):
+    """
+    A class representing the Expanded Schaffer F6 function, which is a benchmark function for optimization problems.
+
+    The Expanded Schaffer F6 function is defined as:
+
+    F(X) = sum_{i=1}^{D-1} SchafferBase(x_i, x_{i+1}) + SchafferBase(x_D, x_1)
+
+    where:
+    - SchafferBase(x, y) = 0.5 + (sin(sqrt(x^2 + y^2))^2 - 0.5) / (1 + 0.001 * (x^2 + y^2))^2
+    - X = (x_1, x_2, ..., x_D) is a D-dimensional input vector.
+
+    This class inherits from the Benchmark class and applies rotation and shift transformations to the input vector before evaluating the function.
+
+    Attributes:
+        rotation (list of list of float): A rotation matrix for transforming
+            the input vector.
+        shift (list of float): A shift vector for adjusting the input vector.
+    """
+
+    def __init__(self, rotation: list[list[float]], shift: list[float]) -> None:
+        """
+        Initializes the Expanded Schaffer F6 class with a rotation matrix and a shift vector.
+
+        Parameters:
+            rotation (list of list of float): The rotation matrix for transforming the input vector.
+            shift (list of float): The shift vector for adjusting the input vector.
+
+        Raises:
+            ValueError: If `rotation` is not a non-empty square matrix.
+            ValueError: If `shift` length does not match the dimension of `rotation`.
+        """
+        if not isinstance(rotation, list) or not rotation:
+            raise ValueError(
+                "Rotation matrix must be a non-empty list of lists")
+        row_count = len(rotation)  # Number of rows
+        if not all(isinstance(row, list) and len(row) == row_count for row in rotation):
+            raise ValueError("Rotation matrix must be a square matrix")
+        if len(rotation) != len(shift):
+            raise ValueError("rotation and shift has different dimensions")
+        super().__init__(rotation, shift)
+
+    def schaffer_base(self, x: float, y: float) -> float:
+        """
+        Computes the Schaffer base function for two variables.
+
+        The Schaffer base function is defined as:
+
+        SchafferBase(x, y) = 0.5 + (sin(sqrt(x^2 + y^2))^2 - 0.5) / (1 + 0.001 * (x^2 + y^2))^2
+
+        Parameters:
+            x (float): The first variable.
+            y (float): The second variable.
+
+        Returns:
+            float: The result of the Schaffer base function.
+        """
+        term = x**2 + y**2
+        numerator = math.sin(math.sqrt(term)) ** 2 - 0.5
+        denominator = (1 + 0.001 * term) ** 2
+        return 0.5 + numerator / denominator
+
+    def evaluate(self, input_vector: list[float]) -> float:
+        """
+        Evaluates the Expanded Schaffer F6 function at a given input vector after applying rotation and shift transformations.
+
+        The evaluation process involves the following steps:
+        1. Apply the rotation matrix to the input vector to obtain the rotated vector.
+        2. Apply the shift vector to the rotated vector to obtain the shifted vector.
+        3. Calculate the Expanded Schaffer F6 function using the shifted vector.
+
+        The function is computed as:
+
+        F(X) = sum_{i=1}^{D-1} SchafferBase(x_i, x_{i+1}) + SchafferBase(x_D, x_1)
+
+        Parameters:
+            input_vector (list of float): The input vector [x1, x2, ..., xD].
+
+        Returns:
+            float: The result of the Expanded Schaffer F6 function after applying rotation and shift.
+
+        Raises:
+            ValueError: If the input vector does not match the expected dimension.
+        """
+        dimension = len(input_vector)
+        if len(self.rotation) != dimension and len(self.shift) != dimension:
+            raise ValueError(
+                "Input vector dimension does not match rotation and shift dimensions")
+        rotated_vector = [0.0] * dimension
+        for i in range(dimension):
+            for j in range(dimension):
+                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
+
+        # Apply shift
+        shifted_vector = [rotated_vector[i] - self.shift[i]
+                          for i in range(dimension)]
+        total_sum = 0.0
+
+        # Compute the sum of F(x_i, x_{i+1}) for i = 1 to D-1
+        for i in range(dimension - 1):
+            total_sum += self.schaffer_base(
+                shifted_vector[i], shifted_vector[i + 1])
+
+        # Add the term F(x_D, x_1)
+        total_sum += self.schaffer_base(shifted_vector[-1], shifted_vector[0])
+
+        return total_sum
