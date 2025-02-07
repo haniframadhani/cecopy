@@ -69,3 +69,34 @@ class Test_ackley(unittest.TestCase):
         term2 = -math.exp(sum_term2 / 2)
         expected_result = -20 * term1 + term2 + 20 + math.e
         self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_invalid_rotation_not_list(self):
+        with self.assertRaises(ValueError) as context:
+            Ackley(rotation="invalid", shift=[0, 0])
+            self.assertEqual(str(context.exception),
+                             "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_empty(self):
+        with self.assertRaises(ValueError) as context:
+            Ackley(rotation=[], shift=[0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_not_square(self):
+        with self.assertRaises(ValueError) as context:
+            Ackley(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a square matrix")
+
+    def test_rotation_shift_mismatch(self):
+        with self.assertRaises(ValueError) as context:
+            Ackley(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "rotation and shift has different dimensions")
+
+    def test_input_vector_mismatch(self):
+        ackley = Ackley(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        with self.assertRaises(ValueError) as context:
+            ackley.evaluate([1, 2, 3])  # Incorrect dimension
+        self.assertEqual(str(context.exception),
+                         "Input vector dimension does not match rotation and shift dimensions")

@@ -26,7 +26,19 @@ class Elliptic(Benchmark):
         Parameters:
             rotation (list of list of float): The rotation matrix for transforming the input vector.
             shift (list of float): The shift vector for adjusting the input vector.
+
+        Raises:
+            ValueError: If `rotation` is not a non-empty square matrix.
+            ValueError: If `shift` length does not match the dimension of `rotation`.
         """
+        if not isinstance(rotation, list) or not rotation:
+            raise ValueError(
+                "Rotation matrix must be a non-empty list of lists")
+        row_count = len(rotation)  # Number of rows
+        if not all(isinstance(row, list) and len(row) == row_count for row in rotation):
+            raise ValueError("Rotation matrix must be a square matrix")
+        if len(rotation) != len(shift):
+            raise ValueError("rotation and shift has different dimensions")
         super().__init__(rotation, shift)
 
     def evaluate(self, input_vector: list[float]) -> float:
@@ -43,9 +55,14 @@ class Elliptic(Benchmark):
 
         Returns:
             float: The result of the Elliptic function after applying rotation and shift.
+
+        Raises:
+            ValueError: If the input vector does not match the expected dimension.
         """
-        # Infer dimension from the input vector
         dimension = len(input_vector)
+        if len(self.rotation) != dimension and len(self.shift) != dimension:
+            raise ValueError(
+                "Input vector dimension does not match rotation and shift dimensions")
 
         # Apply rotation
         rotated_vector = [0.0] * dimension

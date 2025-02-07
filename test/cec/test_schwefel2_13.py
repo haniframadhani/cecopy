@@ -79,6 +79,40 @@ class Test_schwefel2_13(unittest.TestCase):
         result = schwefel.evaluate(input_vector)
         self.assertIsInstance(result, float)  # Check if the result is a float
 
+    def test_invalid_rotation_not_list(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel2_13(rotation="invalid", shift=[0, 0], dimension=2)
+            self.assertEqual(str(context.exception),
+                             "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_empty(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel2_13(rotation=[], shift=[0, 0], dimension=2)
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_not_square(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel2_13(rotation=[[1, 2, 3], [4, 5, 6]],
+                         shift=[0, 0, 0], dimension=3)
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a square matrix")
+
+    def test_rotation_shift_mismatch(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel2_13(rotation=[[1, 0], [0, 1]],
+                         shift=[0, 0, 0], dimension=2)
+        self.assertEqual(str(context.exception),
+                         "rotation and shift has different dimensions")
+
+    def test_input_vector_mismatch(self):
+        schwefel2_13 = Schwefel2_13(
+            rotation=[[1, 0], [0, 1]], shift=[0, 0], dimension=2)
+        with self.assertRaises(ValueError) as context:
+            schwefel2_13.evaluate([1, 2, 3])  # Incorrect dimension
+        self.assertEqual(str(context.exception),
+                         "Input vector dimension does not match rotation and shift dimensions")
+
 
 if __name__ == '__main__':
     unittest.main()

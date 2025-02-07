@@ -3,54 +3,80 @@ from ceco.cec.schwefel1_2 import Schwefel1_2
 
 
 class Test_schwefel1_2(unittest.TestCase):
-    def test_initialization(self):
-        """Test initialization of the Schwefel1_2 class."""
-        rotation = [[1.0, 0.0], [0.0, 1.0]]  # Identity matrix
-        shift = [1.0, 2.0]
+    def setUp(self):
+        # Example rotation matrix and shift vector for testing
+        # Identity matrix (no rotation)
+        self.rotation_identity = [[1, 0], [0, 1]]
+        self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
+        self.shift = [1, 1]  # Shift vector
+        self.no_shift = [0, 0]  # No shift vector
 
-        schwefel = Schwefel1_2(rotation, shift)
+    def test_evaluate_with_identity_rotation_and_no_shift(self):
+        schwefel1_2 = Schwefel1_2(self.rotation_identity, self.no_shift)
+        input_vector = [3.0, 2.0]  # Example input
+        result = schwefel1_2.evaluate(input_vector)
+        expected_result = 34.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-        # Verify that rotation and shift are correctly set
-        self.assertEqual(schwefel.rotation, rotation)
-        self.assertEqual(schwefel.shift, shift)
+    def test_evaluate_with_identity_rotation_and_shift(self):
+        schwefel1_2 = Schwefel1_2(self.rotation_identity, self.shift)
+        input_vector = [3.0, 2.0]  # Example input
+        result = schwefel1_2.evaluate(input_vector)
+        expected_result = 13.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_identity_rotation_and_zero_shift(self):
-        """Test the Schwefel 1.2 function with identity rotation and zero shift."""
-        rotation = [[1.0, 0.0], [0.0, 1.0]]  # Identity matrix
-        shift = [0.0, 0.0]  # Zero shift
-        schwefel = Schwefel1_2(rotation, shift)
+    def test_evaluate_with_non_identity_rotation_and_no_shift(self):
+        schwefel1_2 = Schwefel1_2(self.rotation_non_identity, self.no_shift)
+        input_vector = [3.0, 2.0]  # Example input
+        result = schwefel1_2.evaluate(input_vector)
+        expected_result = 5.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-        # Expected result: (1)^2 + (1+2)^2 = 1 + 9 = 10
-        input_vector = [1.0, 2.0]
-        result = schwefel.evaluate(input_vector)
+    def test_evaluate_with_non_identity_rotation_and_shift(self):
+        schwefel1_2 = Schwefel1_2(self.rotation_non_identity, self.shift)
+        input_vector = [3.0, 2.0]  # Example input
+        result = schwefel1_2.evaluate(input_vector)
+        expected_result = 10.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-        self.assertAlmostEqual(result, 10.0)
+    def test_evaluate_with_zero_input(self):
+        schwefel1_2 = Schwefel1_2(self.rotation_identity, self.no_shift)
+        input_vector = [0.0, 0.0]  # Known input
+        result = schwefel1_2.evaluate(input_vector)
+        expected_result = 0.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_rotation_and_shift(self):
-        """Test the Schwefel 1.2 function with a custom rotation and shift."""
-        rotation = [[0.0, 1.0], [1.0, 0.0]]  # Swaps x and y
-        shift = [1.0, 2.0]
-        schwefel = Schwefel1_2(rotation, shift)
+    def test_invalid_rotation_not_list(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel1_2(rotation="invalid", shift=[0, 0])
+            self.assertEqual(str(context.exception),
+                             "Rotation matrix must be a non-empty list of lists")
 
-        # Rotated vector: [2.0, 1.0], shifted: [1.0, -1.0]
-        input_vector = [1.0, 2.0]
-        # Expected result: (1)^2 + (1 + (-1))^2 = 1 + 0 = 1
-        result = schwefel.evaluate(input_vector)
+    def test_invalid_rotation_empty(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel1_2(rotation=[], shift=[0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a non-empty list of lists")
 
-        self.assertAlmostEqual(result, 1.0)
+    def test_invalid_rotation_not_square(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel1_2(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a square matrix")
 
-    def test_evaluate_zero_vector(self):
-        """Test the Schwefel 1.2 function with a zero input vector."""
-        rotation = [[1.0, 0.0], [0.0, 1.0]]  # Identity matrix
-        shift = [1.0, 2.0]
-        schwefel = Schwefel1_2(rotation, shift)
+    def test_rotation_shift_mismatch(self):
+        with self.assertRaises(ValueError) as context:
+            Schwefel1_2(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "rotation and shift has different dimensions")
 
-        input_vector = [0.0, 0.0]  # Shifted vector: [-1.0, -2.0]
-        # Expected result: (-1)^2 + (-1 + (-2))^2 = 1 + 9 = 10
-        result = schwefel.evaluate(input_vector)
+    def test_input_vector_mismatch(self):
+        schwefel1_2 = Schwefel1_2(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        with self.assertRaises(ValueError) as context:
+            schwefel1_2.evaluate([1, 2, 3])  # Incorrect dimension
+        self.assertEqual(str(context.exception),
+                         "Input vector dimension does not match rotation and shift dimensions")
 
-        self.assertAlmostEqual(result, 10.0)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

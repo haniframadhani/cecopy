@@ -4,9 +4,44 @@ ceco.cec package
 Conference of Evolutional Computation (CEC) benchmark functions.
 ----------------------------------------------------------------
 
-ceco.cec.sphere module
+ceco.cec.ackley module
 ----------------------
-.. automodule:: ceco.cec.sphere
+.. automodule:: ceco.cec.ackley
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.ellipsoid module
+-------------------------
+.. automodule:: ceco.cec.ellipsoid
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.elliptic module
+------------------------
+.. automodule:: ceco.cec.elliptic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.griewank module
+------------------------
+.. automodule:: ceco.cec.griewank
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.rastrigin module
+-------------------------
+.. automodule:: ceco.cec.rastrigin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.rosenbrock module
+--------------------------
+.. automodule:: ceco.cec.rosenbrock
    :members:
    :undoc-members:
    :show-inheritance:
@@ -24,49 +59,14 @@ ceco.cec.schwefel2_13 module
    :members:
    :undoc-members:
    :show-inheritance:
-   
-ceco.cec.elliptic module
-------------------------
-.. automodule:: ceco.cec.elliptic
-   :members:
-   :undoc-members:
-   :show-inheritance:
-      
-ceco.cec.ellipsoid module
--------------------------
-.. automodule:: ceco.cec.ellipsoid
-   :members:
-   :undoc-members:
-   :show-inheritance:
-      
-ceco.cec.rosenbrock module
---------------------------
-.. automodule:: ceco.cec.rosenbrock
-   :members:
-   :undoc-members:
-   :show-inheritance:
-         
-ceco.cec.griewank module
-------------------------
-.. automodule:: ceco.cec.griewank
+
+ceco.cec.sphere module
+----------------------
+.. automodule:: ceco.cec.sphere
    :members:
    :undoc-members:
    :show-inheritance:
 
-ceco.cec.ackley module
-----------------------
-.. automodule:: ceco.cec.ackley
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   
-ceco.cec.rastrigin module
--------------------------
-.. automodule:: ceco.cec.rastrigin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   
 ceco.cec.weierstrass module
 ---------------------------
 .. automodule:: ceco.cec.weierstrass

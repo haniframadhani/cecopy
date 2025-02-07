@@ -112,3 +112,38 @@ class Test_weierstrass(unittest.TestCase):
                 math.cos(2 * math.pi * self.b ** k * 0.5)
         expected_result = total_sum - 2 * second_sum
         self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_invalid_rotation_not_list(self):
+        with self.assertRaises(ValueError) as context:
+            Weierstrass(rotation="invalid", shift=[0, 0])
+            self.assertEqual(str(context.exception),
+                             "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_empty(self):
+        with self.assertRaises(ValueError) as context:
+            Weierstrass(rotation=[], shift=[0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_not_square(self):
+        with self.assertRaises(ValueError) as context:
+            Weierstrass(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a square matrix")
+
+    def test_rotation_shift_mismatch(self):
+        with self.assertRaises(ValueError) as context:
+            Weierstrass(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "rotation and shift has different dimensions")
+
+    def test_input_vector_mismatch(self):
+        weierstrass = Weierstrass(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        with self.assertRaises(ValueError) as context:
+            weierstrass.evaluate([1, 2, 3])  # Incorrect dimension
+        self.assertEqual(str(context.exception),
+                         "Input vector dimension does not match rotation and shift dimensions")
+
+
+if __name__ == '__main__':
+    unittest.main()

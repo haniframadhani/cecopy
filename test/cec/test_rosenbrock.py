@@ -51,6 +51,37 @@ class Test_rosenbrock(unittest.TestCase):
         expected_result = 100 * (-1.0**2 - 1)**2 + (-1.0 - 1)**2
         self.assertAlmostEqual(result, expected_result, places=5)
 
+    def test_invalid_rotation_not_list(self):
+        with self.assertRaises(ValueError) as context:
+            Rosenbrock(rotation="invalid", shift=[0, 0])
+            self.assertEqual(str(context.exception),
+                             "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_empty(self):
+        with self.assertRaises(ValueError) as context:
+            Rosenbrock(rotation=[], shift=[0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_not_square(self):
+        with self.assertRaises(ValueError) as context:
+            Rosenbrock(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a square matrix")
+
+    def test_rotation_shift_mismatch(self):
+        with self.assertRaises(ValueError) as context:
+            Rosenbrock(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "rotation and shift has different dimensions")
+
+    def test_input_vector_mismatch(self):
+        rosenbrock = Rosenbrock(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        with self.assertRaises(ValueError) as context:
+            rosenbrock.evaluate([1, 2, 3])  # Incorrect dimension
+        self.assertEqual(str(context.exception),
+                         "Input vector dimension does not match rotation and shift dimensions")
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -22,7 +22,19 @@ class Schwefel1_2(Benchmark):
         Parameters:
             rotation (list of list of float): The rotation matrix.
             shift (list of float): The shift vector.
+
+        Raises:
+            ValueError: If `rotation` is not a non-empty square matrix.
+            ValueError: If `shift` length does not match the dimension of `rotation`.
         """
+        if not isinstance(rotation, list) or not rotation:
+            raise ValueError(
+                "Rotation matrix must be a non-empty list of lists")
+        row_count = len(rotation)  # Number of rows
+        if not all(isinstance(row, list) and len(row) == row_count for row in rotation):
+            raise ValueError("Rotation matrix must be a square matrix")
+        if len(rotation) != len(shift):
+            raise ValueError("rotation and shift has different dimensions")
         super().__init__(rotation, shift)
 
     def evaluate(self, input_vector: list[float]) -> float:
@@ -36,11 +48,19 @@ class Schwefel1_2(Benchmark):
         Returns:
             float: The result of the Schwefel 1.2 function after applying rotation
             and shift.
+
+        Raises:
+            ValueError: If the input vector does not match the expected dimension.
         """
+        dimension = len(input_vector)
+        if len(self.rotation) != dimension and len(self.shift) != dimension:
+            raise ValueError(
+                "Input vector dimension does not match rotation and shift dimensions")
+
         # Apply rotation
-        rotated_vector = [0.0] * len(input_vector)
-        for i in range(len(input_vector)):
-            for j in range(len(input_vector)):
+        rotated_vector = [0.0] * dimension
+        for i in range(dimension):
+            for j in range(dimension):
                 rotated_vector[i] += self.rotation[i][j] * input_vector[j]
 
         # Apply shift
@@ -48,10 +68,9 @@ class Schwefel1_2(Benchmark):
                           for i in range(len(rotated_vector))]
 
         # Compute the Schwefel 1.2 function
-        dimentions = len(shifted_vector)
         total_sum = 0.0
 
-        for i in range(1, dimentions + 1):
+        for i in range(1, dimension + 1):
             cumulative_sum = sum(shifted_vector[:i])
             total_sum += cumulative_sum ** 2
 

@@ -54,6 +54,37 @@ class Test_ellipsoid(unittest.TestCase):
             (0.0 - 1) ** 2  # F(X) = 1*(1^2) + 2*(1^2)
         self.assertAlmostEqual(result, expected_result, places=5)
 
+    def test_invalid_rotation_not_list(self):
+        with self.assertRaises(ValueError) as context:
+            Ellipsoid(rotation="invalid", shift=[0, 0])
+            self.assertEqual(str(context.exception),
+                             "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_empty(self):
+        with self.assertRaises(ValueError) as context:
+            Ellipsoid(rotation=[], shift=[0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_not_square(self):
+        with self.assertRaises(ValueError) as context:
+            Ellipsoid(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a square matrix")
+
+    def test_rotation_shift_mismatch(self):
+        with self.assertRaises(ValueError) as context:
+            Ellipsoid(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "rotation and shift has different dimensions")
+
+    def test_input_vector_mismatch(self):
+        ellipsoid = Ellipsoid(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        with self.assertRaises(ValueError) as context:
+            ellipsoid.evaluate([1, 2, 3])  # Incorrect dimension
+        self.assertEqual(str(context.exception),
+                         "Input vector dimension does not match rotation and shift dimensions")
+
 
 if __name__ == '__main__':
     unittest.main()

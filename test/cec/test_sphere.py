@@ -3,52 +3,80 @@ from ceco.cec.sphere import Sphere
 
 
 class Test_sphere(unittest.TestCase):
-    def test_initialization(self):
-        """Test initialization of the Sphere class."""
-        rotation = [[1.0, 0.0], [0.0, 1.0]]
-        shift = [1.0, 2.0]
+    def setUp(self):
+        # Example rotation matrix and shift vector for testing
+        # Identity matrix (no rotation)
+        self.rotation_identity = [[1, 0], [0, 1]]
+        self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
+        self.shift = [1, 1]  # Shift vector
+        self.no_shift = [0, 0]  # No shift vector
 
-        sphere = Sphere(rotation, shift)
-
-        self.assertEqual(sphere.rotation, rotation)
-        self.assertEqual(sphere.shift, shift)
-
-    def test_evaluate_identity_rotation_and_zero_shift(self):
-        """Test the Sphere function with identity rotation and zero shift."""
-        rotation = [[1.0, 0.0], [0.0, 1.0]]
-        shift = [0.0, 0.0]
-        sphere = Sphere(rotation, shift)
-
-        input_vector = [3.0, 4.0]  # Expected result is 3^2 + 4^2 = 25
+    def test_evaluate_with_identity_rotation_and_no_shift(self):
+        sphere = Sphere(self.rotation_identity, self.no_shift)
+        input_vector = [3.0, 2.0]  # Example input
         result = sphere.evaluate(input_vector)
+        expected_result = 13.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-        self.assertAlmostEqual(result, 25.0)
-
-    def test_evaluate_with_rotation_and_shift(self):
-        """Test the Sphere function with a custom rotation and shift."""
-        rotation = [[0.0, 1.0], [1.0, 0.0]]  # Swaps x and y
-        shift = [1.0, 2.0]
-        sphere = Sphere(rotation, shift)
-
-        # Rotated vector: [4.0, 3.0], shifted: [3.0, 1.0]
-        input_vector = [3.0, 4.0]
-        # Result: 3^2 + 1^2 = 10
+    def test_evaluate_with_identity_rotation_and_shift(self):
+        sphere = Sphere(self.rotation_identity, self.shift)
+        input_vector = [3.0, 2.0]  # Example input
         result = sphere.evaluate(input_vector)
+        expected_result = 5.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-        self.assertAlmostEqual(result, 10.0)
-
-    def test_evaluate_zero_vector(self):
-        """Test the Sphere function with a zero input vector."""
-        rotation = [[1.0, 0.0], [0.0, 1.0]]
-        shift = [1.0, 2.0]
-        sphere = Sphere(rotation, shift)
-
-        input_vector = [0.0, 0.0]  # Shifted vector: [-1.0, -2.0]
-        # Result: (-1)^2 + (-2)^2 = 5
+    def test_evaluate_with_non_identity_rotation_and_no_shift(self):
+        sphere = Sphere(self.rotation_non_identity, self.no_shift)
+        input_vector = [3.0, 2.0]  # Example input
         result = sphere.evaluate(input_vector)
+        expected_result = 13.0
+        self.assertAlmostEqual(result, expected_result, places=5)
 
-        self.assertAlmostEqual(result, 5.0)
+    def test_evaluate_with_non_identity_rotation_and_shift(self):
+        sphere = Sphere(self.rotation_non_identity, self.shift)
+        input_vector = [3.0, 2.0]  # Example input
+        result = sphere.evaluate(input_vector)
+        expected_result = 13.0
+        self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_evaluate_with_zero_input(self):
+        sphere = Sphere(self.rotation_identity, self.no_shift)
+        input_vector = [0.0, 0.0]  # Known input
+        result = sphere.evaluate(input_vector)
+        expected_result = 0.0
+        self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_invalid_rotation_not_list(self):
+        with self.assertRaises(ValueError) as context:
+            Sphere(rotation="invalid", shift=[0, 0])
+            self.assertEqual(str(context.exception),
+                             "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_empty(self):
+        with self.assertRaises(ValueError) as context:
+            Sphere(rotation=[], shift=[0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a non-empty list of lists")
+
+    def test_invalid_rotation_not_square(self):
+        with self.assertRaises(ValueError) as context:
+            Sphere(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "Rotation matrix must be a square matrix")
+
+    def test_rotation_shift_mismatch(self):
+        with self.assertRaises(ValueError) as context:
+            Sphere(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
+        self.assertEqual(str(context.exception),
+                         "rotation and shift has different dimensions")
+
+    def test_input_vector_mismatch(self):
+        sphere = Sphere(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        with self.assertRaises(ValueError) as context:
+            sphere.evaluate([1, 2, 3])  # Incorrect dimension
+        self.assertEqual(str(context.exception),
+                         "Input vector dimension does not match rotation and shift dimensions")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

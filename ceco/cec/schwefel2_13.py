@@ -38,9 +38,21 @@ class Schwefel2_13(Benchmark):
             rotation (list of list of float): The rotation matrix for transforming the input vector.
             shift (list of float): The shift vector for adjusting the input vector.
             dimension (int): The dimensionality of the problem.
+
+        Raises:
+            ValueError: If `rotation` is not a non-empty square matrix.
+            ValueError: If `shift` length does not match the dimension of `rotation`.
         """
-        super().__init__(rotation, shift)
+        if not isinstance(rotation, list) or not rotation:
+            raise ValueError(
+                "Rotation matrix must be a non-empty list of lists")
+        row_count = len(rotation)  # Number of rows
+        if not all(isinstance(row, list) and len(row) == row_count for row in rotation):
+            raise ValueError("Rotation matrix must be a square matrix")
         self.dimension = dimension
+        if len(rotation) != dimension or len(shift) != dimension:
+            raise ValueError("rotation and shift has different dimensions")
+        super().__init__(rotation, shift)
 
         # Generate random matrices a and b
         self.a = self.generate_random_matrix(self.dimension, -100, 100)
@@ -130,7 +142,15 @@ class Schwefel2_13(Benchmark):
 
         Returns:
             float: The result of the Schwefel 2.13 function after applying rotation and shift.
+
+        Raises:
+            ValueError: If the input vector does not match the expected dimension.
         """
+        dimension = len(input_vector)
+        if len(self.rotation) != dimension and len(self.shift) != dimension:
+            raise ValueError(
+                "Input vector dimension does not match rotation and shift dimensions")
+
         # Apply rotation
         rotated_vector = [0.0] * self.dimension
         for i in range(self.dimension):
