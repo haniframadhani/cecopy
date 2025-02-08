@@ -40,9 +40,8 @@ class Test_elliptic(unittest.TestCase):
         elliptic = Elliptic(self.rotation_non_identity, self.shift)
         input_vector = [2.0, 3.0]  # Example input
         result = elliptic.evaluate(input_vector)
-        # After rotation: [-3.0, 2.0]
-        expected_result = (10**6) ** (0 / 1) * (-3.0 - 1) ** 2 + \
-            (10**6) ** (1 / 1) * (2.0 - 1) ** 2
+        expected_result = ((10**6) ** (0 / 1) * 2.0 ** 2) + \
+            ((10**6) ** (1 / 1) * (-1.0) ** 2)
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_zero_input(self):

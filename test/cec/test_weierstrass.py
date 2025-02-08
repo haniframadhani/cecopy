@@ -58,7 +58,7 @@ class Test_weierstrass(unittest.TestCase):
         weierstrass = Weierstrass(self.rotation_non_identity, self.shift)
         input_vector = [2.0, 3.0]
         result = weierstrass.evaluate(input_vector)
-        z = [-4.0, 1.0]
+        z = [1.0, -2.0]
         total_sum = 0.0
         for i in range(2):
             inner_sum = 0.0

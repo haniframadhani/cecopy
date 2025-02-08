@@ -32,8 +32,8 @@ class Test_ackley(unittest.TestCase):
         rastrigin = Rastrigin(self.rotation_non_identity, self.shift)
         input_vector = [2.0, 3.0]
         result = rastrigin.evaluate(input_vector)
-        expected_result = ((-4)**2-10*math.cos(2*math.pi*(-4))+10) + \
-            (1**2-10*math.cos(2*math.pi*1)+10)
+        expected_result = (2**2-10*math.cos(2*math.pi*2)+10) + \
+            ((-1)**2-10*math.cos(2*math.pi*(-1))+10)
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_identity_rotation_and_shift(self):

@@ -56,7 +56,7 @@ class Test_schaffer(unittest.TestCase):
     def test_evaluate_with_non_identity_rotation_and_shift(self):
         schaffer = Expanded_schaffer_f6(self.rotation_non_identity, self.shift)
         input_vector = [3.0, 2.0]  # Example input
-        z = [-3.0, 2.0]
+        z = [1.0, -2.0]
         result = schaffer.evaluate(input_vector)
         expected_result = 0.0
         for i in range(2 - 1):

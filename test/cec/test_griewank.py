@@ -40,8 +40,8 @@ class Test_griewank(unittest.TestCase):
         griewank = Griewank(self.rotation_non_identity, self.shift)
         input_vector = [2.0, 3.0]
         result = griewank.evaluate(input_vector)
-        expected_result = ((-4)**2/4000)+(1**2/4000) - \
-            (math.cos((-4)/math.sqrt(1))*math.cos(1/math.sqrt(2)))+1
+        expected_result = (2**2/4000)+((-1)**2/4000) - \
+            (math.cos(2/math.sqrt(1))*math.cos((-1)/math.sqrt(2)))+1
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_zero_input(self):

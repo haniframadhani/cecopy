@@ -31,24 +31,21 @@ class Test_rosenbrock(unittest.TestCase):
         input_vector = [1.0, 1.0]  # Example input
         result = rosenbrock.evaluate(input_vector)
         # After rotation: [1.0, -1.0] remains the same
-        expected_result = 4.0  # Minimum value of the Rosenbrock function
+        expected_result = 400.0  # Minimum value of the Rosenbrock function
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_non_identity_rotation_and_shift(self):
         rosenbrock = Rosenbrock(self.rotation_non_identity, self.shift)
         input_vector = [1.0, 1.0]  # Example input
         result = rosenbrock.evaluate(input_vector)
-        # After rotation: [-1.0, 1.0] remains the same
-        # After shift: [-1.0 - 1, 1.0 - 1] = [-2.0, 0.0]
-        expected_result = 1609.0  # Minimum value of the Rosenbrock function
+        expected_result = 1.0  # Minimum value of the Rosenbrock function
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_zero_input(self):
-        rosenbrock = Rosenbrock(self.rotation_identity, self.shift)
+        rosenbrock = Rosenbrock(self.rotation_identity, self.no_shift)
         input_vector = [0.0, 0.0]  # Known input
         result = rosenbrock.evaluate(input_vector)
-        # F(X) = 100*(0-1)^2 + (-1)^2 = 10100
-        expected_result = 100 * (-1.0**2 - 1)**2 + (-1.0 - 1)**2
+        expected_result = 100 * (0.0**2 - 0)**2 + (0.0 - 1)**2
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_invalid_rotation_not_list(self):

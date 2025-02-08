@@ -59,15 +59,9 @@ class Weierstrass(Benchmark):
             raise ValueError(
                 "Input vector dimension does not match rotation and shift dimensions")
 
-        # Apply rotation
-        rotated_vector = [0.0] * dimension
-        for i in range(dimension):
-            for j in range(dimension):
-                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
+        # Apply shift and rotation
+        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(dimension)]
         total_sum = 0.0
         # Calculate the first part of the function
         for i in range(dimension):
@@ -75,7 +69,7 @@ class Weierstrass(Benchmark):
             for k in range(self.k_max + 1):
                 inner_sum += self.a ** k * \
                     math.cos(2 * math.pi * self.b **
-                             k * (shifted_vector[i] + 0.5))
+                             k * (shifted_rotated_vector[i] + 0.5))
             total_sum += inner_sum
 
         # Calculate the second part of the function

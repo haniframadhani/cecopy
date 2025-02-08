@@ -90,22 +90,19 @@ class Expanded_schaffer_f6(Benchmark):
         if len(self.rotation) != dimension and len(self.shift) != dimension:
             raise ValueError(
                 "Input vector dimension does not match rotation and shift dimensions")
-        rotated_vector = [0.0] * dimension
-        for i in range(dimension):
-            for j in range(dimension):
-                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
 
-        # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(dimension)]
+        # Apply shift and rotation
+        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
+
         total_sum = 0.0
 
         # Compute the sum of F(x_i, x_{i+1}) for i = 1 to D-1
         for i in range(dimension - 1):
             total_sum += self.schaffer_base(
-                shifted_vector[i], shifted_vector[i + 1])
+                shifted_rotated_vector[i], shifted_rotated_vector[i + 1])
 
         # Add the term F(x_D, x_1)
-        total_sum += self.schaffer_base(shifted_vector[-1], shifted_vector[0])
+        total_sum += self.schaffer_base(
+            shifted_rotated_vector[-1], shifted_rotated_vector[0])
 
         return total_sum

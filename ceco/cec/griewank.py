@@ -65,21 +65,15 @@ class Griewank(Benchmark):
         if len(self.rotation) != dimension and len(self.shift) != dimension:
             raise ValueError(
                 "Input vector dimension does not match rotation and shift dimensions")
-        # Apply rotation
-        rotated_vector = [0.0] * dimension
-        for i in range(dimension):
-            for j in range(dimension):
-                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
 
-        # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(dimension)]
+        # Apply shift and rotation
+        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        sum_term = sum(z_i**2 / 4000 for z_i in shifted_vector)
+        sum_term = sum(z_i**2 / 4000 for z_i in shifted_rotated_vector)
 
         product_term = 1.0
         for i in range(dimension):
-            product_term *= math.cos(shifted_vector[i]/math.sqrt(i+1))
+            product_term *= math.cos(shifted_rotated_vector[i]/math.sqrt(i+1))
 
         result = sum_term - product_term + 1
         return result

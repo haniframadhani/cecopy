@@ -62,21 +62,15 @@ class Rosenbrock(Benchmark):
             raise ValueError(
                 "Input vector dimension does not match rotation and shift dimensions")
 
-        # Apply rotation
-        rotated_vector = [0.0] * dimension
-        for i in range(dimension):
-            for j in range(dimension):
-                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
-
-        # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(dimension)]
-
+        # Apply shift and rotation
+        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
         # Calculate the Rosenbrock function
         total_sum = 0.0
 
         for i in range(dimension - 1):
-            term1 = 100 * (shifted_vector[i] ** 2 - shifted_vector[i + 1]) ** 2
-            term2 = (shifted_vector[i] - 1) ** 2
+            term1 = 100 * \
+                (shifted_rotated_vector[i] ** 2 -
+                 shifted_rotated_vector[i + 1]) ** 2
+            term2 = (shifted_rotated_vector[i] - 1) ** 2
             total_sum += term1 + term2
         return total_sum

@@ -51,7 +51,7 @@ class Test_ackley(unittest.TestCase):
         ackley = Ackley(self.rotation_non_identity, self.shift)
         input_vector = [2.0, 3.0]
         result = ackley.evaluate(input_vector)
-        rotated_vector = [-4.0, 1.0]
+        rotated_vector = [2.0, -1.0]
         sum_term1 = sum(z_i ** 2 for z_i in rotated_vector)
         sum_term2 = sum(math.cos(2 * math.pi * z_i) for z_i in rotated_vector)
         term1 = math.exp(-0.2 * math.sqrt(sum_term1 / 2))
@@ -100,3 +100,7 @@ class Test_ackley(unittest.TestCase):
             ackley.evaluate([1, 2, 3])  # Incorrect dimension
         self.assertEqual(str(context.exception),
                          "Input vector dimension does not match rotation and shift dimensions")
+
+
+if __name__ == '__main__':
+    unittest.main()

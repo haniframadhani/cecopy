@@ -36,7 +36,7 @@ class Test_schwefel1_2(unittest.TestCase):
         schwefel1_2 = Schwefel1_2(self.rotation_non_identity, self.shift)
         input_vector = [3.0, 2.0]  # Example input
         result = schwefel1_2.evaluate(input_vector)
-        expected_result = 10.0
+        expected_result = 2.0
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_zero_input(self):

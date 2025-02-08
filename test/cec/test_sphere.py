@@ -36,7 +36,7 @@ class Test_sphere(unittest.TestCase):
         sphere = Sphere(self.rotation_non_identity, self.shift)
         input_vector = [3.0, 2.0]  # Example input
         result = sphere.evaluate(input_vector)
-        expected_result = 13.0
+        expected_result = 5.0
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_zero_input(self):

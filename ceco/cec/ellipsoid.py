@@ -74,19 +74,13 @@ class Ellipsoid(Benchmark):
         if len(self.rotation) != dimension and len(self.shift) != dimension:
             raise ValueError(
                 "Input vector dimension does not match rotation and shift dimensions")
-        rotated_vector = [0.0] * dimension
 
-        for i in range(dimension):
-            for j in range(dimension):
-                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
-
-        # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(dimension)]
+        # Apply shift and rotation
+        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
         # Calculate the Ellipsoid function
         total_sum = 0.0
         for i in range(1, dimension + 1):
-            total_sum += i * (shifted_vector[i - 1] ** 2)
+            total_sum += i * (shifted_rotated_vector[i - 1] ** 2)
 
         return total_sum

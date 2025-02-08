@@ -56,19 +56,12 @@ class Sphere(Benchmark):
             raise ValueError(
                 "Input vector dimension does not match rotation and shift dimensions")
 
-        # Apply rotation
-        rotated_vector = [0] * dimension
-        for i in range(dimension):
-            for j in range(dimension):
-                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
-
-        # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(len(rotated_vector))]
+        # Apply shift and rotation
+        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
         # Calculate the sum of squares
         total_sum_of_squares = 0
-        for value in shifted_vector:
+        for value in shifted_rotated_vector:
             total_sum_of_squares += value ** 2
 
         return total_sum_of_squares

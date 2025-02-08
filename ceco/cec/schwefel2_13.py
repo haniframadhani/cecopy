@@ -151,19 +151,13 @@ class Schwefel2_13(Benchmark):
             raise ValueError(
                 "Input vector dimension does not match rotation and shift dimensions")
 
-        # Apply rotation
-        rotated_vector = [0.0] * self.dimension
-        for i in range(self.dimension):
-            for j in range(self.dimension):
-                rotated_vector[i] += self.rotation[i][j] * input_vector[j]
-
-        # Apply shift
-        shifted_vector = [rotated_vector[i] - self.shift[i]
-                          for i in range(self.dimension)]
+        # Apply shift and rotation
+        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
         # Compute A and B
         A = self.compute_A(self.dimension, self.a, self.b, self.alpha)
-        B = self.compute_B(self.dimension, self.a, self.b, shifted_vector)
+        B = self.compute_B(self.dimension, self.a,
+                           self.b, shifted_rotated_vector)
 
         # Compute the Schwefel 2.13 function
         total_sum = 0.0
