@@ -18,6 +18,13 @@ ceco.cec.bent_cigar module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.discus module
+----------------------
+.. automodule:: ceco.cec.discus
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.ellipsoid module
 -------------------------
 .. automodule:: ceco.cec.ellipsoid
