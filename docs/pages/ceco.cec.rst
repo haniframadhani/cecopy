@@ -11,6 +11,13 @@ ceco.cec.ackley module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.bent_cigar module
+--------------------------
+.. automodule:: ceco.cec.bent_cigar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.ellipsoid module
 -------------------------
 .. automodule:: ceco.cec.ellipsoid
