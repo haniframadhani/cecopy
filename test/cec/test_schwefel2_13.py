@@ -14,6 +14,7 @@ class Test_schwefel2_13(unittest.TestCase):
         self.static_a = [[1, 2], [3, 4]]
         self.static_b = [[5, 6], [7, 8]]
         self.static_alpha = [0, 0]
+        self.f_bias = 1.0
 
     def test_evaluate_with_identity_rotation_and_no_shift(self):
         schwefel2_13 = Schwefel2_13(self.rotation_identity, self.no_shift, 2)
@@ -122,6 +123,28 @@ class Test_schwefel2_13(unittest.TestCase):
                     math.sin(
                         input_vector[j]) + schwefel2_13.b[i][j] * math.cos(input_vector[j])
         expected_result = (A[0] - B[0]) ** 2 + (A[1] - B[1]) ** 2
+        self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_evaluate_with_f_bias(self):
+        schwefel2_13 = Schwefel2_13(
+            self.rotation_identity, self.no_shift, 2, self.f_bias)
+        schwefel2_13.a = self.static_a
+        schwefel2_13.b = self.static_b
+        schwefel2_13.alpha = self.static_alpha
+        input_vector = [0.0, 0.0]  # Known input
+        result = schwefel2_13.evaluate(input_vector)
+        A = [0.0] * 2
+        for i in range(2):
+            for j in range(2):
+                A[i] += schwefel2_13.a[i][j] * math.sin(schwefel2_13.alpha[j]) + \
+                    schwefel2_13.b[i][j] * math.cos(schwefel2_13.alpha[j])
+        B = [0.0] * 2
+        for i in range(2):
+            for j in range(2):
+                B[i] += schwefel2_13.a[i][j] * \
+                    math.sin(
+                        input_vector[j]) + schwefel2_13.b[i][j] * math.cos(input_vector[j])
+        expected_result = (A[0] - B[0]) ** 2 + (A[1] - B[1]) ** 2 + self.f_bias
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_invalid_rotation_not_list(self):

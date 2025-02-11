@@ -11,18 +11,22 @@ class Weierstrass(Benchmark):
     standard Weierstrass function.
 
     Attributes:
+        rotation (list of list of float): A rotation matrix for transforming the input vector.
+        shift (list of float): A shift vector for adjusting the input vector.
         a (float): The decay factor, default is 0.5.
         b (float): The frequency factor, default is 3.
         k_max (int): The maximum number of summation terms, default is 20.
+        f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
-    def __init__(self, rotation: list[list[float]], shift: list[float]) -> None:
+    def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
         Initializes the Weierstrass class with a rotation matrix and a shift vector.
 
         Parameters:
             rotation (list of list of float): The rotation matrix.
             shift (list of float): The shift vector.
+            f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
             ValueError: If `rotation` is not a non-empty square matrix.
@@ -39,7 +43,7 @@ class Weierstrass(Benchmark):
         self.a = 0.5
         self.b = 3
         self.k_max = 20
-        super().__init__(rotation, shift)
+        super().__init__(rotation, shift, f_bias)
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
@@ -78,5 +82,5 @@ class Weierstrass(Benchmark):
             second_sum += self.a ** k * \
                 math.cos(2 * math.pi * self.b ** k * 0.5)
         # Final result
-        result = total_sum - dimension * second_sum
+        result = total_sum - dimension * second_sum + self.f_bias
         return result

@@ -11,6 +11,7 @@ class Test_ackley(unittest.TestCase):
         self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
         self.shift = [1, 1]  # Shift vector
         self.no_shift = [0, 0]  # No shift vector
+        self.f_bias = 1.0
 
     def test_evaluate_with_identity_rotation_and_no_shift(self):
         ackley = Ackley(self.rotation_identity, self.no_shift)
@@ -68,6 +69,17 @@ class Test_ackley(unittest.TestCase):
         term1 = math.exp(-0.2 * math.sqrt(sum_term1 / 2))
         term2 = -math.exp(sum_term2 / 2)
         expected_result = -20 * term1 + term2 + 20 + math.e
+        self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_evaluate_with_f_bias(self):
+        ackley = Ackley(self.rotation_identity, self.no_shift, self.f_bias)
+        input_vector = [0.0, 0.0]
+        result = ackley.evaluate(input_vector)
+        sum_term1 = sum(z_i ** 2 for z_i in input_vector)
+        sum_term2 = sum(math.cos(2 * math.pi * z_i) for z_i in input_vector)
+        term1 = math.exp(-0.2 * math.sqrt(sum_term1 / 2))
+        term2 = -math.exp(sum_term2 / 2)
+        expected_result = -20 * term1 + term2 + 20 + math.e + self.f_bias
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_invalid_rotation_not_list(self):

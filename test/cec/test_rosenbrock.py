@@ -10,6 +10,7 @@ class Test_rosenbrock(unittest.TestCase):
         self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
         self.shift = [1, 1]  # Shift vector
         self.no_shift = [0, 0]  # No shift vector
+        self.f_bias = 1.0
 
     def test_evaluate_with_identity_rotation_and_no_shift(self):
         rosenbrock = Rosenbrock(self.rotation_identity, self.no_shift)
@@ -46,6 +47,14 @@ class Test_rosenbrock(unittest.TestCase):
         input_vector = [0.0, 0.0]  # Known input
         result = rosenbrock.evaluate(input_vector)
         expected_result = 100 * (0.0**2 - 0)**2 + (0.0 - 1)**2
+        self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_evaluate_with_f_bias(self):
+        rosenbrock = Rosenbrock(self.rotation_identity,
+                                self.no_shift, self.f_bias)
+        input_vector = [0.0, 0.0]  # Known input
+        result = rosenbrock.evaluate(input_vector)
+        expected_result = 100 * (0.0**2 - 0)**2 + (0.0 - 1)**2 + self.f_bias
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_invalid_rotation_not_list(self):

@@ -11,6 +11,7 @@ class Test_ackley(unittest.TestCase):
         self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
         self.shift = [1, 1]  # Shift vector
         self.no_shift = [0, 0]  # No shift vector
+        self.f_bias = 1.0
 
     def test_evaluate_with_identity_rotation_and_no_shift(self):
         rastrigin = Rastrigin(self.rotation_identity, self.no_shift)
@@ -50,6 +51,15 @@ class Test_ackley(unittest.TestCase):
         result = rastrigin.evaluate(input_vector)
         expected_result = (0**2-10*math.cos(2*math.pi*0)+10) + \
             (0**2-10*math.cos(2*math.pi*0)+10)
+        self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_evaluate_with_f_bias(self):
+        rastrigin = Rastrigin(self.rotation_identity,
+                              self.no_shift, self.f_bias)
+        input_vector = [0.0, 0.0]
+        result = rastrigin.evaluate(input_vector)
+        expected_result = (0**2-10*math.cos(2*math.pi*0)+10) + \
+            (0**2-10*math.cos(2*math.pi*0)+10)+self.f_bias
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_invalid_rotation_not_list(self):

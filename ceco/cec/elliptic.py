@@ -17,15 +17,17 @@ class Elliptic(Benchmark):
     Attributes:
         rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
+        f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
-    def __init__(self, rotation: list[list[float]], shift: list[float]) -> None:
+    def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
         Initializes the Elliptic class with a rotation matrix and a shift vector.
 
         Parameters:
             rotation (list of list of float): The rotation matrix for transforming the input vector.
             shift (list of float): The shift vector for adjusting the input vector.
+            f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
             ValueError: If `rotation` is not a non-empty square matrix.
@@ -39,7 +41,7 @@ class Elliptic(Benchmark):
             raise ValueError("Rotation matrix must be a square matrix")
         if len(rotation) != len(shift):
             raise ValueError("rotation and shift has different dimensions")
-        super().__init__(rotation, shift)
+        super().__init__(rotation, shift, f_bias)
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
@@ -74,4 +76,4 @@ class Elliptic(Benchmark):
                 (shifted_rotated_vector[i - 1] ** 2)
             total_sum += term
 
-        return total_sum
+        return total_sum + self.f_bias

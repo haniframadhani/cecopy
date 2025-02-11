@@ -25,9 +25,10 @@ class Schwefel2_13(Benchmark):
         a (list of list of int): A D x D matrix of random integers in the range [-100, 100].
         b (list of list of int): A D x D matrix of random integers in the range [-100, 100].
         alpha (list of float): A vector of D random numbers in the range [-π, π].
+        f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
-    def __init__(self, rotation: list[list[float]], shift: list[float], dimension: int) -> None:
+    def __init__(self, rotation: list[list[float]], shift: list[float], dimension: int, f_bias: float = 0) -> None:
         """
         Initializes the Schwefel2_13 class with a rotation matrix, shift vector, and dimension.
 
@@ -38,6 +39,7 @@ class Schwefel2_13(Benchmark):
             rotation (list of list of float): The rotation matrix for transforming the input vector.
             shift (list of float): The shift vector for adjusting the input vector.
             dimension (int): The dimensionality of the problem.
+            f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
             ValueError: If `rotation` is not a non-empty square matrix.
@@ -52,7 +54,7 @@ class Schwefel2_13(Benchmark):
         self.dimension = dimension
         if len(rotation) != dimension or len(shift) != dimension:
             raise ValueError("rotation and shift has different dimensions")
-        super().__init__(rotation, shift)
+        super().__init__(rotation, shift, f_bias)
 
         # Generate random matrices a and b
         self.a = self.generate_random_matrix(self.dimension, -100, 100)
@@ -164,4 +166,4 @@ class Schwefel2_13(Benchmark):
         for i in range(self.dimension):
             total_sum += (A[i] - B[i]) ** 2
 
-        return total_sum
+        return total_sum + self.f_bias

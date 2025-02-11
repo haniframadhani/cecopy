@@ -11,6 +11,7 @@ class Test_griewank(unittest.TestCase):
         self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
         self.shift = [1, 1]  # Shift vector
         self.no_shift = [0, 0]  # No shift vector
+        self.f_bias = 1.0
 
     def test_evaluate_with_identity_rotation_and_no_shift(self):
         griewank = Griewank(self.rotation_identity, self.no_shift)
@@ -50,6 +51,14 @@ class Test_griewank(unittest.TestCase):
         result = griewank.evaluate(input_vector)
         expected_result = (0**2/4000)+(0**2/4000) - \
             (math.cos(0/math.sqrt(1))*math.cos(0/math.sqrt(2)))+1
+        self.assertAlmostEqual(result, expected_result, places=5)
+
+    def test_evaluate_with_f_bias(self):
+        griewank = Griewank(self.rotation_identity, self.no_shift, self.f_bias)
+        input_vector = [0.0, 0.0]
+        result = griewank.evaluate(input_vector)
+        expected_result = (0**2/4000)+(0**2/4000) - \
+            (math.cos(0/math.sqrt(1))*math.cos(0/math.sqrt(2)))+1 + self.f_bias
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_invalid_rotation_not_list(self):
