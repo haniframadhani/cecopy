@@ -1,19 +1,16 @@
 from ceco.benchmark import Benchmark
-import math
 
 
-class Different_power(Benchmark):
+class Katsuura(Benchmark):
     """
-    A class representing the Different Power benchmark function, used for optimization problems.
+    A class representing the Katsuura benchmark function, used for optimization problems.
 
-    The Different Power function is a unimodal, non-separable, and scalable function.
+    The Katsuura function is a highly multimodal, non-separable, and scalable function.
     It is defined as:
-    f(X) = sqrt{sum_{i=1}^{D} left| x_i right|^{2 + 4 frac{i-1}{D-1}}}
+    f(X) = frac{10}{D^2} prod_{i=1}^D ( 1 + i sum_{j=1}^{32} frac{\|2^j x_i - round(2^j x_i)\|}{2^j} )^{frac{10}{D^{1.2}}} - frac{10}{D^2}
     where X = [x_1, x_2, ..., x_D] is the input vector of dimension ( D ).
 
-    This class inherits from the `Benchmark` class and implements the `evaluate` method
-    to compute the value of the Discus function after applying shift and rotation
-    transformations to the input vector.
+    This class inherits from the `Benchmark` class and implements the `evaluate` method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.
 
     Attributes:
         rotation (list of list of float): A rotation matrix for transforming the input vector.
@@ -23,7 +20,7 @@ class Different_power(Benchmark):
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Different_power class with a rotation matrix, a shift vector, and a bias term.
+        Initializes the Katsuura class with a rotation matrix, a shift vector, and a bias term.
 
         Parameters:
             rotation (list of list of float): The rotation matrix for transforming the input vector.
@@ -46,13 +43,13 @@ class Different_power(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Different power function for the given input vector after applying shift and rotation transformations.
+        Evaluates the Katsuura function for the given input vector after applying shift and rotation transformations.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Different power function after applying rotation and shift.
+            float: The result of the Katsuura function after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -65,12 +62,17 @@ class Different_power(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        total_sum = 0.0
+        product = 1.0
 
-        for i in range(1, dimension+1):
-            exponent = 2 + 4 * ((i - 1) / (dimension - 1))
-            total_sum += abs(shifted_rotated_vector[i-1])**exponent
+        for i in range(1, dimension + 1):
+            sum_term = 0.0
+            for j in range(1, 33):
+                term = abs(
+                    (2**j)*shifted_rotated_vector[i-1] - round((2**j)*shifted_rotated_vector[i-1]))/(2**j)
+                sum_term += term
+            product *= (1 + i * sum_term)**(10 / (dimension**1.2))
 
-        total_sum = math.sqrt(total_sum) + self.f_bias
+        result = (10 / (dimension**2)) * product - \
+            (10/(dimension**2)) + self.f_bias
 
-        return total_sum
+        return result

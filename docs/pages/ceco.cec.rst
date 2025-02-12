@@ -60,6 +60,13 @@ ceco.cec.griewank module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.katsuura module
+------------------------
+.. automodule:: ceco.cec.katsuura
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.rastrigin module
 -------------------------
 .. automodule:: ceco.cec.rastrigin
