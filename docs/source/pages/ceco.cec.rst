@@ -60,6 +60,13 @@ ceco.cec.griewank module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.happycat module
+------------------------
+.. automodule:: ceco.cec.happycat
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.katsuura module
 ------------------------
 .. automodule:: ceco.cec.katsuura

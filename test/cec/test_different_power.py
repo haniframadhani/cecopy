@@ -97,9 +97,10 @@ class Test_different_power(unittest.TestCase):
                          "rotation and shift has different dimensions")
 
     def test_input_vector_mismatch(self):
-        ellipsoid = Different_power(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        different_power = Different_power(
+            rotation=[[1, 0], [0, 1]], shift=[0, 0])
         with self.assertRaises(ValueError) as context:
-            ellipsoid.evaluate([1, 2, 3])  # Incorrect dimension
+            different_power.evaluate([1, 2, 3])  # Incorrect dimension
         self.assertEqual(str(context.exception),
                          "Input vector dimension does not match rotation and shift dimensions")
 

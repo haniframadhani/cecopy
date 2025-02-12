@@ -80,9 +80,9 @@ class Test_discus(unittest.TestCase):
                          "rotation and shift has different dimensions")
 
     def test_input_vector_mismatch(self):
-        ellipsoid = Discus(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        discus = Discus(rotation=[[1, 0], [0, 1]], shift=[0, 0])
         with self.assertRaises(ValueError) as context:
-            ellipsoid.evaluate([1, 2, 3])  # Incorrect dimension
+            discus.evaluate([1, 2, 3])  # Incorrect dimension
         self.assertEqual(str(context.exception),
                          "Input vector dimension does not match rotation and shift dimensions")
 
