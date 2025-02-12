@@ -67,6 +67,13 @@ ceco.cec.happycat module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.hgbat module
+---------------------
+.. automodule:: ceco.cec.hgbat
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.katsuura module
 ------------------------
 .. automodule:: ceco.cec.katsuura
