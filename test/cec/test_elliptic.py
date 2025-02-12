@@ -1,8 +1,8 @@
 import unittest
-from ceco.cec.schwefel1_2 import Schwefel1_2
+from ceco.cec.elliptic import Elliptic
 
 
-class Test_schwefel1_2(unittest.TestCase):
+class Test_elliptic(unittest.TestCase):
     def setUp(self):
         # Example rotation matrix and shift vector for testing
         # Identity matrix (no rotation)
@@ -13,76 +13,82 @@ class Test_schwefel1_2(unittest.TestCase):
         self.f_bias = 1.0
 
     def test_evaluate_with_identity_rotation_and_no_shift(self):
-        schwefel1_2 = Schwefel1_2(self.rotation_identity, self.no_shift)
-        input_vector = [3.0, 2.0]  # Example input
-        result = schwefel1_2.evaluate(input_vector)
-        expected_result = 34.0
+        elliptic = Elliptic(self.rotation_identity, self.no_shift)
+        input_vector = [2.0, 3.0]  # Example input
+        result = elliptic.evaluate(input_vector)
+        expected_result = (10**6) ** (0 / 1) * (2.0 ** 2) + \
+            (10**6) ** (1 / 1) * (3.0 ** 2)
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_identity_rotation_and_shift(self):
-        schwefel1_2 = Schwefel1_2(self.rotation_identity, self.shift)
-        input_vector = [3.0, 2.0]  # Example input
-        result = schwefel1_2.evaluate(input_vector)
-        expected_result = 13.0
+        elliptic = Elliptic(self.rotation_identity, self.shift)
+        input_vector = [2.0, 3.0]  # Example input
+        result = elliptic.evaluate(input_vector)
+        expected_result = (10**6) ** (0 / 1) * (2.0 - 1) ** 2 + \
+            (10**6) ** (1 / 1) * (3.0 - 1) ** 2
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_non_identity_rotation_and_no_shift(self):
-        schwefel1_2 = Schwefel1_2(self.rotation_non_identity, self.no_shift)
-        input_vector = [3.0, 2.0]  # Example input
-        result = schwefel1_2.evaluate(input_vector)
-        expected_result = 5.0
+        elliptic = Elliptic(self.rotation_non_identity, self.no_shift)
+        input_vector = [2.0, 3.0]  # Example input
+        result = elliptic.evaluate(input_vector)
+        # After rotation: [3.0, 2.0]
+        expected_result = (10**6) ** (0 / 1) * (3.0 ** 2) + \
+            (10**6) ** (1 / 1) * (2.0 ** 2)
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_non_identity_rotation_and_shift(self):
-        schwefel1_2 = Schwefel1_2(self.rotation_non_identity, self.shift)
-        input_vector = [3.0, 2.0]  # Example input
-        result = schwefel1_2.evaluate(input_vector)
-        expected_result = 2.0
+        elliptic = Elliptic(self.rotation_non_identity, self.shift)
+        input_vector = [2.0, 3.0]  # Example input
+        result = elliptic.evaluate(input_vector)
+        expected_result = ((10**6) ** (0 / 1) * 2.0 ** 2) + \
+            ((10**6) ** (1 / 1) * (-1.0) ** 2)
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_zero_input(self):
-        schwefel1_2 = Schwefel1_2(self.rotation_identity, self.no_shift)
+        elliptic = Elliptic(self.rotation_identity, self.shift)
         input_vector = [0.0, 0.0]  # Known input
-        result = schwefel1_2.evaluate(input_vector)
-        expected_result = 0.0
+        result = elliptic.evaluate(input_vector)
+        expected_result = (10**6) ** (0 / 1) * (0.0 - 1) ** 2 + \
+            (10**6) ** (1 / 1) * (0.0 - 1) ** 2
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_evaluate_with_f_bias(self):
-        schwefel1_2 = Schwefel1_2(
-            self.rotation_identity, self.no_shift, self.f_bias)
+        elliptic = Elliptic(self.rotation_identity, self.shift, self.f_bias)
         input_vector = [0.0, 0.0]  # Known input
-        result = schwefel1_2.evaluate(input_vector)
-        expected_result = 0.0 + self.f_bias
+        result = elliptic.evaluate(input_vector)
+        expected_result = (10**6) ** (0 / 1) * (0.0 - 1) ** 2 + \
+            (10**6) ** (1 / 1) * (0.0 - 1) ** 2 + self.f_bias
         self.assertAlmostEqual(result, expected_result, places=5)
 
     def test_invalid_rotation_not_list(self):
         with self.assertRaises(ValueError) as context:
-            Schwefel1_2(rotation="invalid", shift=[0, 0])
+            Elliptic(rotation="invalid", shift=[0, 0])
             self.assertEqual(str(context.exception),
                              "Rotation matrix must be a non-empty list of lists")
 
     def test_invalid_rotation_empty(self):
         with self.assertRaises(ValueError) as context:
-            Schwefel1_2(rotation=[], shift=[0, 0])
+            Elliptic(rotation=[], shift=[0, 0])
         self.assertEqual(str(context.exception),
                          "Rotation matrix must be a non-empty list of lists")
 
     def test_invalid_rotation_not_square(self):
         with self.assertRaises(ValueError) as context:
-            Schwefel1_2(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
+            Elliptic(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
         self.assertEqual(str(context.exception),
                          "Rotation matrix must be a square matrix")
 
     def test_rotation_shift_mismatch(self):
         with self.assertRaises(ValueError) as context:
-            Schwefel1_2(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
+            Elliptic(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
         self.assertEqual(str(context.exception),
                          "rotation and shift has different dimensions")
 
     def test_input_vector_mismatch(self):
-        schwefel1_2 = Schwefel1_2(rotation=[[1, 0], [0, 1]], shift=[0, 0])
+        elliptic = Elliptic(rotation=[[1, 0], [0, 1]], shift=[0, 0])
         with self.assertRaises(ValueError) as context:
-            schwefel1_2.evaluate([1, 2, 3])  # Incorrect dimension
+            elliptic.evaluate([1, 2, 3])  # Incorrect dimension
         self.assertEqual(str(context.exception),
                          "Input vector dimension does not match rotation and shift dimensions")
 

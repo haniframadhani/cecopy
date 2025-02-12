@@ -1,28 +1,35 @@
 from ceco.benchmark import Benchmark
+import math
 
 
-class Schwefel1_2(Benchmark):
+class Griewank(Benchmark):
     """
-    A class representing the Schwefel 1.2 function, which is a benchmark function
-    for optimization.
+    A class representing the Griewank function, a commonly used benchmark function
+    in optimization problems. It inherits from the Benchmark class and applies
+    rotation and shift transformations before evaluation.
 
-    Inherits from the Benchmark class and applies rotation and shift to the
-    input vector before evaluating the Schwefel 1.2 function.
+    The Griewank function is defined as:
+
+        f(x) = (1/4000) * sum(x_i^2) - prod(cos(x_i / sqrt(i+1))) + 1
+
+    where:
+        - The first term represents the sum of squared components divided by 4000.
+        - The second term is the product of cosine terms applied to each component.
+        - The final term is a constant used to adjust the function's range.
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming
-            the input vector.
+        rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
         f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Schwefel1_2 class with a rotation matrix and a shift vector.
+        Initializes the Griewank function with a rotation matrix and a shift vector.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix.
-            shift (list of float): The shift vector.
+            rotation (list of list of float): The rotation matrix applied to the input vector.
+            shift (list of float): The shift vector applied to the rotated input vector.
             f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
@@ -41,15 +48,16 @@ class Schwefel1_2(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Schwefel 1.2 function at a given input vector after applying
-        rotation and shift.
+        Evaluates the rotated and shifted Griewank function at a given input vector.
+
+        The function first applies a rotation transformation followed by a shift
+        transformation to the input vector before computing the Griewank function.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Schwefel 1.2 function after applying rotation
-            and shift.
+            float: The computed Griewank function value after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -62,11 +70,11 @@ class Schwefel1_2(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        # Compute the Schwefel 1.2 function
-        total_sum = 0.0
+        sum_term = sum(z_i**2 / 4000 for z_i in shifted_rotated_vector)
 
-        for i in range(1, dimension + 1):
-            cumulative_sum = sum(shifted_rotated_vector[:i])
-            total_sum += cumulative_sum ** 2
+        product_term = 1.0
+        for i in range(dimension):
+            product_term *= math.cos(shifted_rotated_vector[i]/math.sqrt(i+1))
 
-        return total_sum + self.f_bias
+        result = sum_term - product_term + 1 + self.f_bias
+        return result

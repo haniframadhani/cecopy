@@ -1,28 +1,31 @@
 from ceco.benchmark import Benchmark
+import math
 
 
-class Schwefel1_2(Benchmark):
+class Bent_cigar(Benchmark):
     """
-    A class representing the Schwefel 1.2 function, which is a benchmark function
-    for optimization.
+    A class representing the Bent Cigar benchmark function, used for optimization problems.
 
-    Inherits from the Benchmark class and applies rotation and shift to the
-    input vector before evaluating the Schwefel 1.2 function.
+    The Bent Cigar function is a unimodal, non-separable, and highly conditioned function.
+    It is defined as:
+    f(X) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2
+    where ( X = [x_1, x_2, ..., x_D] ) is the input vector of dimension ( D ).
+
+    This class inherits from the `Benchmark` class and implements the `evaluate` method to compute the value of the Bent Cigar function after applying shift and rotation transformations to the input vector.
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming
-            the input vector.
+        rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
         f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Schwefel1_2 class with a rotation matrix and a shift vector.
+        Initializes the Bent_ciger class with a rotation matrix, a shift vector, and a bias term.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix.
-            shift (list of float): The shift vector.
+            rotation (list of list of float): The rotation matrix for transforming the input vector.
+            shift (list of float): The shift vector for adjusting the input vector.
             f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
@@ -41,15 +44,13 @@ class Schwefel1_2(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Schwefel 1.2 function at a given input vector after applying
-        rotation and shift.
+        Evaluates the Bent Cigar function for the given input vector after applying shift and rotation transformations.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Schwefel 1.2 function after applying rotation
-            and shift.
+            float: The result of the Ellipsoid function after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -62,11 +63,8 @@ class Schwefel1_2(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        # Compute the Schwefel 1.2 function
-        total_sum = 0.0
+        sum_term = sum(z_i ** 2 for z_i in shifted_rotated_vector[1:])
 
-        for i in range(1, dimension + 1):
-            cumulative_sum = sum(shifted_rotated_vector[:i])
-            total_sum += cumulative_sum ** 2
-
-        return total_sum + self.f_bias
+        total_sum = shifted_rotated_vector[0] ** 2 + \
+            math.pow(10, 6) * sum_term + self.f_bias
+        return total_sum

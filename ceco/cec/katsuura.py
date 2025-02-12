@@ -1,28 +1,30 @@
 from ceco.benchmark import Benchmark
 
 
-class Schwefel1_2(Benchmark):
+class Katsuura(Benchmark):
     """
-    A class representing the Schwefel 1.2 function, which is a benchmark function
-    for optimization.
+    A class representing the Katsuura benchmark function, used for optimization problems.
 
-    Inherits from the Benchmark class and applies rotation and shift to the
-    input vector before evaluating the Schwefel 1.2 function.
+    The Katsuura function is a highly multimodal, non-separable, and scalable function.
+    It is defined as:
+    f(X) = frac{10}{D^2} prod_{i=1}^D ( 1 + i sum_{j=1}^{32} frac{\|2^j x_i - round(2^j x_i)\|}{2^j} )^{frac{10}{D^{1.2}}} - frac{10}{D^2}
+    where X = [x_1, x_2, ..., x_D] is the input vector of dimension ( D ).
+
+    This class inherits from the `Benchmark` class and implements the `evaluate` method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming
-            the input vector.
+        rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
         f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Schwefel1_2 class with a rotation matrix and a shift vector.
+        Initializes the Katsuura class with a rotation matrix, a shift vector, and a bias term.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix.
-            shift (list of float): The shift vector.
+            rotation (list of list of float): The rotation matrix for transforming the input vector.
+            shift (list of float): The shift vector for adjusting the input vector.
             f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
@@ -41,15 +43,13 @@ class Schwefel1_2(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Schwefel 1.2 function at a given input vector after applying
-        rotation and shift.
+        Evaluates the Katsuura function for the given input vector after applying shift and rotation transformations.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Schwefel 1.2 function after applying rotation
-            and shift.
+            float: The result of the Katsuura function after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -62,11 +62,17 @@ class Schwefel1_2(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        # Compute the Schwefel 1.2 function
-        total_sum = 0.0
+        product = 1.0
 
         for i in range(1, dimension + 1):
-            cumulative_sum = sum(shifted_rotated_vector[:i])
-            total_sum += cumulative_sum ** 2
+            sum_term = 0.0
+            for j in range(1, 33):
+                term = abs(
+                    (2**j)*shifted_rotated_vector[i-1] - round((2**j)*shifted_rotated_vector[i-1]))/(2**j)
+                sum_term += term
+            product *= (1 + i * sum_term)**(10 / (dimension**1.2))
 
-        return total_sum + self.f_bias
+        result = (10 / (dimension**2)) * product - \
+            (10/(dimension**2)) + self.f_bias
+
+        return result

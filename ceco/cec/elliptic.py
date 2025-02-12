@@ -1,28 +1,32 @@
 from ceco.benchmark import Benchmark
 
 
-class Schwefel1_2(Benchmark):
+class Elliptic(Benchmark):
     """
-    A class representing the Schwefel 1.2 function, which is a benchmark function
+    A class representing the Elliptic function, which is a benchmark function
     for optimization.
 
-    Inherits from the Benchmark class and applies rotation and shift to the
-    input vector before evaluating the Schwefel 1.2 function.
+    The Elliptic function is commonly used to test optimization algorithms due to its
+    highly anisotropic and ill-conditioned nature. The function is defined as:
+    F(X) = sum_{i=1 to D} (10^6)^((i-1)/(D-1)) * (x_i)^2,
+    where D is the dimensionality of the problem.
+
+    The class inherits from the `Benchmark` class and applies rotation and shift
+    transformations to the input vector before evaluating the function.
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming
-            the input vector.
+        rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
         f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Schwefel1_2 class with a rotation matrix and a shift vector.
+        Initializes the Elliptic class with a rotation matrix and a shift vector.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix.
-            shift (list of float): The shift vector.
+            rotation (list of list of float): The rotation matrix for transforming the input vector.
+            shift (list of float): The shift vector for adjusting the input vector.
             f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
@@ -41,15 +45,18 @@ class Schwefel1_2(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Schwefel 1.2 function at a given input vector after applying
-        rotation and shift.
+        Evaluates the Elliptic function at a given input vector after applying
+        rotation and shift transformations.
+
+        The function first applies the rotation matrix and shift vector to the input vector.
+        Then, it computes the Elliptic function:
+        F(X) = sum_{i=1 to D} (10^6)^((i-1)/(D-1)) * (x_i)^2.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Schwefel 1.2 function after applying rotation
-            and shift.
+            float: The result of the Elliptic function after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -62,11 +69,11 @@ class Schwefel1_2(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        # Compute the Schwefel 1.2 function
+        # Calculate the Elliptic function
         total_sum = 0.0
-
         for i in range(1, dimension + 1):
-            cumulative_sum = sum(shifted_rotated_vector[:i])
-            total_sum += cumulative_sum ** 2
+            term = (10**6) ** ((i - 1) / (dimension - 1)) * \
+                (shifted_rotated_vector[i - 1] ** 2)
+            total_sum += term
 
         return total_sum + self.f_bias

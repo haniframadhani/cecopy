@@ -1,28 +1,35 @@
 from ceco.benchmark import Benchmark
 
 
-class Schwefel1_2(Benchmark):
+class Ellipsoid(Benchmark):
     """
-    A class representing the Schwefel 1.2 function, which is a benchmark function
+    A class representing the Ellipsoid function, which is a benchmark function
     for optimization.
 
-    Inherits from the Benchmark class and applies rotation and shift to the
-    input vector before evaluating the Schwefel 1.2 function.
+    The Ellipsoid function is defined as:
+
+    F(X) = sum_{i=1}^{D} i * (x_i)^2
+
+    where:
+    - D is the dimension of the input vector.
+    - x = (x1, x2, ..., xD) is a D-dimensional row vector (i.e., a 1xD matrix).
+    - The function is characterized by its elongated shape, which can make optimization algorithms struggle to find the global minimum.
+
+    This class inherits from the Benchmark class and applies rotation and shift transformations to the input vector before evaluating the function.
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming
-            the input vector.
+        rotation (list of list of float): A rotation matrix for transforming the input vector.
         shift (list of float): A shift vector for adjusting the input vector.
         f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Schwefel1_2 class with a rotation matrix and a shift vector.
+        Initializes the Ellipsoid class with a rotation matrix and a shift vector.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix.
-            shift (list of float): The shift vector.
+            rotation (list of list of float): The rotation matrix for transforming the input vector.
+            shift (list of float): The shift vector for adjusting the input vector.
             f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
 
         Raises:
@@ -41,15 +48,26 @@ class Schwefel1_2(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Schwefel 1.2 function at a given input vector after applying
-        rotation and shift.
+        Evaluates the Ellipsoid function at a given input vector after applying
+        rotation and shift transformations.
+
+        The evaluation process involves the following steps:
+        1. Apply the rotation matrix to the input vector to obtain the rotated vector.
+        2. Apply the shift vector to the rotated vector to obtain the shifted vector.
+        3. Calculate the Ellipsoid function using the shifted vector.
+
+        The Ellipsoid function is computed as follows:
+
+        F(X) = sum_{i=1}^{D} i * (x_i - shift_i)^2
+
+        where:
+        - x_i is the i-th element of the shifted vector.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Schwefel 1.2 function after applying rotation
-            and shift.
+            float: The result of the Ellipsoid function after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -62,11 +80,9 @@ class Schwefel1_2(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        # Compute the Schwefel 1.2 function
+        # Calculate the Ellipsoid function
         total_sum = 0.0
-
         for i in range(1, dimension + 1):
-            cumulative_sum = sum(shifted_rotated_vector[:i])
-            total_sum += cumulative_sum ** 2
+            total_sum += i * (shifted_rotated_vector[i - 1] ** 2)
 
         return total_sum + self.f_bias
