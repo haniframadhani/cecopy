@@ -18,6 +18,13 @@ ceco.cec.bent_cigar module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.different_power module
+-------------------------------
+.. automodule:: ceco.cec.different_power
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.discus module
 ----------------------
 .. automodule:: ceco.cec.discus

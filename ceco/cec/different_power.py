@@ -2,13 +2,13 @@ from ceco.benchmark import Benchmark
 import math
 
 
-class Discus(Benchmark):
+class Different_power(Benchmark):
     """
-    A class representing the Discus benchmark function, used for optimization problems.
+    A class representing the Different Power benchmark function, used for optimization problems.
 
-    The Discus function is a unimodal, non-separable, and highly conditioned function.
+    The Different Power function is a unimodal, non-separable, and scalable function.
     It is defined as:
-    f(X) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2
+    f(X) = sqrt{sum_{i=1}^{D} left| x_i right|^{2 + 4 frac{i-1}{D-1}}}
     where X = [x_1, x_2, ..., x_D] is the input vector of dimension ( D ).
 
     This class inherits from the `Benchmark` class and implements the `evaluate` method
@@ -23,7 +23,7 @@ class Discus(Benchmark):
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Discus class with a rotation matrix, a shift vector, and a bias term.
+        Initializes the Bent_ciger class with a rotation matrix, a shift vector, and a bias term.
 
         Parameters:
             rotation (list of list of float): The rotation matrix for transforming the input vector.
@@ -46,13 +46,13 @@ class Discus(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Discus function for the given input vector after applying shift and rotation transformations.
+        Evaluates the Different power function for the given input vector after applying shift and rotation transformations.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Ellipsoid function after applying rotation and shift.
+            float: The result of the Different power function after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -65,9 +65,12 @@ class Discus(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        sum_term = sum(z_i ** 2 for z_i in shifted_rotated_vector[1:])
+        total_sum = 0.0
 
-        total_sum = math.pow(
-            10, 6) * shifted_rotated_vector[0] ** 2 + sum_term + self.f_bias
+        for i in range(1, dimension+1):
+            exponent = 2 + 4 * ((i - 1) / (dimension - 1))
+            total_sum += abs(shifted_rotated_vector[i-1])**exponent
+
+        total_sum = math.sqrt(total_sum) + self.f_bias
 
         return total_sum
