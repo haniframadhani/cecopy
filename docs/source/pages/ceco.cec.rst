@@ -130,6 +130,13 @@ ceco.cec.step_function module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.vincent module
+-----------------------
+.. automodule:: ceco.cec.vincent
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.weierstrass module
 ---------------------------
 .. automodule:: ceco.cec.weierstrass
