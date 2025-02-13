@@ -81,6 +81,13 @@ ceco.cec.katsuura module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.levy module
+--------------------
+.. automodule:: ceco.cec.levy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.rastrigin module
 -------------------------
 .. automodule:: ceco.cec.rastrigin
