@@ -109,6 +109,13 @@ ceco.cec.schwefel2_13 module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.shubert module
+-----------------------
+.. automodule:: ceco.cec.shubert
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.sphere module
 ----------------------
 .. automodule:: ceco.cec.sphere
