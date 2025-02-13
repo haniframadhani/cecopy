@@ -116,6 +116,13 @@ ceco.cec.sphere module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.step_function module
+-----------------------------
+.. automodule:: ceco.cec.step_function
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.weierstrass module
 ---------------------------
 .. automodule:: ceco.cec.weierstrass
