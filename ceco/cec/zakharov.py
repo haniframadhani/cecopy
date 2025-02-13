@@ -2,15 +2,13 @@ from ceco.benchmark import Benchmark
 import math
 
 
-class Step_function(Benchmark):
+class Zakharov(Benchmark):
     """
-    A class representing the Step function benchmark function, used for optimization problems.
+    A class representing the Zakharov benchmark function, used for optimization problems.
 
-    The Step function is a discontinuous, non-differentiable, and scalable function.
-
+    The Zakharov function is a continuous, differentiable, and scalable function.
     It is defined as:
-    f(X)=sum_{i=1}^{D} (lfloor x_i+0.5 rfloor)^2
-
+    f(X) = sum_{i=1}^{D} x_i^2 + ( sum_{i=1}^{D} 0.5 x_i )^2 + ( sum_{i=1}^{D} 0.5 x_i )^4
     where X = [x_1, x_2, ..., x_D] is the input vector of dimension ( D ).
 
     This class inherits from the `Benchmark` class and implements the `evaluate` method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.
@@ -23,7 +21,7 @@ class Step_function(Benchmark):
 
     def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
         """
-        Initializes the Step function class with a rotation matrix, a shift vector, and a bias term.
+        Initializes the Zakharov class with a rotation matrix, a shift vector, and a bias term.
 
         Parameters:
             rotation (list of list of float): The rotation matrix for transforming the input vector.
@@ -46,13 +44,13 @@ class Step_function(Benchmark):
 
     def evaluate(self, input_vector: list[float]) -> float:
         """
-        Evaluates the Step function function for the given input vector after applying shift and rotation transformations.
+        Evaluates the Zakharov function for the given input vector after applying shift and rotation transformations.
 
         Parameters:
             input_vector (list of float): The input vector [x1, x2, ..., xD].
 
         Returns:
-            float: The result of the Step function function after applying rotation and shift.
+            float: The result of the Zakharov function after applying rotation and shift.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
@@ -65,9 +63,6 @@ class Step_function(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
 
-        result = 0.0
-
-        for i in shifted_rotated_vector:
-            result += math.floor(i + 0.5)**2
-
-        return result + self.f_bias
+        sum_x_squared = sum(z_i ** 2 for z_i in shifted_rotated_vector)
+        sum_half_x = sum(0.5 * z_i for z_i in shifted_rotated_vector)
+        return sum_x_squared + sum_half_x ** 2 + sum_half_x ** 4 + self.f_bias

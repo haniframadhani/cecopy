@@ -143,3 +143,10 @@ ceco.cec.weierstrass module
    :members:
    :undoc-members:
    :show-inheritance:
+
+ceco.cec.zakharov module
+------------------------
+.. automodule:: ceco.cec.zakharov
+   :members:
+   :undoc-members:
+   :show-inheritance:
