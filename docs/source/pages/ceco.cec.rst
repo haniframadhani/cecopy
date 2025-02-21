@@ -60,9 +60,30 @@ ceco.cec.griewank module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.happycat module
+------------------------
+.. automodule:: ceco.cec.happycat
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.hgbat module
+---------------------
+.. automodule:: ceco.cec.hgbat
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.katsuura module
 ------------------------
 .. automodule:: ceco.cec.katsuura
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.levy module
+--------------------
+.. automodule:: ceco.cec.levy
    :members:
    :undoc-members:
    :show-inheritance:
@@ -95,6 +116,13 @@ ceco.cec.schwefel2_13 module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.shubert module
+-----------------------
+.. automodule:: ceco.cec.shubert
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.sphere module
 ----------------------
 .. automodule:: ceco.cec.sphere
@@ -102,9 +130,30 @@ ceco.cec.sphere module
    :undoc-members:
    :show-inheritance:
 
+ceco.cec.step_function module
+-----------------------------
+.. automodule:: ceco.cec.step_function
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.vincent module
+-----------------------
+.. automodule:: ceco.cec.vincent
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.cec.weierstrass module
 ---------------------------
 .. automodule:: ceco.cec.weierstrass
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.cec.zakharov module
+------------------------
+.. automodule:: ceco.cec.zakharov
    :members:
    :undoc-members:
    :show-inheritance:
