@@ -4,10 +4,9 @@ ceco.coco package
 COmparing Continous Optimizers (COCO) benchmark functions.
 ----------------------------------------------------------
 
-Module contents
----------------
-
-.. automodule:: ceco.coco
+ceco.coco.sphere module
+-----------------------
+.. automodule:: ceco.coco.sphere
    :members:
    :undoc-members:
    :show-inheritance:
