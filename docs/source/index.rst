@@ -18,6 +18,7 @@ Welcome to CECO documentation!
    :caption: Modules:
 
    pages/ceco.benchmark
+   pages/ceco.bbob
    pages/ceco.cec
    pages/ceco.coco
    pages/ceco.rw

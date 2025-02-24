@@ -5,7 +5,7 @@ COmparing Continous Optimizers (COCO) benchmark functions.
 ----------------------------------------------------------
 
 ceco.coco.ellipsoidal module
------------------------
+----------------------------
 .. automodule:: ceco.coco.ellipsoidal
    :members:
    :undoc-members:
