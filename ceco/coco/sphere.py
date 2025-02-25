@@ -34,7 +34,7 @@ class Sphere(Bbob):
             raise ValueError("Dimension must be a positive integer")
         super().__init__(dimension)
         # Generate a random optimal solution vector x_opt within the range [-4, 4]
-        self.x_opt = [random.uniform(-4, 4) for _ in range(dimension)]
+        self.x_opt = [random.uniform(-5, 5) for _ in range(dimension)]
         # Compute f_opt as the value of the Sphere function at x_opt
         if f_opt is None:
             self.f_opt = self.raw(self.x_opt)

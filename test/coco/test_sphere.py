@@ -14,15 +14,15 @@ class Test_sphere(unittest.TestCase):
         # Check if x_opt is generated correctly
         self.assertEqual(len(sphere.x_opt), dimension)
         for x in sphere.x_opt:
-            self.assertTrue(-4 <= x <= 4)
+            self.assertTrue(-5 <= x <= 5)
 
         # Check if f_opt is computed correctly
         expected_f_opt = sphere.raw(sphere.x_opt)
         self.assertEqual(sphere.f_opt, expected_f_opt)
 
         # Check the specific values of x_opt for reproducibility
-        expected_x_opt = [1.11541438766307, -3.7999139582186645, -
-                          1.799765453047046, -2.214314094809418, 1.8917697133120992]
+        expected_x_opt = [1.3942679845788373, -4.74989244777333, -
+                          2.2497068163088074, -2.7678926185117723, 2.3647121416401244]
         self.assertEqual(sphere.x_opt, expected_x_opt)
 
     def test_evaluate_at_optimal_point(self):
