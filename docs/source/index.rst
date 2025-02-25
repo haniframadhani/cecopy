@@ -17,8 +17,7 @@ Welcome to CECO documentation!
    :maxdepth: 4
    :caption: Modules:
 
-   pages/ceco.benchmark
-   pages/ceco.bbob
+   pages/base_class
    pages/ceco.cec
    pages/ceco.coco
    pages/ceco.rw
