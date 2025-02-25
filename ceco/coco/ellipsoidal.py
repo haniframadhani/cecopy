@@ -1,65 +1,98 @@
-from ceco.benchmark import Benchmark
+from ceco.bbob import Bbob
+import random
 
 
-class Ellipsoidal(Benchmark):
+class Ellipsoidal(Bbob):
     """
     A class representing the Ellipsoidal function, which is a benchmark function
     for optimization.
 
-    Inherits from the Benchmark class and applies rotation and shift to the
-    standard Ellipsoidal function.
+    The Ellipsoidal function is defined as:
+
+        f(x) = sum(10^(6 * (i-1)/(D-1) * (x_i)^2) for i in [1, D]
+
+    where x is an input vector of dimension D.
+
+    This class inherits from `Bbob` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) can be explicitly provided or computed as f(x_opt).
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming the input vector.
-        shift (list of float): A shift vector for adjusting the input vector.
+        x_opt (list of float): The optimal shift vector, randomly generated within [-4, 4].
+        f_opt (float): The function value at x_opt. Defaults to f(x_opt) if not provided.
     """
 
-    def __init__(self, rotation: list[list[float]], shift: list[float]) -> None:
+    def __init__(self, dimension: int, f_opt: float = None) -> None:
         """
-        Initializes the Ellipsoidal class with a rotation matrix and a shift vector.
+        Initializes the Ellipsoidal function with a given dimension.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix.
-            shift (list of float): The shift vector.
+            dimension (int): The number of dimensions for the input space. Must be a positive integer.
+            f_opt (float, optional): The function value at x_opt. If None, it is computed as f(x_opt).
+
         Raises:
-            ValueError: If `rotation` is not a non-empty square matrix.
-            ValueError: If `shift` length does not match the dimension of `rotation`.
+            ValueError: If dimension is not a positive integer.
         """
-        if not isinstance(rotation, list) or not rotation:
-            raise ValueError(
-                "Rotation matrix must be a non-empty list of lists")
-        row_count = len(rotation)  # Number of rows
-        if not all(isinstance(row, list) and len(row) == row_count for row in rotation):
-            raise ValueError("Rotation matrix must be a square matrix")
-        if len(rotation) != len(shift):
-            raise ValueError("rotation and shift has different dimensions")
-        super().__init__(rotation, shift)
+        if not isinstance(dimension, int) or dimension <= 0:
+            raise ValueError("Dimension must be a positive integer")
+        super().__init__(dimension)
+        # Generate a random optimal solution vector x_opt within the range [-4, 4]
+        self.x_opt = [random.uniform(-5, 5) for _ in range(dimension)]
+        # Compute f_opt as the value of the Ellipsoidal function at x_opt
+        if f_opt is None:
+            self.f_opt = self.raw(self.x_opt)
+        else:
+            self.f_opt = f_opt
 
-    def evaluate(self, input_vector: list[float]) -> float:
+    def raw(self, x: list[float]) -> float:
         """
-        Evaluates the rotated and shifted Ellipsoidal function at a given input vector.
+        Evaluates the Ellipsoidal function at a given input vector without any shift.
+
+        The function is calculated as:
+            f(x) = sum(10^(6 * (i-1)/(D-1) * (x_i)^2) for i in [1, D]
 
         Parameters:
-            input_vector (list of float): The input vector [x1, x2, ..., xD].
+            x (list[float]): A vector of real numbers representing a candidate solution.
 
         Returns:
-            float: The result of the Ellipsoidal function after applying rotation
-            and shift.
+            float: The function value at the given input vector.
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
         """
-        dimension = len(input_vector)
-        if len(self.rotation) != dimension and len(self.shift) != dimension:
+        if len(x) != self.dimension:
             raise ValueError(
-                "Input vector dimension does not match rotation and shift dimensions")
-
-        # Apply shift and rotation
-        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
+                f"Input vector must have {self.dimension} elements")
 
         total_sum = 0.0
-        for i in range(1, dimension+1):
-            exponent = 6 * (i - 1) / (dimension - 1)
-            total_sum += (10 ** exponent) * (shifted_rotated_vector[i-1]**2)
+        for i in range(1, self.dimension+1):
+            if self.dimension == 1:
+                exponent = 0  # Handle the case when dimension = 1
+            else:
+                exponent = 6 * (i - 1) / (self.dimension - 1)
+            total_sum += (10 ** exponent) * (x[i - 1] ** 2)
 
         return total_sum
+
+    def evaluate(self, input_vector: list[float]) -> float:
+        """
+        Evaluates the Ellipsoidal function at a given input vector.
+
+        The function is calculated as:
+            f(x) = sum(10^(6 * (i-1)/(D-1) * (z_i)^2) + f_opt
+
+        Parameters:
+            input_vector (list[float]): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Ellipsoidal function.
+
+        Returns:
+            float: The function value at the given input vector.
+
+        Raises:
+            ValueError: If the input vector does not match the expected dimension.
+        """
+        if len(input_vector) != self.dimension:
+            raise ValueError(
+                f"Input vector must have {self.dimension} elements")
+        z = [x - y for x, y in zip(input_vector, self.x_opt)]
+        z = self.T_osz(z)
+        result = self.raw(z) + self.f_opt
+
+        return result
