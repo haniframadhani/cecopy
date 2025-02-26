@@ -1,6 +1,6 @@
 import math
 import random
-from typing import List
+from typing import List, Union
 
 
 class Bbob:
@@ -34,28 +34,26 @@ class Bbob:
             raise ValueError("Input vector cannot be empty.")
         return math.sqrt(sum(x_i ** 2 for x_i in input_vector))
 
-    def create_diagonal_matrix(self, alpha: float, a: float, b: float) -> List[List[float]]:
+    def create_diagonal_matrix(self, alpha: float) -> List[List[float]]:
         """
         Creates a diagonal matrix Λ^alpha with diagonal elements defined as:
-        λ_ii = alpha^((a/b) * (i-1)/(D-1)), for i = 1, ..., D.
+        λ_ii = alpha^((1/2) * (i-1)/(D-1)), for i = 1, ..., D.
 
         Parameters:
             alpha (float): Base value for the diagonal elements.
-            a (float): Numerator of the scaling fraction.
-            b (float): Denominator of the scaling fraction.
 
         Returns:
             List[List[float]]: The diagonal matrix as a list of lists.
         """
         if self.dimension == 1:
-            return [[alpha ** ((a / b) * 0)]]  # Handle the case when D = 1
+            return [[alpha ** ((1 / 2) * 0)]]  # Handle the case when D = 1
 
         # Handle the case when alpha = 0
         if alpha == 0:
             return [[0.0] * self.dimension for _ in range(self.dimension)]
 
         # Compute the diagonal elements
-        diagonal_elements = [alpha ** ((a / b) * (i - 1) / (self.dimension - 1))
+        diagonal_elements = [alpha ** ((1 / 2) * (i - 1) / (self.dimension - 1))
                              for i in range(1, self.dimension + 1)]
 
         # Create the diagonal matrix as a list of lists
@@ -177,21 +175,44 @@ class Bbob:
         """
         return list(map(list, zip(*matrix)))
 
-    def matrix_multiply(self, A: List[List[float]], B: List[List[float]]) -> List[List[float]]:
+    def matrix_multiply(self, A: Union[List[List[float]], List[float]],
+                        B: Union[List[List[float]], List[float]]) -> Union[List[List[float]], List[float], float]:
         """
-        Multiplies two matrices.
+        Multiplies two matrices or a matrix with a vector, supporting 1D and 2D inputs.
+        Also supports dot product when both A and B are 1D vectors.
 
         Parameters:
-            A (List[List[float]]): The first matrix.
-            B (List[List[float]]): The second matrix.
+            A (List[List[float]] or List[float]): The first matrix or vector.
+            B (List[List[float]] or List[float]): The second matrix or vector.
 
         Returns:
-            List[List[float]]: The product of A and B.
+            List[List[float]] or List[float] or float: The product of A and B.
         """
+        # Check if A is a 1D vector
+        is_A_vector = isinstance(A[0], (int, float))
+        if is_A_vector:
+            A = [A]  # Convert row vector to a single-row matrix
+
+        # Check if B is a 1D vector and convert it to a column matrix if necessary
+        is_B_vector = isinstance(B[0], (int, float))
+        if is_B_vector:
+            B = [[b] for b in B]  # Convert vector to column matrix
+
+        # Validate dimensions
         if len(A[0]) != len(B):
             raise ValueError(
-                "Number of columns in A must match number of rows in B.")
-        return [[sum(a * b for a, b in zip(row_A, col_B)) for col_B in zip(*B)] for row_A in A]
+                "Incompatible dimensions: Cannot multiply A and B.")
+
+        # Perform matrix multiplication
+        result = [[sum(a * b for a, b in zip(row_A, col_B)) for col_B in zip(*B)]
+                  for row_A in A]
+
+        # If both A and B were originally 1D vectors, return a scalar (dot product result)
+        if is_A_vector and is_B_vector:
+            return result[0][0]  # Return a single number instead of a list
+
+        # If B was originally a vector, return a flattened list
+        return [row[0] for row in result] if is_B_vector else result
 
     def T_asy_beta(self, beta: float, input_vector: List[float]) -> List[float]:
         """

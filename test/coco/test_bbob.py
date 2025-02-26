@@ -48,14 +48,12 @@ class TestBbob(unittest.TestCase):
         Test the create_diagonal_matrix method with valid parameters.
         """
         alpha = 2
-        a = 1
-        b = 1
         expected_matrix = [
             [2 ** 0, 0, 0],
-            [0, 2 ** 0.5, 0],
-            [0, 0, 2 ** 1]
+            [0, 2 ** (0.5 * (1 / (self.dimension - 1))), 0],
+            [0, 0, 2 ** (0.5 * (2 / (self.dimension - 1)))]
         ]
-        result_matrix = self.bbob.create_diagonal_matrix(alpha, a, b)
+        result_matrix = self.bbob.create_diagonal_matrix(alpha)
         for i in range(self.dimension):
             for j in range(self.dimension):
                 self.assertAlmostEqual(
@@ -67,10 +65,8 @@ class TestBbob(unittest.TestCase):
         """
         bbob = Bbob(dimension=1)
         alpha = 2
-        a = 1
-        b = 1
         expected_matrix = [[2 ** 0]]
-        result_matrix = bbob.create_diagonal_matrix(alpha, a, b)
+        result_matrix = bbob.create_diagonal_matrix(alpha)
         self.assertEqual(result_matrix, expected_matrix)
 
     def test_create_diagonal_matrix_zero_alpha(self):
@@ -78,14 +74,12 @@ class TestBbob(unittest.TestCase):
         Test the create_diagonal_matrix method with alpha = 0.
         """
         alpha = 0
-        a = 1
-        b = 1
         expected_matrix = [
             [0, 0, 0],
             [0, 0, 0],
             [0, 0, 0]
         ]
-        result_matrix = self.bbob.create_diagonal_matrix(alpha, a, b)
+        result_matrix = self.bbob.create_diagonal_matrix(alpha)
         self.assertEqual(result_matrix, expected_matrix)
 
     # Test cases for T_asy_beta
@@ -199,6 +193,45 @@ class TestBbob(unittest.TestCase):
         expected_result = []
         result = self.bbob.elementwise_multiply(x, y)
         self.assertEqual(result, expected_result)
+
+    def test_matrix_multiply_2d_matrices(self):
+        """
+        Test matrix multiplication with two 2D matrices.
+        """
+        A = [[1, 2], [3, 4]]
+        B = [[5, 6], [7, 8]]
+        expected_result = [[19, 22], [43, 50]]  # Computed manually
+        result = self.bbob.matrix_multiply(A, B)
+        self.assertEqual(result, expected_result)
+
+    def test_matrix_multiply_2d_matrix_1d_vector(self):
+        """
+        Test matrix multiplication with a 2D matrix and a 1D vector.
+        """
+        A = [[1, 2], [3, 4]]
+        B = [5, 6]
+        expected_result = [17, 39]  # Computed as [1*5 + 2*6, 3*5 + 4*6]
+        result = self.bbob.matrix_multiply(A, B)
+        self.assertEqual(result, expected_result)
+
+    def test_matrix_multiply_1d_vectors(self):
+        """
+        Test dot product of two 1D vectors.
+        """
+        A = [1, 2, 3]
+        B = [4, 5, 6]
+        expected_result = 32  # Computed as 1*4 + 2*5 + 3*6
+        result = self.bbob.matrix_multiply(A, B)
+        self.assertEqual(result, expected_result)
+
+    def test_matrix_multiply_incompatible_dimensions(self):
+        """
+        Test matrix multiplication with incompatible dimensions (should raise ValueError).
+        """
+        A = [[1, 2, 3], [4, 5, 6]]
+        B = [[7, 8], [9, 10]]  # Incorrect shape
+        with self.assertRaises(ValueError):
+            self.bbob.matrix_multiply(A, B)
 
 
 if __name__ == "__main__":
