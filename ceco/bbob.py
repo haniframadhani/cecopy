@@ -288,6 +288,47 @@ class Bbob:
             raise ValueError("Vectors must have the same length.")
         return [xi * yi for xi, yi in zip(x, y)]
 
+    def f_pen(self, x: list[float]) -> float:
+        """
+        Computes the penalty function f_pen(X) = sum(max(0, |x_i| - 5)^2 for i in [1, D].
+
+        Parameters:
+            X (list[float]): A list of real numbers representing the input vector.
+
+        Returns:
+            float: The penalty value.
+        """
+        penalty = 0.0
+        for x_i in x:
+            penalty += max(0, abs(x_i) - 5) ** 2
+        return penalty
+
+    def compute_s_i(self, z_i: list[float]) -> list[float]:
+        """
+        Computes the scaling factors s_i for a given list of transformed variables z_i.
+
+        s_i = 10 times 10^(0.5 times (i - 1) / (D - 1)),   if z_i > 0 and i is odd (i = 1, 3, 5, ...)
+                10^(0.5 times (i - 1) / (D - 1)),        otherwise
+
+        Parameters:
+            z_i (list[float]): A list of transformed variables.
+
+        Returns:
+            list[float]: A list of scaling factors s_i corresponding to each z_i.
+        """
+        s_i = []
+
+        for i, z in enumerate(z_i, start=1):  # Start indexing from 1
+            if self.dimension == 1:  # Handle the case when D = 1
+                s_i.append(1.0)  # Default scaling factor for D = 1
+            else:
+                if z > 0 and i % 2 == 1:  # Odd index and z_i > 0
+                    s_i.append(
+                        10 * (10 ** (0.5 * (i - 1) / (self.dimension - 1))))
+                else:
+                    s_i.append(10 ** (0.5 * (i - 1) / (self.dimension - 1)))
+
+        return s_i
 
 # # Example input vector
 # input_vector = [1.0, 2.0, 3.0]

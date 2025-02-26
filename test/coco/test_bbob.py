@@ -233,6 +233,50 @@ class TestBbob(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.bbob.matrix_multiply(A, B)
 
+    def test_f_pen_no_penalty(self):
+        """
+        Test the f_pen method when no penalty is applied.
+        """
+        x = [1, 2, 3]
+        result = self.bbob.f_pen(x)
+        self.assertAlmostEqual(result, 0.0)
+
+    def test_f_pen_partial_penalty(self):
+        """
+        Test the f_pen method when partial penalty is applied.
+        """
+        x = [1, 6, 3]
+        result = self.bbob.f_pen(x)
+        self.assertAlmostEqual(result, 1.0)
+
+    def test_f_pen_all_penalty(self):
+        """
+        Test the f_pen method when all components incur a penalty.
+        """
+        x = [6, 7, 8]
+        result = self.bbob.f_pen(x)
+        self.assertAlmostEqual(result, 14.0)
+
+    def test_compute_s_i_all_positive(self):
+        """
+        Test the compute_s_i method with all positive z_i values.
+        """
+        z_i = [1, 2, 3]
+        result = self.bbob.compute_s_i(z_i)
+        expected = [10.0, 1.77827941004, 31.62277660168]
+        for r, e in zip(result, expected):
+            self.assertAlmostEqual(r, e, places=6)
+
+    def test_compute_s_i_mixed_values(self):
+        """
+        Test the compute_s_i method with mixed positive and negative z_i values.
+        """
+        z_i = [1, -2, 3]
+        result = self.bbob.compute_s_i(z_i)
+        expected = [10.0, 1.77827941004, 31.62277660168]
+        for r, e in zip(result, expected):
+            self.assertAlmostEqual(r, e, places=4)
+
 
 if __name__ == "__main__":
     unittest.main()

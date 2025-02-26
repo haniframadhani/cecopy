@@ -11,6 +11,13 @@ ceco.coco.ellipsoidal module
    :undoc-members:
    :show-inheritance:
 
+ceco.coco.buche_rastrigin module
+--------------------------------
+.. automodule:: ceco.coco.buche_rastrigin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.rastrigin module
 --------------------------
 .. automodule:: ceco.coco.rastrigin
