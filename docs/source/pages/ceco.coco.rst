@@ -25,6 +25,13 @@ ceco.coco.rastrigin module
    :undoc-members:
    :show-inheritance:
 
+ceco.coco.rosenbrock module
+---------------------------
+.. automodule:: ceco.coco.rosenbrock
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.sphere module
 -----------------------
 .. automodule:: ceco.coco.sphere
