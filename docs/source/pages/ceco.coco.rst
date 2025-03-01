@@ -32,6 +32,16 @@ ceco.coco.rosenbrock module
    :undoc-members:
    :show-inheritance:
 
+ceco.coco.schwefel module
+-------------------------
+
+**3 TEST NOT PASSED!**
+
+.. automodule:: ceco.coco.schwefel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.sphere module
 -----------------------
 .. automodule:: ceco.coco.sphere
