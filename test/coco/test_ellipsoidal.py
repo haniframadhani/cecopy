@@ -1,12 +1,12 @@
 import unittest
-import random
+import numpy as np
 from ceco.bbob import Bbob
 from ceco.coco.ellipsoidal import Ellipsoidal
 
 
 class Test_ellipsoidal(unittest.TestCase):
     def setUp(self):
-        random.seed(42)
+        np.random.seed(42)
 
     def test_initialization(self):
         dimension = 5
@@ -14,17 +14,18 @@ class Test_ellipsoidal(unittest.TestCase):
 
         # Check if x_opt is generated correctly
         self.assertEqual(len(ellipsoidal.x_opt), dimension)
-        for x in ellipsoidal.x_opt:
-            self.assertTrue(-5 <= x <= 5)
+        self.assertTrue(np.all(ellipsoidal.x_opt >= -5)
+                        and np.all(ellipsoidal.x_opt <= 5))
 
         # Check if f_opt is computed correctly
         expected_f_opt = ellipsoidal.raw(ellipsoidal.x_opt)
-        self.assertEqual(ellipsoidal.f_opt, expected_f_opt)
+        self.assertAlmostEqual(ellipsoidal.f_opt, expected_f_opt, places=6)
 
         # Check the specific values of x_opt for reproducibility
-        expected_x_opt = [1.3942679845788373, -4.74989244777333, -
-                          2.2497068163088074, -2.7678926185117723, 2.3647121416401244]
-        self.assertEqual(ellipsoidal.x_opt, expected_x_opt)
+        expected_x_opt = np.array(
+            [-1.25459881, 4.50714306, 2.31993942, 0.98658484, -3.4398136])
+        self.assertTrue(np.allclose(ellipsoidal.x_opt,
+                        expected_x_opt, rtol=1e-6, atol=1e-6))
 
     def test_evaluate_at_optimal_point(self):
         dimension = 3
@@ -43,16 +44,15 @@ class Test_ellipsoidal(unittest.TestCase):
         bbob = Bbob(dimension)
 
         # Zero vector
-        input_vector = [0.0] * dimension
+        input_vector = np.zeros(dimension)
         result = ellipsoidal.evaluate(input_vector)
 
         # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, ellipsoidal.x_opt)]
+        z = input_vector - ellipsoidal.x_opt
         z = bbob.T_osz(z)
-        expected_result = 0.0
-        for i in range(1, dimension+1):
-            exponent = 6 * (i - 1) / (dimension - 1)
-            expected_result += (10 ** exponent) * (z[i-1]**2)
+        i = np.arange(1, dimension + 1)
+        exponent = 6 * (i - 1) / (dimension - 1)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
         expected_result = expected_result + ellipsoidal.f_opt
         self.assertAlmostEqual(result, expected_result, places=6)
 
@@ -62,18 +62,16 @@ class Test_ellipsoidal(unittest.TestCase):
         bbob = Bbob(dimension)
 
         # Input vector with negative values
-        input_vector = [-3, -2]
+        input_vector = np.array([-3, -2])
         result = ellipsoidal.evaluate(input_vector)
 
         # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, ellipsoidal.x_opt)]
+        z = input_vector - ellipsoidal.x_opt
         z = bbob.T_osz(z)
-        expected_result = 0.0
-        for i in range(1, dimension+1):
-            exponent = 6 * (i - 1) / (dimension - 1)
-            expected_result += (10 ** exponent) * (z[i-1]**2)
+        i = np.arange(1, dimension + 1)
+        exponent = 6 * (i - 1) / (dimension - 1)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
         expected_result = expected_result + ellipsoidal.f_opt
-
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_custom_f_opt(self):
@@ -95,17 +93,15 @@ class Test_ellipsoidal(unittest.TestCase):
         self.assertAlmostEqual(result, ellipsoidal.f_opt, places=6)
 
         # Evaluate at an arbitrary point
-        input_vector = [2.0]
+        input_vector = np.array([2.0])
         result = ellipsoidal.evaluate(input_vector)
 
         # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, ellipsoidal.x_opt)]
+        z = input_vector - ellipsoidal.x_opt
         z = bbob.T_osz(z)
-        expected_result = 0.0
         exponent = 0
-        expected_result += (10 ** exponent) * (z[0] ** 2)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
         expected_result = expected_result + ellipsoidal.f_opt
-
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_empty_input_vector(self):
@@ -113,7 +109,7 @@ class Test_ellipsoidal(unittest.TestCase):
         ellipsoidal = Ellipsoidal(dimension)
 
         # Empty input vector
-        input_vector = []
+        input_vector = np.array([])
         with self.assertRaises(ValueError):
             ellipsoidal.evaluate(input_vector)
 

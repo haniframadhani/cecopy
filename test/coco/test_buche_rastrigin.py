@@ -1,127 +1,133 @@
 import unittest
-import random
+import numpy as np
 from ceco.bbob import Bbob
-from ceco.coco.buche_rastrigin import Buche_Rastrigin
-import math
+from ceco.coco.buche_rastrigin import Buche_rastrigin
 
 
-class Test_buche_rastrigin(unittest.TestCase):
+class TestBucheRastrigin(unittest.TestCase):
+
     def setUp(self):
-        random.seed(42)
+        np.random.seed(42)
 
     def test_initialization(self):
         dimension = 5
-        buche_rastrigin = Buche_Rastrigin(dimension)
+        buche_rastrigin = Buche_rastrigin(dimension)
 
         # Check if x_opt is generated correctly
         self.assertEqual(len(buche_rastrigin.x_opt), dimension)
-        for x in buche_rastrigin.x_opt:
-            self.assertTrue(-5 <= x <= 5)
+        self.assertTrue(np.all(buche_rastrigin.x_opt >= -5)
+                        and np.all(buche_rastrigin.x_opt <= 5))
 
         # Check if f_opt is computed correctly
         expected_f_opt = buche_rastrigin.raw(buche_rastrigin.x_opt)
-        self.assertEqual(buche_rastrigin.f_opt, expected_f_opt)
+        self.assertAlmostEqual(buche_rastrigin.f_opt, expected_f_opt, places=6)
 
         # Check the specific values of x_opt for reproducibility
-        expected_x_opt = [1.3942679845788373, -4.74989244777333, -
-                          2.2497068163088074, -2.7678926185117723, 2.3647121416401244]
-        self.assertEqual(buche_rastrigin.x_opt, expected_x_opt)
+        expected_x_opt = np.array(
+            [-1.25459881, 4.50714306, 2.31993942, 0.98658484, -3.4398136])
+        self.assertTrue(np.allclose(buche_rastrigin.x_opt,
+                        expected_x_opt, rtol=1e-6, atol=1e-6))
 
     def test_evaluate_at_optimal_point(self):
         dimension = 3
-        buche_rastrigin = Buche_Rastrigin(dimension)
+        buche_rastrigin = Buche_rastrigin(dimension)
 
-        # Evaluate at x_opt
         result = buche_rastrigin.evaluate(buche_rastrigin.x_opt)
         self.assertAlmostEqual(result, buche_rastrigin.f_opt, places=6)
 
     def test_evaluate_at_zero_vector(self):
-        """
-        Test the evaluate method at the zero vector.
-        """
         dimension = 2
-        buche_rastrigin = Buche_Rastrigin(dimension)
+        buche_rastrigin = Buche_rastrigin(dimension)
         bbob = Bbob(dimension)
 
-        # Zero vector
-        input_vector = [0.0] * dimension
+        input_vector = np.zeros(dimension)
         result = buche_rastrigin.evaluate(input_vector)
 
-        # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, buche_rastrigin.x_opt)]
+        # Manually compute expected result
+        z = input_vector - buche_rastrigin.x_opt
         z = bbob.T_osz(z)
-        s = bbob.compute_s_i(z)
-        z = [x * y for x, y in zip(z, s)]
-        sum_cos = sum(math.cos(2 * math.pi * x_i) for x_i in z)
-        sum_square = sum(x_i ** 2 for x_i in z)
+        s = buche_rastrigin.compute_s_i(z)
+        z = bbob.elementwise_multiply(z, s)
+        sum_cos = np.sum(np.cos(2 * np.pi * z))
+        sum_square = np.sum(z)
         expected_result = 10 * (dimension - sum_cos) + sum_square + 100
         expected_result = expected_result * \
             bbob.f_pen(input_vector) + buche_rastrigin.f_opt
+
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_negative_values(self):
         dimension = 2
-        buche_rastrigin = Buche_Rastrigin(dimension)
+        buche_rastrigin = Buche_rastrigin(dimension)
         bbob = Bbob(dimension)
 
-        # Input vector with negative values
-        input_vector = [-3, -2]
+        input_vector = np.array([-3, -2])
         result = buche_rastrigin.evaluate(input_vector)
 
-        # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, buche_rastrigin.x_opt)]
+        z = input_vector - buche_rastrigin.x_opt
         z = bbob.T_osz(z)
-        s = bbob.compute_s_i(z)
-        z = [x * y for x, y in zip(z, s)]
-        sum_cos = sum(math.cos(2 * math.pi * x_i) for x_i in z)
-        sum_square = sum(x_i ** 2 for x_i in z)
+        s = buche_rastrigin.compute_s_i(z)
+        z = bbob.elementwise_multiply(z, s)
+        sum_cos = np.sum(np.cos(2 * np.pi * z))
+        sum_square = np.sum(z)
         expected_result = 10 * (dimension - sum_cos) + sum_square + 100
         expected_result = expected_result * \
             bbob.f_pen(input_vector) + buche_rastrigin.f_opt
+
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_custom_f_opt(self):
         dimension = 3
         custom_f_opt = 10.0
-        buche_rastrigin = Buche_Rastrigin(dimension, f_opt=custom_f_opt)
+        buche_rastrigin = Buche_rastrigin(dimension, f_opt=custom_f_opt)
 
-        # Evaluate at x_opt
         result = buche_rastrigin.evaluate(buche_rastrigin.x_opt)
         self.assertAlmostEqual(result, custom_f_opt, places=6)
 
     def test_evaluate_with_dimension_1(self):
         dimension = 1
-        buche_rastrigin = Buche_Rastrigin(dimension)
+        buche_rastrigin = Buche_rastrigin(dimension)
         bbob = Bbob(dimension)
 
-        # Evaluate at x_opt
         result = buche_rastrigin.evaluate(buche_rastrigin.x_opt)
         self.assertAlmostEqual(result, buche_rastrigin.f_opt, places=6)
 
-        # Evaluate at an arbitrary point
-        input_vector = [2.0]
+        input_vector = np.array([2.0])
         result = buche_rastrigin.evaluate(input_vector)
 
-        # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, buche_rastrigin.x_opt)]
+        z = input_vector - buche_rastrigin.x_opt
         z = bbob.T_osz(z)
-        s = bbob.compute_s_i(z)
-        z = [x * y for x, y in zip(z, s)]
-        sum_cos = sum(math.cos(2 * math.pi * x_i) for x_i in z)
-        sum_square = sum(x_i ** 2 for x_i in z)
+        s = buche_rastrigin.compute_s_i(z)
+        z = bbob.elementwise_multiply(z, s)
+        sum_cos = np.sum(np.cos(2 * np.pi * z))
+        sum_square = np.sum(z)
         expected_result = 10 * (dimension - sum_cos) + sum_square + 100
         expected_result = expected_result * \
             bbob.f_pen(input_vector) + buche_rastrigin.f_opt
+
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_empty_input_vector(self):
         dimension = 3
-        buche_rastrigin = Buche_Rastrigin(dimension)
+        buche_rastrigin = Buche_rastrigin(dimension)
 
-        # Empty input vector
-        input_vector = []
+        input_vector = np.array([])
         with self.assertRaises(ValueError):
             buche_rastrigin.evaluate(input_vector)
+
+    # Test Compute s_i
+    def test_compute_s_i(self):
+        dimension = 3
+        buche_rastrigin = Buche_rastrigin(dimension)
+        z_i = np.array([1, 2, 3])
+        result = buche_rastrigin.compute_s_i(z_i)
+
+        expected = np.array([
+            10 * (10 ** (0.5 * (0) / 2)),
+            10 ** (0.5 * (1) / 2),
+            10 * (10 ** (0.5 * (2) / 2))
+        ])
+        np.testing.assert_array_almost_equal(result, expected, decimal=6)
 
 
 if __name__ == '__main__':

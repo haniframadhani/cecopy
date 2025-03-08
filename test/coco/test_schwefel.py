@@ -1,13 +1,12 @@
 import unittest
-import random
 from ceco.bbob import Bbob
 from ceco.coco.schwefel import Schwefel
-import math
+import numpy as np
 
 
 class Test_schwefel(unittest.TestCase):
     def setUp(self):
-        random.seed(42)
+        np.random.seed(42)
 
     def test_initialization(self):
         dimension = 5
@@ -15,17 +14,18 @@ class Test_schwefel(unittest.TestCase):
 
         # Check if x_opt is generated correctly
         self.assertEqual(len(schwefel.x_opt), dimension)
-        for x in schwefel.x_opt:
-            self.assertTrue(-5 <= x <= 5)
+        self.assertTrue(np.all(schwefel.x_opt >= -5)
+                        and np.all(schwefel.x_opt <= 5))
 
         # Check if f_opt is computed correctly
         expected_f_opt = schwefel.raw(schwefel.x_opt)
-        self.assertEqual(schwefel.f_opt, expected_f_opt)
+        self.assertAlmostEqual(schwefel.f_opt, expected_f_opt, places=6)
 
         # Check the specific values of x_opt for reproducibility
-        expected_x_opt = [1.3942679845788373, -4.74989244777333, -
-                          2.2497068163088074, -2.7678926185117723, 2.3647121416401244]
-        self.assertEqual(schwefel.x_opt, expected_x_opt)
+        expected_x_opt = np.array(
+            [-1.25459881, 4.50714306, 2.31993942, 0.98658484, -3.4398136])
+        self.assertTrue(np.allclose(schwefel.x_opt,
+                        expected_x_opt, rtol=1e-6, atol=1e-6))
 
     # def test_evaluate_at_optimal_point(self):
     #     dimension = 3
@@ -44,44 +44,42 @@ class Test_schwefel(unittest.TestCase):
         bbob = Bbob(dimension)
 
         # Zero vector
-        input_vector = [0.0] * dimension
+        input_vector = np.zeros(dimension)
         result = schwefel.evaluate(input_vector)
 
         # Manually compute the expected result
         # 1. Apply first transformation: x_hat = 2 × 1± ⊗ x
-        x_hat = [2 * sign * x for sign,
-                 x in zip(schwefel.sign_vector, input_vector)]
+        x_hat = 2 * schwefel.sign_vector * input_vector
 
         # 2. Calculate z_hat values
-        z_hat = [0] * dimension
+        z_hat = np.zeros(dimension)
         z_hat[0] = x_hat[0]  # z_hat_1 = x_hat_1
 
         for i in range(dimension - 1):
             # Calculate the term [x_i^opt → 2|x_i^opt|]
-            x_opt_term = 2 * abs(schwefel.true_x_opt[i])
+            x_opt_term = 2 * np.abs(schwefel.true_x_opt[i])
 
             # Calculate z_hat_{i+1} using the recursive formula
             z_hat[i+1] = x_hat[i+1] + 0.25 * (x_hat[i] - x_opt_term)
 
         # 3. Prepare the final transformation for z
         # Calculate the vector [x^opt → 2|x^opt|]
-        x_opt_transformed = [2 * abs(x) for x in schwefel.true_x_opt]
+        x_opt_transformed = 2 * np.abs(schwefel.true_x_opt)
 
         # Calculate the difference: z_hat - [x^opt → 2|x^opt|]
-        diff_vector = [z - x_opt for z, x_opt in zip(z_hat, x_opt_transformed)]
+        diff_vector = z_hat - x_opt_transformed
 
         # Apply the diagonal matrix A^10
         lambda_matrix = bbob.create_diagonal_matrix(10)
 
         # Multiply the diagonal matrix by the difference vector
-        matrix_result = bbob.matrix_multiply(lambda_matrix, diff_vector)
+        matrix_result = np.matmul(lambda_matrix, diff_vector)
 
         # Add 2|x^opt| to the result and scale by 100
-        z = [100 * (r + 2 * abs(x_opt))
-             for r, x_opt in zip(matrix_result, schwefel.true_x_opt)]
+        z = 100 * (matrix_result + 2 * np.abs(schwefel.true_x_opt))
 
         # 4. Calculate the penalty term: 100*f_pen(z/100)
-        z_scaled = [zi/100 for zi in z]
+        z_scaled = z/100
         penalty = 100 * bbob.f_pen(z_scaled)
 
         # 5. Calculate the raw Schwefel function value
@@ -97,44 +95,42 @@ class Test_schwefel(unittest.TestCase):
         bbob = Bbob(dimension)
 
         # Input vector with negative values
-        input_vector = [-3, -2]
+        input_vector = np.array([-3, -2])
         result = schwefel.evaluate(input_vector)
 
         # Manually compute the expected result
         # 1. Apply first transformation: x_hat = 2 × 1± ⊗ x
-        x_hat = [2 * sign * x for sign,
-                 x in zip(schwefel.sign_vector, input_vector)]
+        x_hat = 2 * schwefel.sign_vector * input_vector
 
         # 2. Calculate z_hat values
-        z_hat = [0] * dimension
+        z_hat = np.zeros(dimension)
         z_hat[0] = x_hat[0]  # z_hat_1 = x_hat_1
 
         for i in range(dimension - 1):
             # Calculate the term [x_i^opt → 2|x_i^opt|]
-            x_opt_term = 2 * abs(schwefel.true_x_opt[i])
+            x_opt_term = 2 * np.abs(schwefel.true_x_opt[i])
 
             # Calculate z_hat_{i+1} using the recursive formula
             z_hat[i+1] = x_hat[i+1] + 0.25 * (x_hat[i] - x_opt_term)
 
         # 3. Prepare the final transformation for z
         # Calculate the vector [x^opt → 2|x^opt|]
-        x_opt_transformed = [2 * abs(x) for x in schwefel.true_x_opt]
+        x_opt_transformed = 2 * np.abs(schwefel.true_x_opt)
 
         # Calculate the difference: z_hat - [x^opt → 2|x^opt|]
-        diff_vector = [z - x_opt for z, x_opt in zip(z_hat, x_opt_transformed)]
+        diff_vector = z_hat - x_opt_transformed
 
         # Apply the diagonal matrix A^10
         lambda_matrix = bbob.create_diagonal_matrix(10)
 
         # Multiply the diagonal matrix by the difference vector
-        matrix_result = bbob.matrix_multiply(lambda_matrix, diff_vector)
+        matrix_result = np.matmul(lambda_matrix, diff_vector)
 
         # Add 2|x^opt| to the result and scale by 100
-        z = [100 * (r + 2 * abs(x_opt))
-             for r, x_opt in zip(matrix_result, schwefel.true_x_opt)]
+        z = 100 * (matrix_result + 2 * np.abs(schwefel.true_x_opt))
 
         # 4. Calculate the penalty term: 100*f_pen(z/100)
-        z_scaled = [zi/100 for zi in z]
+        z_scaled = z/100
         penalty = 100 * bbob.f_pen(z_scaled)
 
         # 5. Calculate the raw Schwefel function value
@@ -163,44 +159,42 @@ class Test_schwefel(unittest.TestCase):
     #     self.assertAlmostEqual(result, schwefel.f_opt, places=6)
 
     #     # Evaluate at an arbitrary point
-    #     input_vector = [2.0]
+    #     input_vector = np.array([2.0])
     #     result = schwefel.evaluate(input_vector)
 
     #     # Manually compute the expected result
     #     # 1. Apply first transformation: x_hat = 2 × 1± ⊗ x
-    #     x_hat = [2 * sign * x for sign,
-    #              x in zip(schwefel.sign_vector, input_vector)]
+    #     x_hat = 2 * schwefel.sign_vector * input_vector
 
     #     # 2. Calculate z_hat values
-    #     z_hat = [0] * dimension
+    #     z_hat = np.zeros(dimension)
     #     z_hat[0] = x_hat[0]  # z_hat_1 = x_hat_1
 
     #     for i in range(dimension - 1):
     #         # Calculate the term [x_i^opt → 2|x_i^opt|]
-    #         x_opt_term = 2 * abs(schwefel.true_x_opt[i])
+    #         x_opt_term = 2 * np.abs(schwefel.true_x_opt[i])
 
     #         # Calculate z_hat_{i+1} using the recursive formula
     #         z_hat[i+1] = x_hat[i+1] + 0.25 * (x_hat[i] - x_opt_term)
 
     #     # 3. Prepare the final transformation for z
     #     # Calculate the vector [x^opt → 2|x^opt|]
-    #     x_opt_transformed = [2 * abs(x) for x in schwefel.true_x_opt]
+    #     x_opt_transformed = 2 * np.abs(schwefel.true_x_opt)
 
     #     # Calculate the difference: z_hat - [x^opt → 2|x^opt|]
-    #     diff_vector = [z - x_opt for z, x_opt in zip(z_hat, x_opt_transformed)]
+    #     diff_vector = z_hat - x_opt_transformed
 
     #     # Apply the diagonal matrix A^10
     #     lambda_matrix = bbob.create_diagonal_matrix(10)
 
     #     # Multiply the diagonal matrix by the difference vector
-    #     matrix_result = bbob.matrix_multiply(lambda_matrix, diff_vector)
+    #     matrix_result = np.matmul(lambda_matrix, diff_vector)
 
     #     # Add 2|x^opt| to the result and scale by 100
-    #     z = [100 * (r + 2 * abs(x_opt))
-    #          for r, x_opt in zip(matrix_result, schwefel.true_x_opt)]
+    #     z = 100 * (matrix_result + 2 * np.abs(schwefel.true_x_opt))
 
     #     # 4. Calculate the penalty term: 100*f_pen(z/100)
-    #     z_scaled = [zi/100 for zi in z]
+    #     z_scaled = z/100
     #     penalty = 100 * bbob.f_pen(z_scaled)
 
     #     # 5. Calculate the raw Schwefel function value
@@ -215,7 +209,7 @@ class Test_schwefel(unittest.TestCase):
         schwefel = Schwefel(dimension)
 
         # Empty input vector
-        input_vector = []
+        input_vector = np.array([])
         with self.assertRaises(ValueError):
             schwefel.evaluate(input_vector)
 

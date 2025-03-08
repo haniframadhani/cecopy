@@ -1,6 +1,5 @@
+import numpy as np
 from ceco.bbob import Bbob
-import random
-import math
 
 
 class Rastrigin(Bbob):
@@ -17,7 +16,7 @@ class Rastrigin(Bbob):
     This class inherits from `Bbob` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) can be explicitly provided or computed as f(x_opt).
 
     Attributes:
-        x_opt (list of float): The optimal shift vector, randomly generated within [-4, 4].
+        x_opt (np.ndarray): The optimal shift vector, randomly generated within [-4, 4].
         f_opt (float): The function value at x_opt. Defaults to f(x_opt) if not provided.
     """
 
@@ -35,15 +34,15 @@ class Rastrigin(Bbob):
         if not isinstance(dimension, int) or dimension <= 0:
             raise ValueError("Dimension must be a positive integer")
         super().__init__(dimension)
-        # Generate a random optimal solution vector x_opt within the range [-4, 4]
-        self.x_opt = [random.uniform(-5, 5) for _ in range(dimension)]
+        # Generate a random optimal solution vector x_opt within the range [-5, 5]
+        self.x_opt = np.random.uniform(-5, 5, dimension)
         # Compute f_opt as the value of the Rastrigin function at x_opt
         if f_opt is None:
             self.f_opt = self.raw(self.x_opt)
         else:
             self.f_opt = f_opt
 
-    def raw(self, x: list[float]) -> float:
+    def raw(self, x: np.ndarray) -> float:
         """
         Evaluates the Rastrigin function at a given input vector without any shift.
 
@@ -52,7 +51,7 @@ class Rastrigin(Bbob):
         f(X)=10 ( D - sum(cos(2 pi x_i)) ) for i in [1, D]
 
         Parameters:
-            x (list[float]): A vector of real numbers representing a candidate solution.
+            x (np.ndarray): A vector of real numbers representing a candidate solution.
 
         Returns:
             float: The function value at the given input vector.
@@ -60,15 +59,15 @@ class Rastrigin(Bbob):
         Raises:
             ValueError: If the input vector does not match the expected dimension.
         """
-        if len(x) != self.dimension:
+        if x.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        sum_cos = sum(math.cos(2 * math.pi * x_i) for x_i in x)
+        sum_cos = np.sum(np.cos(2 * np.pi * x))
         result = 10 * (self.dimension - sum_cos)
         return result
 
-    def evaluate(self, input_vector: list[float]) -> float:
+    def evaluate(self, input_vector: np.ndarray) -> float:
         """
         Evaluates the Rastrigin function at a given input vector.
 
@@ -79,7 +78,7 @@ class Rastrigin(Bbob):
         where z = Λ^10 * T_asy(0.2, T_osz(x - x_opt)).
 
         Parameters:
-            input_vector (list[float]): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Rastrigin function.
+            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Rastrigin function.
 
         Returns:
             float: The function value at the given input vector.
@@ -87,12 +86,12 @@ class Rastrigin(Bbob):
         Raises:
             ValueError: If the input vector does not match the expected dimension.
         """
-        if len(input_vector) != self.dimension:
+        if input_vector.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
-        z = [x - y for x, y in zip(input_vector, self.x_opt)]
+        z = input_vector - self.x_opt
         z = self.T_osz(z)
-        z = self.matrix_multiply(
+        z = np.matmul(
             self.create_diagonal_matrix(10), self.T_asy_beta(0.2, z))
         result = self.raw(z) + self.euclidean_norm(z) + self.f_opt
 

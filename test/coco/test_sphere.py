@@ -1,11 +1,11 @@
 import unittest
-import random
+import numpy as np
 from ceco.coco.sphere import Sphere
 
 
 class Test_sphere(unittest.TestCase):
     def setUp(self):
-        random.seed(42)
+        np.random.seed(42)
 
     def test_initialization(self):
         dimension = 5
@@ -13,17 +13,18 @@ class Test_sphere(unittest.TestCase):
 
         # Check if x_opt is generated correctly
         self.assertEqual(len(sphere.x_opt), dimension)
-        for x in sphere.x_opt:
-            self.assertTrue(-5 <= x <= 5)
+        self.assertTrue(np.all(sphere.x_opt >= -5)
+                        and np.all(sphere.x_opt <= 5))
 
         # Check if f_opt is computed correctly
         expected_f_opt = sphere.raw(sphere.x_opt)
-        self.assertEqual(sphere.f_opt, expected_f_opt)
+        self.assertAlmostEqual(sphere.f_opt, expected_f_opt, places=6)
 
         # Check the specific values of x_opt for reproducibility
-        expected_x_opt = [1.3942679845788373, -4.74989244777333, -
-                          2.2497068163088074, -2.7678926185117723, 2.3647121416401244]
-        self.assertEqual(sphere.x_opt, expected_x_opt)
+        expected_x_opt = np.array(
+            [-1.25459881, 4.50714306, 2.31993942, 0.98658484, -3.4398136])
+        self.assertTrue(np.allclose(sphere.x_opt,
+                        expected_x_opt, rtol=1e-6, atol=1e-6))
 
     def test_evaluate_at_optimal_point(self):
         dimension = 3
@@ -41,12 +42,12 @@ class Test_sphere(unittest.TestCase):
         sphere = Sphere(dimension)
 
         # Zero vector
-        input_vector = [0.0] * dimension
+        input_vector = np.zeros(dimension)
         result = sphere.evaluate(input_vector)
 
         # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, sphere.x_opt)]
-        expected_result = sum(zi ** 2 for zi in z) + sphere.f_opt
+        z = input_vector - sphere.x_opt
+        expected_result = np.sum(z ** 2) + sphere.f_opt
 
         self.assertAlmostEqual(result, expected_result, places=6)
 
@@ -55,12 +56,12 @@ class Test_sphere(unittest.TestCase):
         sphere = Sphere(dimension)
 
         # Input vector with negative values
-        input_vector = [-3, -2]
+        input_vector = np.array([-3, -2])
         result = sphere.evaluate(input_vector)
 
         # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, sphere.x_opt)]
-        expected_result = sum(zi ** 2 for zi in z) + sphere.f_opt
+        z = input_vector - sphere.x_opt
+        expected_result = np.sum(z ** 2) + sphere.f_opt
 
         self.assertAlmostEqual(result, expected_result, places=6)
 
@@ -82,12 +83,12 @@ class Test_sphere(unittest.TestCase):
         self.assertAlmostEqual(result, sphere.f_opt, places=6)
 
         # Evaluate at an arbitrary point
-        input_vector = [2.0]
+        input_vector = np.array([2.0])
         result = sphere.evaluate(input_vector)
 
         # Manually compute the expected result
-        z = [x - y for x, y in zip(input_vector, sphere.x_opt)]
-        expected_result = sum(zi ** 2 for zi in z) + sphere.f_opt
+        z = input_vector - sphere.x_opt
+        expected_result = np.sum(z ** 2) + sphere.f_opt
 
         self.assertAlmostEqual(result, expected_result, places=6)
 
@@ -96,7 +97,7 @@ class Test_sphere(unittest.TestCase):
         sphere = Sphere(dimension)
 
         # Empty input vector
-        input_vector = []
+        input_vector = np.array([])
         with self.assertRaises(ValueError):
             sphere.evaluate(input_vector)
 
