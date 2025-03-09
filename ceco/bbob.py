@@ -189,3 +189,38 @@ class Bbob:
             float: The penalty value.
         """
         return np.sum(np.maximum(0, np.abs(x) - 5) ** 2)
+
+    def gram_schmidt(self, matrix: np.ndarray) -> np.ndarray:
+        """
+        Applies the Gram-Schmidt process to a set of vectors.
+
+        This method orthogonalizes the input vectors (columns of the matrix) and normalizes them to unit length.
+
+        Parameters:
+            matrix (np.ndarray): A 2D array where each column is a vector.
+
+        Returns:
+            np.ndarray: A 2D array with orthogonal and normalized vectors as columns.
+
+        Notes:
+            - If the input vectors are linearly dependent, the output will contain zero vectors for dependent columns.
+            - Uses floating-point arithmetic, so results may have small numerical errors.
+        """
+
+        matrix = np.copy(matrix).astype(np.float64)
+
+        num_vectors = matrix.shape[1]
+
+        for j in range(num_vectors):
+            for k in range(j):
+                projection = np.dot(matrix[:, k], matrix[:, j]) * matrix[:, k]
+                matrix[:, j] -= projection
+
+            norm = np.linalg.norm(matrix[:, j])
+
+            if np.isclose(norm, 0, rtol=1e-15, atol=1e-14, equal_nan=False):
+                matrix[:, j] = np.zeros(matrix.shape[0])
+            else:
+                matrix[:, j] /= norm
+
+        return matrix
