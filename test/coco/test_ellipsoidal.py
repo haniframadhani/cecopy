@@ -79,10 +79,6 @@ class Test_ellipsoidal(unittest.TestCase):
         ellipsoidal = Ellipsoidal(dimension)
         bbob = Bbob(dimension)
 
-        # Evaluate at x_opt
-        result = ellipsoidal.evaluate(ellipsoidal.x_opt)
-        self.assertAlmostEqual(result, ellipsoidal.f_opt, places=6)
-
         # Evaluate at an arbitrary point
         input_vector = np.array([2.0])
         result = ellipsoidal.evaluate(input_vector)

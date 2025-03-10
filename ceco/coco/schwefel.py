@@ -15,6 +15,7 @@ class Schwefel(Bbob):
 
     Attributes:
         x_opt (np.ndarray): The optimal shift vector, randomly generated within [-5, 5].
+        f_opt (float): The function value at x_opt.
         sign_vector (np.ndarray): Vector of random signs (±1) used in transformations.
     """
 

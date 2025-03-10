@@ -27,6 +27,9 @@ ceco.coco.rastrigin module
 
 ceco.coco.rosenbrock module
 ---------------------------
+
+**1 TEST NOT PASSED AT ROTATED!**
+
 .. automodule:: ceco.coco.rosenbrock
    :members:
    :undoc-members:

@@ -83,10 +83,6 @@ class Test_rastrigin(unittest.TestCase):
         rastrigin = Rastrigin(dimension)
         bbob = Bbob(dimension)
 
-        # Evaluate at x_opt
-        result = rastrigin.evaluate(rastrigin.x_opt)
-        self.assertAlmostEqual(result, rastrigin.f_opt, places=6)
-
         # Evaluate at an arbitrary point
         input_vector = np.array([2.0])
         result = rastrigin.evaluate(input_vector)

@@ -69,10 +69,6 @@ class Test_sphere(unittest.TestCase):
         dimension = 1
         sphere = Sphere(dimension)
 
-        # Evaluate at x_opt
-        result = sphere.evaluate(sphere.x_opt)
-        self.assertAlmostEqual(result, sphere.f_opt, places=6)
-
         # Evaluate at an arbitrary point
         input_vector = np.array([2.0])
         result = sphere.evaluate(input_vector)

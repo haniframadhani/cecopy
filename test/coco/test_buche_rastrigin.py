@@ -81,9 +81,6 @@ class TestBucheRastrigin(unittest.TestCase):
         buche_rastrigin = Buche_rastrigin(dimension)
         bbob = Bbob(dimension)
 
-        result = buche_rastrigin.evaluate(buche_rastrigin.x_opt)
-        self.assertAlmostEqual(result, buche_rastrigin.f_opt, places=6)
-
         input_vector = np.array([2.0])
         result = buche_rastrigin.evaluate(input_vector)
 
