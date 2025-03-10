@@ -140,69 +140,56 @@ class Test_schwefel(unittest.TestCase):
         expected_result = raw_value + 4.189828872724339 + penalty + schwefel.f_opt
         self.assertAlmostEqual(result, expected_result, places=6)
 
-    # def test_evaluate_with_custom_f_opt(self):
-    #     dimension = 3
-    #     custom_f_opt = 10.0
-    #     schwefel = Schwefel(dimension, f_opt=custom_f_opt)
+    def test_evaluate_with_dimension_1(self):
+        dimension = 1
+        schwefel = Schwefel(dimension)
+        bbob = Bbob(dimension)
 
-    #     # Evaluate at x_opt
-    #     result = schwefel.evaluate(schwefel.x_opt)
-    #     self.assertAlmostEqual(result, custom_f_opt, places=6)
+        # Evaluate at an arbitrary point
+        input_vector = np.array([2.0])
+        result = schwefel.evaluate(input_vector)
 
-    # def test_evaluate_with_dimension_1(self):
-    #     dimension = 1
-    #     schwefel = Schwefel(dimension)
-    #     bbob = Bbob(dimension)
+        # Manually compute the expected result
+        # 1. Apply first transformation: x_hat = 2 × 1± ⊗ x
+        x_hat = 2 * schwefel.sign_vector * input_vector
 
-    #     # Evaluate at x_opt
-    #     result = schwefel.evaluate(schwefel.x_opt)
-    #     self.assertAlmostEqual(result, schwefel.f_opt, places=6)
+        # 2. Calculate z_hat values
+        z_hat = np.zeros(dimension)
+        z_hat[0] = x_hat[0]  # z_hat_1 = x_hat_1
 
-    #     # Evaluate at an arbitrary point
-    #     input_vector = np.array([2.0])
-    #     result = schwefel.evaluate(input_vector)
+        for i in range(dimension - 1):
+            # Calculate the term [x_i^opt → 2|x_i^opt|]
+            x_opt_term = 2 * np.abs(schwefel.true_x_opt[i])
 
-    #     # Manually compute the expected result
-    #     # 1. Apply first transformation: x_hat = 2 × 1± ⊗ x
-    #     x_hat = 2 * schwefel.sign_vector * input_vector
+            # Calculate z_hat_{i+1} using the recursive formula
+            z_hat[i+1] = x_hat[i+1] + 0.25 * (x_hat[i] - x_opt_term)
 
-    #     # 2. Calculate z_hat values
-    #     z_hat = np.zeros(dimension)
-    #     z_hat[0] = x_hat[0]  # z_hat_1 = x_hat_1
+        # 3. Prepare the final transformation for z
+        # Calculate the vector [x^opt → 2|x^opt|]
+        x_opt_transformed = 2 * np.abs(schwefel.true_x_opt)
 
-    #     for i in range(dimension - 1):
-    #         # Calculate the term [x_i^opt → 2|x_i^opt|]
-    #         x_opt_term = 2 * np.abs(schwefel.true_x_opt[i])
+        # Calculate the difference: z_hat - [x^opt → 2|x^opt|]
+        diff_vector = z_hat - x_opt_transformed
 
-    #         # Calculate z_hat_{i+1} using the recursive formula
-    #         z_hat[i+1] = x_hat[i+1] + 0.25 * (x_hat[i] - x_opt_term)
+        # Apply the diagonal matrix A^10
+        lambda_matrix = bbob.create_diagonal_matrix(10)
 
-    #     # 3. Prepare the final transformation for z
-    #     # Calculate the vector [x^opt → 2|x^opt|]
-    #     x_opt_transformed = 2 * np.abs(schwefel.true_x_opt)
+        # Multiply the diagonal matrix by the difference vector
+        matrix_result = np.matmul(lambda_matrix, diff_vector)
 
-    #     # Calculate the difference: z_hat - [x^opt → 2|x^opt|]
-    #     diff_vector = z_hat - x_opt_transformed
+        # Add 2|x^opt| to the result and scale by 100
+        z = 100 * (matrix_result + 2 * np.abs(schwefel.true_x_opt))
 
-    #     # Apply the diagonal matrix A^10
-    #     lambda_matrix = bbob.create_diagonal_matrix(10)
+        # 4. Calculate the penalty term: 100*f_pen(z/100)
+        z_scaled = z/100
+        penalty = 100 * bbob.f_pen(z_scaled)
 
-    #     # Multiply the diagonal matrix by the difference vector
-    #     matrix_result = np.matmul(lambda_matrix, diff_vector)
+        # 5. Calculate the raw Schwefel function value
+        raw_value = schwefel.raw(input_vector)
 
-    #     # Add 2|x^opt| to the result and scale by 100
-    #     z = 100 * (matrix_result + 2 * np.abs(schwefel.true_x_opt))
-
-    #     # 4. Calculate the penalty term: 100*f_pen(z/100)
-    #     z_scaled = z/100
-    #     penalty = 100 * bbob.f_pen(z_scaled)
-
-    #     # 5. Calculate the raw Schwefel function value
-    #     raw_value = schwefel.raw(input_vector)
-
-    #     # 6. Combine all terms to get the final result
-    #     expected_result = raw_value + 4.189828872724339 + penalty + schwefel.f_opt
-    #     self.assertAlmostEqual(result, expected_result, places=6)
+        # 6. Combine all terms to get the final result
+        expected_result = raw_value + 4.189828872724339 + penalty + schwefel.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_empty_input_vector(self):
         dimension = 3

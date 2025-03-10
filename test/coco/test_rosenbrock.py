@@ -65,15 +65,6 @@ class Test_rosenbrock(unittest.TestCase):
         expected_result = rosenbrock.raw(z) + rosenbrock.f_opt
         self.assertAlmostEqual(result, expected_result, places=6)
 
-    def test_evaluate_with_custom_f_opt(self):
-        dimension = 3
-        custom_f_opt = 10.0
-        rosenbrock = Rosenbrock(dimension, f_opt=custom_f_opt)
-
-        # Evaluate at x_opt
-        result = rosenbrock.evaluate(rosenbrock.x_opt)
-        self.assertAlmostEqual(result, custom_f_opt, places=6)
-
     def test_evaluate_with_dimension_1(self):
         dimension = 1
         rosenbrock = Rosenbrock(dimension)

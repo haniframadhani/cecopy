@@ -35,7 +35,7 @@ ceco.coco.rosenbrock module
 ceco.coco.schwefel module
 -------------------------
 
-**3 TEST NOT PASSED!**
+**2 TEST NOT PASSED!**
 
 .. automodule:: ceco.coco.schwefel
    :members:

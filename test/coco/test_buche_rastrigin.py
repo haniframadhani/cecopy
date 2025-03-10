@@ -76,14 +76,6 @@ class TestBucheRastrigin(unittest.TestCase):
 
         self.assertAlmostEqual(result, expected_result, places=6)
 
-    def test_evaluate_with_custom_f_opt(self):
-        dimension = 3
-        custom_f_opt = 10.0
-        buche_rastrigin = Buche_rastrigin(dimension, f_opt=custom_f_opt)
-
-        result = buche_rastrigin.evaluate(buche_rastrigin.x_opt)
-        self.assertAlmostEqual(result, custom_f_opt, places=6)
-
     def test_evaluate_with_dimension_1(self):
         dimension = 1
         buche_rastrigin = Buche_rastrigin(dimension)

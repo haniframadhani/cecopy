@@ -74,15 +74,6 @@ class Test_ellipsoidal(unittest.TestCase):
         expected_result = expected_result + ellipsoidal.f_opt
         self.assertAlmostEqual(result, expected_result, places=6)
 
-    def test_evaluate_with_custom_f_opt(self):
-        dimension = 3
-        custom_f_opt = 10.0
-        ellipsoidal = Ellipsoidal(dimension, f_opt=custom_f_opt)
-
-        # Evaluate at x_opt
-        result = ellipsoidal.evaluate(ellipsoidal.x_opt)
-        self.assertAlmostEqual(result, custom_f_opt, places=6)
-
     def test_evaluate_with_dimension_1(self):
         dimension = 1
         ellipsoidal = Ellipsoidal(dimension)

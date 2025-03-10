@@ -11,21 +11,19 @@ class Schwefel(Bbob):
         f(X)= -frac{1}{100D}sum_{i=1}^{D}x_i sin(sqrt{| x_i |}) + 4.189828872724339 + 100f_{pen}(z/100) + f_{opt}
         where x is an input vector of dimension D.
 
-    This class inherits from `Bbob` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) can be explicitly provided or computed as f(x_opt).
+    This class inherits from `Bbob` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).
 
     Attributes:
         x_opt (np.ndarray): The optimal shift vector, randomly generated within [-5, 5].
-        f_opt (float): The function value at x_opt. Defaults to f(x_opt) if not provided.
         sign_vector (np.ndarray): Vector of random signs (±1) used in transformations.
     """
 
-    def __init__(self, dimension: int, f_opt: float = None) -> None:
+    def __init__(self, dimension: int) -> None:
         """
         Initializes the Schwefel function with a given dimension.
 
         Parameters:
             dimension (int): The number of dimensions for the input space. Must be a positive integer.
-            f_opt (float, optional): The function value at x_opt. If None, it is computed as f(x_opt).
 
         Raises:
             ValueError: If dimension is not a positive integer.
@@ -39,11 +37,8 @@ class Schwefel(Bbob):
         self.sign_vector = np.random.choice([-1, 1], dimension)
         # Generate the true optimal point as defined in the formula
         self.true_x_opt = 4.209687463 / 2 * self.sign_vector
-        # Compute f_opt as the value of the Schwefel function at x_opt
-        if f_opt is None:
-            self.f_opt = self.raw(self.x_opt)
-        else:
-            self.f_opt = f_opt
+
+        self.f_opt = self.raw(self.x_opt)
 
     def raw(self, x: np.ndarray) -> float:
         """
