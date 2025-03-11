@@ -51,3 +51,10 @@ ceco.coco.sphere module
    :members:
    :undoc-members:
    :show-inheritance:
+
+ceco.coco.step_ellipsoidal module
+-----------------------
+.. automodule:: ceco.coco.step_ellipsoidal
+   :members:
+   :undoc-members:
+   :show-inheritance:
