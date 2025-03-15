@@ -1,5 +1,5 @@
 from ceco.benchmark import Benchmark
-import math
+import numpy as np
 
 
 class Vincent(Benchmark):
@@ -14,61 +14,45 @@ class Vincent(Benchmark):
     This class inherits from the `Benchmark` class and implements the `evaluate` method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming the input vector.
-        shift (list of float): A shift vector for adjusting the input vector.
+        dimension (int): The number of dimensions for the input space. Must be a positive integer.
+        rotation (np.ndarray): A rotation matrix for transforming the input vector.
+        shift (np.ndarray): A shift vector for adjusting the input vector.
         f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
-    def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
+    def __init__(self, dimension: int, rotation: np.ndarray, shift: np.ndarray, f_bias: float = 0) -> None:
         """
         Initializes the Vincent class with a rotation matrix, a shift vector, and a bias term.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix for transforming the input vector.
-            shift (list of float): The shift vector for adjusting the input vector.
+            dimension (int): The number of dimensions for the input space. Must be a positive integer.
+            rotation (np.ndarray): The rotation matrix for transforming the input vector.
+            shift (np.ndarray): The shift vector for adjusting the input vector.
             f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
-
-        Raises:
-            ValueError: If `rotation` is not a non-empty square matrix.
-            ValueError: If `shift` length does not match the dimension of `rotation`.
         """
-        if not isinstance(rotation, list) or not rotation:
-            raise ValueError(
-                "Rotation matrix must be a non-empty list of lists")
-        row_count = len(rotation)  # Number of rows
-        if not all(isinstance(row, list) and len(row) == row_count for row in rotation):
-            raise ValueError("Rotation matrix must be a square matrix")
-        if len(rotation) != len(shift):
-            raise ValueError("rotation and shift has different dimensions")
-        super().__init__(rotation, shift, f_bias)
+        super().__init__(dimension)
+        self.cec_init(rotation, shift, f_bias)
 
-    def evaluate(self, input_vector: list[float]) -> float:
+    def evaluate(self, input_vector: np.ndarray) -> float:
         """
         Evaluates the Vincent function for the given input vector after applying shift and rotation transformations.
 
         Parameters:
-            input_vector (list of float): The input vector [x1, x2, ..., xD].
+            input_vector (np.ndarray): The input vector [x1, x2, ..., xD].
 
         Returns:
             float: The result of the Vincent function after applying rotation and shift.
-
-        Raises:
-            ValueError: If the input vector does not match the expected dimension.
-            ValueError: If the input vector less or equal to zero.
         """
-        dimension = len(input_vector)
-        if len(self.rotation) != dimension and len(self.shift) != dimension:
-            raise ValueError(
-                "Input vector dimension does not match rotation and shift dimensions")
-
         # Apply shift and rotation
-        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
-        total_sum = 0.0
+        shifted_rotated_vector = np.matmul(
+            self.rotation, input_vector - self.shift)
 
-        for z_i in shifted_rotated_vector:
-            if z_i <= 0:
-                raise ValueError(
-                    "All elements in input_vector must be greater than 0 after shift and rotation")
-            total_sum += math.sin(10 * math.log(z_i))
+        # Check if all elements are greater than 0
+        if np.any(shifted_rotated_vector <= 0):
+            raise ValueError(
+                "All elements in input_vector must be greater than 0 after shift and rotation")
 
-        return 1 / dimension * total_sum + self.f_bias
+        # Compute the Vincent function using vectorized operations
+        total_sum = np.sum(np.sin(10 * np.log(shifted_rotated_vector)))
+
+        return 1 / self.dimension * total_sum + self.f_bias
