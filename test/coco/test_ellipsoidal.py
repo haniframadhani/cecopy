@@ -1,82 +1,196 @@
 import unittest
+import numpy as np
+from ceco.bbob import Bbob
 from ceco.coco.ellipsoidal import Ellipsoidal
 
 
 class Test_ellipsoidal(unittest.TestCase):
     def setUp(self):
-        # Example rotation matrix and shift vector for testing
-        # Identity matrix (no rotation)
-        self.rotation_identity = [[1, 0], [0, 1]]
-        self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
-        self.shift = [1, 1]  # Shift vector
-        self.no_shift = [0, 0]  # No shift vector
-        self.f_bias = 1.0
+        np.random.seed(42)
 
-    def test_evaluate_with_identity_rotation_and_no_shift(self):
-        ellipsoidal = Ellipsoidal(self.rotation_identity, self.no_shift)
-        input_vector = [3.0, 2.0]  # Example input
+    def test_initialization(self):
+        dimension = 5
+        ellipsoidal = Ellipsoidal(dimension)
+
+        # Check if x_opt is generated correctly
+        self.assertEqual(len(ellipsoidal.x_opt), dimension)
+        self.assertTrue(np.all(ellipsoidal.x_opt >= -5)
+                        and np.all(ellipsoidal.x_opt <= 5))
+
+        # Check if f_opt is computed correctly
+        expected_f_opt = ellipsoidal.raw(ellipsoidal.x_opt)
+        self.assertAlmostEqual(ellipsoidal.f_opt, expected_f_opt, places=6)
+
+        # Check the specific values of x_opt for reproducibility
+        expected_x_opt = np.array(
+            [-1.25459881, 4.50714306, 2.31993942, 0.98658484, -3.4398136])
+        self.assertTrue(np.allclose(ellipsoidal.x_opt,
+                        expected_x_opt, rtol=1e-6, atol=1e-6))
+
+    def test_evaluate_at_optimal_point(self):
+        dimension = 3
+        ellipsoidal = Ellipsoidal(dimension)
+
+        # Evaluate at x_opt
+        result = ellipsoidal.evaluate(ellipsoidal.x_opt)
+        self.assertAlmostEqual(result, ellipsoidal.f_opt, places=6)
+
+    def test_evaluate_at_zero_vector(self):
+        """
+        Test the evaluate method at the zero vector.
+        """
+        dimension = 2
+        ellipsoidal = Ellipsoidal(dimension)
+        bbob = Bbob(dimension)
+
+        # Zero vector
+        input_vector = np.zeros(dimension)
         result = ellipsoidal.evaluate(input_vector)
-        expected_result = 4_000_009
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_identity_rotation_and_shift(self):
-        ellipsoidal = Ellipsoidal(self.rotation_identity, self.shift)
-        input_vector = [3.0, 2.0]  # Example input
+        # Manually compute the expected result
+        z = input_vector - ellipsoidal.x_opt
+        z = bbob.T_osz(z)
+        i = np.arange(1, dimension + 1)
+        exponent = 6 * (i - 1) / (dimension - 1)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
+        expected_result = expected_result + ellipsoidal.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
+
+    def test_evaluate_with_negative_values(self):
+        dimension = 2
+        ellipsoidal = Ellipsoidal(dimension)
+        bbob = Bbob(dimension)
+
+        # Input vector with negative values
+        input_vector = np.array([-3, -2])
         result = ellipsoidal.evaluate(input_vector)
-        expected_result = 1_000_004
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_non_identity_rotation_and_no_shift(self):
-        ellipsoidal = Ellipsoidal(self.rotation_non_identity, self.no_shift)
-        input_vector = [3.0, 2.0]  # Example input
+        # Manually compute the expected result
+        z = input_vector - ellipsoidal.x_opt
+        z = bbob.T_osz(z)
+        i = np.arange(1, dimension + 1)
+        exponent = 6 * (i - 1) / (dimension - 1)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
+        expected_result = expected_result + ellipsoidal.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
+
+    def test_evaluate_with_dimension_1(self):
+        dimension = 1
+        ellipsoidal = Ellipsoidal(dimension)
+        bbob = Bbob(dimension)
+
+        # Evaluate at an arbitrary point
+        input_vector = np.array([2.0])
         result = ellipsoidal.evaluate(input_vector)
-        expected_result = 9_000_004
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_non_identity_rotation_and_shift(self):
-        ellipsoidal = Ellipsoidal(self.rotation_non_identity, self.shift)
-        input_vector = [3.0, 2.0]  # Example input
+        # Manually compute the expected result
+        z = input_vector - ellipsoidal.x_opt
+        z = bbob.T_osz(z)
+        exponent = 0
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
+        expected_result = expected_result + ellipsoidal.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
+
+    def test_evaluate_with_empty_input_vector(self):
+        dimension = 3
+        ellipsoidal = Ellipsoidal(dimension)
+
+        # Empty input vector
+        input_vector = np.array([])
+        with self.assertRaises(ValueError):
+            ellipsoidal.evaluate(input_vector)
+
+    def test_initialization_high(self):
+        dimension = 5
+        ellipsoidal = Ellipsoidal(dimension, high_conditioning=True)
+
+        # Check if x_opt is generated correctly
+        self.assertEqual(len(ellipsoidal.x_opt), dimension)
+        self.assertTrue(np.all(ellipsoidal.x_opt >= -5)
+                        and np.all(ellipsoidal.x_opt <= 5))
+
+        # Check if f_opt is computed correctly
+        expected_f_opt = ellipsoidal.raw(ellipsoidal.x_opt)
+        self.assertAlmostEqual(ellipsoidal.f_opt, expected_f_opt, places=6)
+
+        # Check the specific values of x_opt for reproducibility
+        expected_x_opt = np.array(
+            [-1.25459881, 4.50714306, 2.31993942, 0.98658484, -3.4398136])
+        self.assertTrue(np.allclose(ellipsoidal.x_opt,
+                        expected_x_opt, rtol=1e-6, atol=1e-6))
+
+    def test_evaluate_at_optimal_point_high(self):
+        dimension = 3
+        ellipsoidal = Ellipsoidal(dimension, high_conditioning=True)
+
+        # Evaluate at x_opt
+        result = ellipsoidal.evaluate(ellipsoidal.x_opt)
+        self.assertAlmostEqual(result, ellipsoidal.f_opt, places=6)
+
+    def test_evaluate_at_zero_vector_high(self):
+        """
+        Test the evaluate method at the zero vector.
+        """
+        dimension = 2
+        ellipsoidal = Ellipsoidal(dimension, high_conditioning=True)
+        bbob = Bbob(dimension)
+
+        # Zero vector
+        input_vector = np.zeros(dimension)
         result = ellipsoidal.evaluate(input_vector)
-        expected_result = 4_000_001
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_zero_input(self):
-        ellipsoidal = Ellipsoidal(self.rotation_identity, self.no_shift)
-        input_vector = [0.0, 0.0]  # Known input
+        # Manually compute the expected result
+        z = input_vector - ellipsoidal.x_opt
+        z = bbob.T_osz(bbob.gram_schmidt(np.array([z]).T).ravel())
+        i = np.arange(1, dimension + 1)
+        exponent = 6 * (i - 1) / (dimension - 1)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
+        expected_result = expected_result + ellipsoidal.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
+
+    def test_evaluate_with_negative_values_high(self):
+        dimension = 2
+        ellipsoidal = Ellipsoidal(dimension, high_conditioning=True)
+        bbob = Bbob(dimension)
+
+        # Input vector with negative values
+        input_vector = np.array([-3, -2])
         result = ellipsoidal.evaluate(input_vector)
-        expected_result = 0.0
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_invalid_rotation_not_list(self):
-        with self.assertRaises(ValueError) as context:
-            Ellipsoidal(rotation="invalid", shift=[0, 0])
-            self.assertEqual(str(context.exception),
-                             "Rotation matrix must be a non-empty list of lists")
+        # Manually compute the expected result
+        z = input_vector - ellipsoidal.x_opt
+        z = bbob.T_osz(bbob.gram_schmidt(np.array([z]).T).ravel())
+        i = np.arange(1, dimension + 1)
+        exponent = 6 * (i - 1) / (dimension - 1)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
+        expected_result = expected_result + ellipsoidal.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
-    def test_invalid_rotation_empty(self):
-        with self.assertRaises(ValueError) as context:
-            Ellipsoidal(rotation=[], shift=[0, 0])
-        self.assertEqual(str(context.exception),
-                         "Rotation matrix must be a non-empty list of lists")
+    def test_evaluate_with_dimension_1_high(self):
+        dimension = 1
+        ellipsoidal = Ellipsoidal(dimension, high_conditioning=True)
+        bbob = Bbob(dimension)
 
-    def test_invalid_rotation_not_square(self):
-        with self.assertRaises(ValueError) as context:
-            Ellipsoidal(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
-        self.assertEqual(str(context.exception),
-                         "Rotation matrix must be a square matrix")
+        # Evaluate at an arbitrary point
+        input_vector = np.array([2.0])
+        result = ellipsoidal.evaluate(input_vector)
 
-    def test_rotation_shift_mismatch(self):
-        with self.assertRaises(ValueError) as context:
-            Ellipsoidal(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
-        self.assertEqual(str(context.exception),
-                         "rotation and shift has different dimensions")
+        # Manually compute the expected result
+        z = input_vector - ellipsoidal.x_opt
+        z = bbob.T_osz(bbob.gram_schmidt(np.array([z]).T).ravel())
+        exponent = 0
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
+        expected_result = expected_result + ellipsoidal.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
-    def test_input_vector_mismatch(self):
-        ellipsoidal = Ellipsoidal(rotation=[[1, 0], [0, 1]], shift=[0, 0])
-        with self.assertRaises(ValueError) as context:
-            ellipsoidal.evaluate([1, 2, 3])  # Incorrect dimension
-        self.assertEqual(str(context.exception),
-                         "Input vector dimension does not match rotation and shift dimensions")
+    def test_evaluate_with_empty_input_vector_high(self):
+        dimension = 3
+        ellipsoidal = Ellipsoidal(dimension, high_conditioning=True)
+
+        # Empty input vector
+        input_vector = np.array([])
+        with self.assertRaises(ValueError):
+            ellipsoidal.evaluate(input_vector)
 
 
 if __name__ == '__main__':

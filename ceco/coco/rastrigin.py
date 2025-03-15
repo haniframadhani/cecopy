@@ -1,14 +1,15 @@
-from ceco.bbob import Bbob
 import numpy as np
+from ceco.bbob import Bbob
 
 
-class Sphere(Bbob):
+class Rastrigin(Bbob):
     """
-    Implements the Sphere function, a common benchmark function for optimization problems.
+    A class representing the Rastrigin function, which is a benchmark function
+    for optimization.
 
-    The Sphere function is defined as:
+    The Rastrigin function is defined as:
 
-        f(x) = sum(x_i^2) for i in [1, D]
+        f(X)=10 ( D - sum(cos(2 pi x_i)) ) for i in [1, D]
 
     where x is an input vector of dimension D.
 
@@ -21,7 +22,7 @@ class Sphere(Bbob):
 
     def __init__(self, dimension: int) -> None:
         """
-        Initializes the Sphere function with a given dimension.
+        Initializes the Rastrigin function with a given dimension.
 
         Parameters:
             dimension (int): The number of dimensions for the input space. Must be a positive integer.
@@ -39,11 +40,11 @@ class Sphere(Bbob):
 
     def raw(self, x: np.ndarray) -> float:
         """
-        Evaluates the Sphere function at a given input vector without any shift.
+        Evaluates the Rastrigin function at a given input vector without any shift.
 
         The function is calculated as:
 
-            f(x) = sum(x_i^2) for i in [1, D]
+        f(X)=10 ( D - sum(cos(2 pi x_i)) ) for i in [1, D]
 
         Parameters:
             x (np.ndarray): A vector of real numbers representing a candidate solution.
@@ -54,23 +55,26 @@ class Sphere(Bbob):
         Raises:
             ValueError: If the input vector does not match the expected dimension.
         """
-        if len(x) != self.dimension:
+        if x.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
-        # Calculate the sum of squares
-        total_sum_of_squares = np.sum(x ** 2)
-        return total_sum_of_squares
+
+        sum_cos = np.sum(np.cos(2 * np.pi * x))
+        result = 10 * (self.dimension - sum_cos)
+        return result
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
-        Evaluates the Sphere function at a given input vector.
+        Evaluates the Rastrigin function at a given input vector.
 
         The function is calculated as:
 
-            f(x) = sum((x_i - x_opt_i)^2) + f_opt
+        f(X)=10 ( D - sum(cos(2 pi z_i)) ) + ||z||^2 + f_opt
+
+        where z = Λ^10 * T_asy(0.2, T_osz(x - x_opt)).
 
         Parameters:
-            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Sphere function.
+            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Rastrigin function.
 
         Returns:
             float: The function value at the given input vector.
@@ -78,11 +82,13 @@ class Sphere(Bbob):
         Raises:
             ValueError: If the input vector does not match the expected dimension.
         """
-        if len(input_vector) != self.dimension:
+        if input_vector.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
         z = input_vector - self.x_opt
-        # Calculate the sum of squares
-        total_sum_of_squares = self.raw(z) + self.f_opt
+        z = self.T_osz(z)
+        z = np.matmul(
+            self.create_diagonal_matrix(10), self.T_asy_beta(0.2, z))
+        result = self.raw(z) + self.euclidean_norm(z) + self.f_opt
 
-        return total_sum_of_squares
+        return result

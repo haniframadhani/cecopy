@@ -1,82 +1,92 @@
 import unittest
+import numpy as np
 from ceco.coco.sphere import Sphere
 
 
 class Test_sphere(unittest.TestCase):
     def setUp(self):
-        # Example rotation matrix and shift vector for testing
-        # Identity matrix (no rotation)
-        self.rotation_identity = [[1, 0], [0, 1]]
-        self.rotation_non_identity = [[0, -1], [1, 0]]  # 90-degree rotation
-        self.shift = [1, 1]  # Shift vector
-        self.no_shift = [0, 0]  # No shift vector
-        self.f_bias = 1.0
+        np.random.seed(42)
 
-    def test_evaluate_with_identity_rotation_and_no_shift(self):
-        sphere = Sphere(self.rotation_identity, self.no_shift)
-        input_vector = [3.0, 2.0]  # Example input
+    def test_initialization(self):
+        dimension = 5
+        sphere = Sphere(dimension)
+
+        # Check if x_opt is generated correctly
+        self.assertEqual(len(sphere.x_opt), dimension)
+        self.assertTrue(np.all(sphere.x_opt >= -5)
+                        and np.all(sphere.x_opt <= 5))
+
+        # Check if f_opt is computed correctly
+        expected_f_opt = sphere.raw(sphere.x_opt)
+        self.assertAlmostEqual(sphere.f_opt, expected_f_opt, places=6)
+
+        # Check the specific values of x_opt for reproducibility
+        expected_x_opt = np.array(
+            [-1.25459881, 4.50714306, 2.31993942, 0.98658484, -3.4398136])
+        self.assertTrue(np.allclose(sphere.x_opt,
+                        expected_x_opt, rtol=1e-6, atol=1e-6))
+
+    def test_evaluate_at_optimal_point(self):
+        dimension = 3
+        sphere = Sphere(dimension)
+
+        # Evaluate at x_opt
+        result = sphere.evaluate(sphere.x_opt)
+        self.assertAlmostEqual(result, sphere.f_opt, places=6)
+
+    def test_evaluate_at_zero_vector(self):
+        """
+        Test the evaluate method at the zero vector.
+        """
+        dimension = 2
+        sphere = Sphere(dimension)
+
+        # Zero vector
+        input_vector = np.zeros(dimension)
         result = sphere.evaluate(input_vector)
-        expected_result = 13.0
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_identity_rotation_and_shift(self):
-        sphere = Sphere(self.rotation_identity, self.shift)
-        input_vector = [3.0, 2.0]  # Example input
+        # Manually compute the expected result
+        z = input_vector - sphere.x_opt
+        expected_result = np.sum(z ** 2) + sphere.f_opt
+
+        self.assertAlmostEqual(result, expected_result, places=6)
+
+    def test_evaluate_with_negative_values(self):
+        dimension = 2
+        sphere = Sphere(dimension)
+
+        # Input vector with negative values
+        input_vector = np.array([-3, -2])
         result = sphere.evaluate(input_vector)
-        expected_result = 5.0
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_non_identity_rotation_and_no_shift(self):
-        sphere = Sphere(self.rotation_non_identity, self.no_shift)
-        input_vector = [3.0, 2.0]  # Example input
+        # Manually compute the expected result
+        z = input_vector - sphere.x_opt
+        expected_result = np.sum(z ** 2) + sphere.f_opt
+
+        self.assertAlmostEqual(result, expected_result, places=6)
+
+    def test_evaluate_with_dimension_1(self):
+        dimension = 1
+        sphere = Sphere(dimension)
+
+        # Evaluate at an arbitrary point
+        input_vector = np.array([2.0])
         result = sphere.evaluate(input_vector)
-        expected_result = 13.0
-        self.assertAlmostEqual(result, expected_result, places=5)
 
-    def test_evaluate_with_non_identity_rotation_and_shift(self):
-        sphere = Sphere(self.rotation_non_identity, self.shift)
-        input_vector = [3.0, 2.0]  # Example input
-        result = sphere.evaluate(input_vector)
-        expected_result = 5.0
-        self.assertAlmostEqual(result, expected_result, places=5)
+        # Manually compute the expected result
+        z = input_vector - sphere.x_opt
+        expected_result = np.sum(z ** 2) + sphere.f_opt
 
-    def test_evaluate_with_zero_input(self):
-        sphere = Sphere(self.rotation_identity, self.no_shift)
-        input_vector = [0.0, 0.0]  # Known input
-        result = sphere.evaluate(input_vector)
-        expected_result = 0.0
-        self.assertAlmostEqual(result, expected_result, places=5)
+        self.assertAlmostEqual(result, expected_result, places=6)
 
-    def test_invalid_rotation_not_list(self):
-        with self.assertRaises(ValueError) as context:
-            Sphere(rotation="invalid", shift=[0, 0])
-            self.assertEqual(str(context.exception),
-                             "Rotation matrix must be a non-empty list of lists")
+    def test_evaluate_with_empty_input_vector(self):
+        dimension = 3
+        sphere = Sphere(dimension)
 
-    def test_invalid_rotation_empty(self):
-        with self.assertRaises(ValueError) as context:
-            Sphere(rotation=[], shift=[0, 0])
-        self.assertEqual(str(context.exception),
-                         "Rotation matrix must be a non-empty list of lists")
-
-    def test_invalid_rotation_not_square(self):
-        with self.assertRaises(ValueError) as context:
-            Sphere(rotation=[[1, 2, 3], [4, 5, 6]], shift=[0, 0, 0])
-        self.assertEqual(str(context.exception),
-                         "Rotation matrix must be a square matrix")
-
-    def test_rotation_shift_mismatch(self):
-        with self.assertRaises(ValueError) as context:
-            Sphere(rotation=[[1, 0], [0, 1]], shift=[0, 0, 0])
-        self.assertEqual(str(context.exception),
-                         "rotation and shift has different dimensions")
-
-    def test_input_vector_mismatch(self):
-        sphere = Sphere(rotation=[[1, 0], [0, 1]], shift=[0, 0])
-        with self.assertRaises(ValueError) as context:
-            sphere.evaluate([1, 2, 3])  # Incorrect dimension
-        self.assertEqual(str(context.exception),
-                         "Input vector dimension does not match rotation and shift dimensions")
+        # Empty input vector
+        input_vector = np.array([])
+        with self.assertRaises(ValueError):
+            sphere.evaluate(input_vector)
 
 
 if __name__ == '__main__':

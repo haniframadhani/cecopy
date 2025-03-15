@@ -1,5 +1,5 @@
 from ceco.benchmark import Benchmark
-import math
+import numpy as np
 
 
 class Weierstrass(Benchmark):
@@ -11,76 +11,63 @@ class Weierstrass(Benchmark):
     standard Weierstrass function.
 
     Attributes:
-        rotation (list of list of float): A rotation matrix for transforming the input vector.
-        shift (list of float): A shift vector for adjusting the input vector.
+        dimension (int): The number of dimensions for the input space. Must be a positive integer.
+        rotation (np.ndarray): A rotation matrix for transforming the input vector.
+        shift (np.ndarray): A shift vector for adjusting the input vector.
+        f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
         a (float): The decay factor, default is 0.5.
         b (float): The frequency factor, default is 3.
         k_max (int): The maximum number of summation terms, default is 20.
-        f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
     """
 
-    def __init__(self, rotation: list[list[float]], shift: list[float], f_bias: float = 0) -> None:
+    def __init__(self, dimension: int, rotation: np.ndarray, shift: np.ndarray, f_bias: float = 0) -> None:
         """
         Initializes the Weierstrass class with a rotation matrix and a shift vector.
 
         Parameters:
-            rotation (list of list of float): The rotation matrix.
-            shift (list of float): The shift vector.
+            dimension (int): The number of dimensions for the input space. Must be a positive integer.
+            rotation (np.ndarray): The rotation matrix for transforming the input vector.
+            shift (np.ndarray): The shift vector for adjusting the input vector.
             f_bias (float): A bias term added to the benchmark function's output. Defaults to 0.
-
-        Raises:
-            ValueError: If `rotation` is not a non-empty square matrix.
-            ValueError: If `shift` length does not match the dimension of `rotation`.
         """
-        if not isinstance(rotation, list) or not rotation:
-            raise ValueError(
-                "Rotation matrix must be a non-empty list of lists")
-        row_count = len(rotation)  # Number of rows
-        if not all(isinstance(row, list) and len(row) == row_count for row in rotation):
-            raise ValueError("Rotation matrix must be a square matrix")
-        if len(rotation) != len(shift):
-            raise ValueError("rotation and shift has different dimensions")
+        super().__init__(dimension)
+        self.cec_init(rotation, shift, f_bias)
         self.a = 0.5
         self.b = 3
         self.k_max = 20
-        super().__init__(rotation, shift, f_bias)
 
-    def evaluate(self, input_vector: list[float]) -> float:
+    def evaluate(self, input_vector: np.ndarray) -> float:
         """
         Evaluates the rotated and shifted Weierstrass function at a given input vector.
 
         Parameters:
-            input_vector (list of float): The input vector [x1, x2, ..., xD].
+            input_vector (np.ndarray): The input vector [x1, x2, ..., xD].
 
         Returns:
             float: The result of the Weierstrass function after applying rotation and shift.
-
-        Raises:
-            ValueError: If the input vector does not match the expected dimension.
         """
-        dimension = len(input_vector)
-        if len(self.rotation) != dimension and len(self.shift) != dimension:
-            raise ValueError(
-                "Input vector dimension does not match rotation and shift dimensions")
-
         # Apply shift and rotation
-        shifted_rotated_vector = super().rotate_input(super().shift_input(input_vector))
+        shifted_rotated_vector = np.matmul(
+            self.rotation, input_vector - self.shift)
 
-        total_sum = 0.0
-        # Calculate the first part of the function
-        for i in range(dimension):
-            inner_sum = 0.0
-            for k in range(self.k_max + 1):
-                inner_sum += self.a ** k * \
-                    math.cos(2 * math.pi * self.b **
-                             k * (shifted_rotated_vector[i] + 0.5))
-            total_sum += inner_sum
+        k_values = np.arange(self.k_max + 1)  # k = 0, 1, ..., k_max
+        a_pow_k = self.a ** k_values  # a^k for all k
+        b_pow_k = self.b ** k_values  # b^k for all k
 
-        # Calculate the second part of the function
-        second_sum = 0.0
-        for k in range(self.k_max + 1):
-            second_sum += self.a ** k * \
-                math.cos(2 * math.pi * self.b ** k * 0.5)
+        # Compute the first part of the function
+        inner_sum = np.sum(
+            a_pow_k[:, np.newaxis] *
+            np.cos(2 * np.pi * b_pow_k[:, np.newaxis]
+                   * (shifted_rotated_vector + 0.5)),
+            axis=0
+        )
+        total_sum = np.sum(inner_sum)
+
+        # Compute the second part of the function
+        second_sum = np.sum(
+            a_pow_k * np.cos(2 * np.pi * b_pow_k * 0.5)
+        )
+
         # Final result
-        result = total_sum - dimension * second_sum + self.f_bias
+        result = total_sum - self.dimension * second_sum + self.f_bias
         return result

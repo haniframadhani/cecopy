@@ -1,15 +1,15 @@
-import numpy as np
 from ceco.bbob import Bbob
+import numpy as np
 
 
-class Ellipsoidal(Bbob):
+class Rosenbrock(Bbob):
     """
-    A class representing the Ellipsoidal function, which is a benchmark function
+    A class representing the Rosenbrock function, which is a benchmark function
     for optimization.
 
-    The Ellipsoidal function is defined as:
+    The Rosenbrock function is defined as:
 
-        f(x) = sum(10^(6 * (i-1)/(D-1) * (x_i)^2) for i in [1, D]
+        f(X)=sum_{i=1}^{D-1}( 100( z_i^2-z_{i+1} )^2+( z_i-1 )^2 )+f_opt
 
     where x is an input vector of dimension D.
 
@@ -18,16 +18,16 @@ class Ellipsoidal(Bbob):
     Attributes:
         x_opt (np.ndarray): The optimal shift vector, randomly generated within [-5, 5].
         f_opt (float): The function value at x_opt.
-        high_conditioning (bool): If `True`, applies an additional Gram-Schmidt transformation to introduce high conditioning.
+        rotation (bool): Whether to apply rotation to the input vector during evaluation.
     """
 
-    def __init__(self, dimension: int, high_conditioning: bool = None) -> None:
+    def __init__(self, dimension: int, rotation: bool = None) -> None:
         """
-        Initializes the Ellipsoidal function with a given dimension.
+        Initializes the Rosenbrock function with a given dimension.
 
         Parameters:
             dimension (int): The number of dimensions for the input space. Must be a positive integer.
-            high_conditioning (bool, optional): If `True`, applies a Gram-Schmidt transformation to increase problem conditioning. Defaults to `False`.
+            rotation (bool, optional): Whether to apply rotation to the input vector during evaluation. Defaults to None (no rotation).
 
         Raises:
             ValueError: If dimension is not a positive integer.
@@ -40,14 +40,15 @@ class Ellipsoidal(Bbob):
 
         self.f_opt = self.raw(self.x_opt)
 
-        self.high_conditioning = high_conditioning
+        self.rotation = rotation
 
     def raw(self, x: np.ndarray) -> float:
         """
-        Evaluates the Ellipsoidal function at a given input vector without any shift.
+        Evaluates the Rosenbrock function at a given input vector without any shift.
 
         The function is calculated as:
-            f(x) = sum(10^(6 * (i-1)/(D-1) * (x_i)^2) for i in [1, D]
+
+        f(X)=sum_{i=1}^{D-1}( 100( x_i^2-x_i+1 )^2+( x_i-1 )^2 )
 
         Parameters:
             x (np.ndarray): A vector of real numbers representing a candidate solution.
@@ -62,24 +63,22 @@ class Ellipsoidal(Bbob):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        i = np.arange(1, self.dimension + 1)
-        if self.dimension == 1:
-            exponent = 0  # Handle the case when dimension = 1
-        else:
-            exponent = 6 * (i - 1) / (self.dimension - 1)
-        total_sum = np.sum((10 ** exponent) * (x ** 2))
+        result = 0.0
+        for i in range(self.dimension - 1):
+            result += 100 * (x[i] ** 2 - x[i + 1]) ** 2 + (x[i] - 1) ** 2
+        return result
 
-        return total_sum
-
-    def evaluate(self, input_vector: np.ndarray) -> float:
+    def evaluate(self, input_vector: np.ndarray, rotation_matrix: np.ndarray = None) -> float:
         """
-        Evaluates the Ellipsoidal function at a given input vector.
+        Evaluates the Rosenbrock function at a given input vector.
 
         The function is calculated as:
-            f(x) = sum(10^(6 * (i-1)/(D-1) * (z_i)^2) + f_opt
+
+        f(X)=sum_{i=1}^{D-1}( 100( z_i^2-z_{i+1} )^2+( z_i-1 )^2 )+f_opt
 
         Parameters:
-            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Ellipsoidal function.
+            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Rosenbrock function.
+            rotation_matrix (np.ndarray, optional): A rotation matrix to apply to the input vector. Required if `rotation` is True.
 
         Returns:
             float: The function value at the given input vector.
@@ -90,17 +89,13 @@ class Ellipsoidal(Bbob):
         if input_vector.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
-
-        # Shift the input vector
-        z = input_vector - self.x_opt
-
-        # Apply T_osz transformation
-        if not self.high_conditioning:
-            z = self.T_osz(z)
+        scaling_factor = max(1, self.dimension / 8)
+        if not self.rotation:
+            z = scaling_factor * (input_vector - self.x_opt) + 1
         else:
-            z = self.T_osz(self.gram_schmidt(np.array([z]).T).ravel())
-
-        # Compute the raw Ellipsoidal function value
+            z = scaling_factor * \
+                np.matmul(self.gram_schmidt(rotation_matrix.T),
+                          input_vector) + 1 / 2
         result = self.raw(z) + self.f_opt
 
         return result
