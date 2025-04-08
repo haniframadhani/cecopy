@@ -35,6 +35,12 @@ class Elliptic(Benchmark):
         super().__init__(dimension)
         self.cec_init(rotation, shift, f_bias)
 
+        if self.dimension > 1:
+            self.scaling_factors = (
+                10**6) ** (np.arange(self.dimension) / (self.dimension - 1))
+        else:
+            self.scaling_factors = None
+
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
         Evaluates the Elliptic function at a given input vector after applying
@@ -55,10 +61,11 @@ class Elliptic(Benchmark):
             self.rotation, input_vector - self.shift)
 
         # Calculate the Elliptic function
-        total_sum = 0.0
-        for i in range(1, self.dimension + 1):
-            term = (10**6) ** ((i - 1) / (self.dimension - 1)) * \
-                (shifted_rotated_vector[i - 1] ** 2)
-            total_sum += term
+        if self.dimension == 1:
+            return ((10 ** 6) ** 2) * (shifted_rotated_vector[0] ** 2) + self.f_bias
+
+        # Vectorized computation
+        total_sum = np.sum(self.scaling_factors *
+                           (shifted_rotated_vector ** 2))
 
         return total_sum + self.f_bias

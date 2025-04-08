@@ -36,6 +36,15 @@ class Weierstrass(Benchmark):
         self.b = 3
         self.k_max = 20
 
+        self.k_values = np.arange(self.k_max + 1)  # k = 0, 1, ..., k_max
+        self.a_pow_k = self.a ** self.k_values  # a^k for all k
+        self.b_pow_k = self.b ** self.k_values  # b^k for all k
+
+        # Compute the second part of the function
+        self.second_sum = np.sum(
+            self.a_pow_k * np.cos(2 * np.pi * self.b_pow_k * 0.5)
+        )
+
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
         Evaluates the rotated and shifted Weierstrass function at a given input vector.
@@ -50,24 +59,15 @@ class Weierstrass(Benchmark):
         shifted_rotated_vector = np.matmul(
             self.rotation, input_vector - self.shift)
 
-        k_values = np.arange(self.k_max + 1)  # k = 0, 1, ..., k_max
-        a_pow_k = self.a ** k_values  # a^k for all k
-        b_pow_k = self.b ** k_values  # b^k for all k
-
         # Compute the first part of the function
         inner_sum = np.sum(
-            a_pow_k[:, np.newaxis] *
-            np.cos(2 * np.pi * b_pow_k[:, np.newaxis]
+            self.a_pow_k[:, np.newaxis] *
+            np.cos(2 * np.pi * self.b_pow_k[:, np.newaxis]
                    * (shifted_rotated_vector + 0.5)),
             axis=0
         )
         total_sum = np.sum(inner_sum)
 
-        # Compute the second part of the function
-        second_sum = np.sum(
-            a_pow_k * np.cos(2 * np.pi * b_pow_k * 0.5)
-        )
-
         # Final result
-        result = total_sum - self.dimension * second_sum + self.f_bias
+        result = total_sum - self.dimension * self.second_sum + self.f_bias
         return result
