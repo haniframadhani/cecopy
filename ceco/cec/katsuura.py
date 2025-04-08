@@ -32,6 +32,10 @@ class Katsuura(Benchmark):
         """
         super().__init__(dimension)
         self.cec_init(rotation, shift, f_bias)
+        self.j_values = np.arange(1, 33)
+        self.powers_of_two = 2 ** self.j_values
+        self.exponent = 10 / (self.dimension ** 1.2)
+        self.scale_factor = 10 / (self.dimension ** 2)
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
@@ -47,17 +51,22 @@ class Katsuura(Benchmark):
         shifted_rotated_vector = np.matmul(
             self.rotation, input_vector - self.shift)
 
-        product = 1.0
+        powers_of_2 = 2 ** np.arange(1, 33)
 
-        for i in range(1, self.dimension + 1):
-            sum_term = 0.0
-            for j in range(1, 33):
-                term = np.abs(
-                    (2**j)*shifted_rotated_vector[i-1] - np.round((2**j)*shifted_rotated_vector[i-1]))/(2**j)
-                sum_term += term
-            product *= (1 + i * sum_term)**(10 / (self.dimension**1.2))
+        # Compute sum term using vectorized operations
+        sum_terms = np.sum(
+            np.abs(powers_of_2[:, None] * shifted_rotated_vector - np.round(
+                powers_of_2[:, None] * shifted_rotated_vector)) / powers_of_2[:, None],
+            axis=0
+        )
 
-        result = (10 / (self.dimension**2)) * product - \
-            (10/(self.dimension**2)) + self.f_bias
+        # Compute product term efficiently
+        indices = np.arange(1, self.dimension + 1)
+        product = np.prod((1 + indices * sum_terms) **
+                          (10 / (self.dimension ** 1.2)))
+
+        # Compute final result
+        result = (10 / (self.dimension ** 2)) * product - \
+            (10 / (self.dimension ** 2)) + self.f_bias
 
         return result
