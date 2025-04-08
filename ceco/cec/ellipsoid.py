@@ -66,8 +66,7 @@ class Ellipsoid(Benchmark):
             self.rotation, input_vector - self.shift)
 
         # Calculate the Ellipsoid function
-        total_sum = 0.0
-        for i in range(1, self.dimension + 1):
-            total_sum += i * (shifted_rotated_vector[i - 1] ** 2)
+        i_value = np.arange(1, self.dimension + 1, dtype=np.float64)
+        result = np.sum(i_value * (shifted_rotated_vector ** 2))
 
-        return total_sum + self.f_bias
+        return result + self.f_bias

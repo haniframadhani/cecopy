@@ -34,6 +34,11 @@ class Different_power(Benchmark):
         """
         super().__init__(dimension)
         self.cec_init(rotation, shift, f_bias)
+        if self.dimension > 1:
+            self.exponents = 2 + 4 * \
+                (np.arange(self.dimension) / (self.dimension - 1))
+        else:
+            self.exponents = None
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
@@ -48,13 +53,11 @@ class Different_power(Benchmark):
         # Apply shift and rotation
         shifted_rotated_vector = np.matmul(
             self.rotation, input_vector - self.shift)
+        if self.dimension == 1:
+            return np.abs(shifted_rotated_vector[0]) + self.f_bias
 
-        total_sum = 0.0
-
-        for i in range(1, self.dimension+1):
-            exponent = 2 + 4 * ((i - 1) / (self.dimension - 1))
-            total_sum += np.abs(shifted_rotated_vector[i-1])**exponent
-
+        # Vectorized computation
+        total_sum = np.sum(np.abs(shifted_rotated_vector) ** self.exponents)
         total_sum = np.sqrt(total_sum) + self.f_bias
 
         return total_sum

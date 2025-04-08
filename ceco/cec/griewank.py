@@ -36,6 +36,7 @@ class Griewank(Benchmark):
         """
         super().__init__(dimension)
         self.cec_init(rotation, shift, f_bias)
+        self.i_value = np.arange(1, self.dimension + 1)
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
@@ -54,11 +55,10 @@ class Griewank(Benchmark):
         shifted_rotated_vector = np.matmul(
             self.rotation, input_vector - self.shift)
 
-        sum_term = sum(z_i**2 / 4000 for z_i in shifted_rotated_vector)
+        sum_term = np.sum(shifted_rotated_vector ** 2 / 4000)
 
-        product_term = 1.0
-        for i in range(self.dimension):
-            product_term *= np.cos(shifted_rotated_vector[i]/np.sqrt(i+1))
+        product_term = np.prod(
+            np.cos(shifted_rotated_vector/np.sqrt(self.i_value)))
 
         result = sum_term - product_term + 1 + self.f_bias
         return result
