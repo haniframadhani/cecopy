@@ -1,8 +1,8 @@
-from ceco.bbob import Bbob
 import numpy as np
+from ceco.benchmark import Benchmark
 
 
-class Sphere(Bbob):
+class Sphere(Benchmark):
     """
     Implements the Sphere function, a common benchmark function for optimization problems.
 
@@ -12,7 +12,7 @@ class Sphere(Bbob):
 
     where x is an input vector of dimension D.
 
-    This class inherits from `Bbob` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).
+    This class inherits from `Benchmark` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).
 
     Attributes:
         x_opt (np.ndarray): The optimal shift vector, randomly generated within [-5, 5].

@@ -1,8 +1,8 @@
-from ceco.bbob import Bbob
 import numpy as np
+from ceco.benchmark import Benchmark
 
 
-class Schwefel(Bbob):
+class Schwefel(Benchmark):
     """
     A class representing the Schwefel function, which is a benchmark function for optimization.
 
@@ -11,7 +11,7 @@ class Schwefel(Bbob):
         f(X)= -frac{1}{100D}sum_{i=1}^{D}x_i sin(sqrt{| x_i |}) + 4.189828872724339 + 100f_{pen}(z/100) + f_{opt}
         where x is an input vector of dimension D.
 
-    This class inherits from `Bbob` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).
+    This class inherits from `Benchmark` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).
 
     Attributes:
         x_opt (np.ndarray): The optimal shift vector, randomly generated within [-5, 5].
