@@ -73,7 +73,7 @@ class Discus(Benchmark):
         Evaluates the Ellipsoidal function at a given input vector.
 
         The function is calculated as:
-            f(x) = sum(10^(6 * (i-1)/(D-1) * (z_i)^2) + f_opt
+            f(x) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2 + f_opt
 
         Parameters:
             input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Ellipsoidal function.
