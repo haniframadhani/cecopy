@@ -1,8 +1,8 @@
-from ceco.bbob import Bbob
 import numpy as np
+from ceco.benchmark import Benchmark
 
 
-class Rosenbrock(Bbob):
+class Rosenbrock(Benchmark):
     """
     A class representing the Rosenbrock function, which is a benchmark function
     for optimization.
@@ -13,21 +13,21 @@ class Rosenbrock(Bbob):
 
     where x is an input vector of dimension D.
 
-    This class inherits from `Bbob` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).
+    This class inherits from `Benchmark` and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).
 
     Attributes:
         x_opt (np.ndarray): The optimal shift vector, randomly generated within [-5, 5].
         f_opt (float): The function value at x_opt.
-        rotation (bool): Whether to apply rotation to the input vector during evaluation.
+        rotation (np.ndarray): A rotation matrix for transforming the input vector.
     """
 
-    def __init__(self, dimension: int, rotation: bool = None) -> None:
+    def __init__(self, dimension: int, rotation: np.ndarray = None) -> None:
         """
         Initializes the Rosenbrock function with a given dimension.
 
         Parameters:
             dimension (int): The number of dimensions for the input space. Must be a positive integer.
-            rotation (bool, optional): Whether to apply rotation to the input vector during evaluation. Defaults to None (no rotation).
+            rotation (np.ndarray): A rotation matrix for transforming the input vector. Defaults to None (no rotation).
 
         Raises:
             ValueError: If dimension is not a positive integer.
@@ -40,7 +40,7 @@ class Rosenbrock(Bbob):
 
         self.f_opt = self.raw(self.x_opt)
 
-        self.rotation = rotation
+        self.coco_init(rotation)
 
     def raw(self, x: np.ndarray) -> float:
         """
@@ -68,7 +68,7 @@ class Rosenbrock(Bbob):
             result += 100 * (x[i] ** 2 - x[i + 1]) ** 2 + (x[i] - 1) ** 2
         return result
 
-    def evaluate(self, input_vector: np.ndarray, rotation_matrix: np.ndarray = None) -> float:
+    def evaluate(self, input_vector: np.ndarray) -> float:
         """
         Evaluates the Rosenbrock function at a given input vector.
 
@@ -90,11 +90,11 @@ class Rosenbrock(Bbob):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
         scaling_factor = max(1, self.dimension / 8)
-        if not self.rotation:
+        if np.allclose(self.rotation, np.eye(self.dimension)):
             z = scaling_factor * (input_vector - self.x_opt) + 1
         else:
             z = scaling_factor * \
-                np.matmul(self.gram_schmidt(rotation_matrix.T),
+                np.matmul(self.gram_schmidt(self.rotation.T),
                           input_vector) + 1 / 2
         result = self.raw(z) + self.f_opt
 
