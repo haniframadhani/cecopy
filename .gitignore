@@ -166,3 +166,5 @@ cython_debug/
 
 benchmarking
 benchmarking/
+
+*.csv
