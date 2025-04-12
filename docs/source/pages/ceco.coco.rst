@@ -4,9 +4,9 @@ ceco.coco package
 COmparing Continous Optimizers (COCO) benchmark functions.
 ----------------------------------------------------------
 
-ceco.coco.ellipsoidal module
-----------------------------
-.. automodule:: ceco.coco.ellipsoidal
+ceco.coco.bent_cigar module
+---------------------------
+.. automodule:: ceco.coco.bent_cigar
    :members:
    :undoc-members:
    :show-inheritance:
@@ -14,6 +14,27 @@ ceco.coco.ellipsoidal module
 ceco.coco.buche_rastrigin module
 --------------------------------
 .. automodule:: ceco.coco.buche_rastrigin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.different_power module
+--------------------------------
+.. automodule:: ceco.coco.different_power
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
+ceco.coco.discus module
+-----------------------
+.. automodule:: ceco.coco.discus
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.ellipsoidal module
+----------------------------
+.. automodule:: ceco.coco.ellipsoidal
    :members:
    :undoc-members:
    :show-inheritance:
@@ -53,7 +74,7 @@ ceco.coco.sphere module
    :show-inheritance:
 
 ceco.coco.step_ellipsoidal module
------------------------
+---------------------------------
 .. automodule:: ceco.coco.step_ellipsoidal
    :members:
    :undoc-members:
