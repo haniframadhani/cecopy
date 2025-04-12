@@ -2,14 +2,14 @@ import numpy as np
 from ceco.benchmark import Benchmark
 
 
-class Discus(Benchmark):
+class Bent_cigar(Benchmark):
     """
-    A class representing the Discus function, which is a benchmark function
+    A class representing the Bent cigar function, which is a benchmark function
     for optimization.
 
-    The Discus function is defined as:
+    The Bent cigar function is defined as:
 
-        f(x) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2 for i in [1, D]
+        f(x) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2 for i in [1, D]
 
     where x is an input vector of dimension D.
 
@@ -22,7 +22,7 @@ class Discus(Benchmark):
 
     def __init__(self, dimension: int) -> None:
         """
-        Initializes the Discus function with a given dimension.
+        Initializes the Bent cigar function with a given dimension.
 
         Parameters:
             dimension (int): The number of dimensions for the input space. Must be a positive integer.
@@ -44,10 +44,10 @@ class Discus(Benchmark):
 
     def raw(self, x: np.ndarray) -> float:
         """
-        Evaluates the Discus function at a given input vector without any shift.
+        Evaluates the Bent cigar function at a given input vector without any shift.
 
         The function is calculated as:
-            f(x) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2 for i in [1, D]
+            f(x) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2 for i in [1, D]
 
         Parameters:
             x (np.ndarray): A vector of real numbers representing a candidate solution.
@@ -64,19 +64,19 @@ class Discus(Benchmark):
 
         sum_term = np.sum(x[1:] ** 2)
 
-        total_sum = np.power(10, 6) * x[0] ** 2 + sum_term
+        total_sum = x[0] ** 2 + np.pow(10, 6) * sum_term
 
         return total_sum
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
-        Evaluates the Discus function at a given input vector.
+        Evaluates the Bent cigar function at a given input vector.
 
         The function is calculated as:
-            f(x) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2 + f_opt
+            f(x) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2 + f_opt
 
         Parameters:
-            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Discus function.
+            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Bent cigar function.
 
         Returns:
             float: The function value at the given input vector.
@@ -89,9 +89,10 @@ class Discus(Benchmark):
                 f"Input vector must have {self.dimension} elements")
 
         # Shift the input vector
-        z = self.T_osz(np.matmul(self.R, (input_vector - self.x_opt)))
+        z = np.matmul(self.R, self.T_asy_beta(0.5, np.matmul(
+            self.R, (input_vector - self.x_opt))))
 
-        # Compute the raw Discus function value
+        # Compute the raw Bent cigar function value
         result = self.raw(z) + self.f_opt
 
         return result
