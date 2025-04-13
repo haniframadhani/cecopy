@@ -21,7 +21,7 @@ class Ellipsoidal(Benchmark):
         high_conditioning (bool): If `True`, applies an additional Gram-Schmidt transformation to introduce high conditioning.
     """
 
-    def __init__(self, dimension: int, high_conditioning: bool = None) -> None:
+    def __init__(self, dimension: int, high_conditioning: bool = False) -> None:
         """
         Initializes the Ellipsoidal function with a given dimension.
 
@@ -40,6 +40,8 @@ class Ellipsoidal(Benchmark):
 
         self.f_opt = self.raw(self.x_opt)
 
+        if not isinstance(high_conditioning, bool):
+            raise ValueError("high_conditioning must be a boolean")
         self.high_conditioning = high_conditioning
 
     def raw(self, x: np.ndarray) -> float:
