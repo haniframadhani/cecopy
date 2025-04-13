@@ -20,7 +20,7 @@ class Rastrigin(Benchmark):
         f_opt (float): The function value at x_opt.
     """
 
-    def __init__(self, dimension: int) -> None:
+    def __init__(self, dimension: int, adequate_global_structure: bool = False) -> None:
         """
         Initializes the Rastrigin function with a given dimension.
 
@@ -29,6 +29,7 @@ class Rastrigin(Benchmark):
 
         Raises:
             ValueError: If dimension is not a positive integer.
+            ValueError: If adequate global structure is not a boolean
         """
         if not isinstance(dimension, int) or dimension <= 0:
             raise ValueError("Dimension must be a positive integer")
@@ -37,6 +38,18 @@ class Rastrigin(Benchmark):
         self.x_opt = np.random.uniform(-5, 5, dimension)
 
         self.f_opt = self.raw(self.x_opt)
+
+        if not isinstance(adequate_global_structure, bool):
+            raise ValueError("adequate_global_structure must be a boolean")
+
+        self.adequate_global_structure = adequate_global_structure
+
+        self.diagonal_matrix = self.create_diagonal_matrix(10)
+
+        self.R = self.generate_random_matrix(dimension)
+        self.R = self.gram_schmidt(self.R)
+        self.Q = self.generate_random_matrix(dimension)
+        self.Q = self.gram_schmidt(self.Q)
 
     def raw(self, x: np.ndarray) -> float:
         """
@@ -71,7 +84,8 @@ class Rastrigin(Benchmark):
 
         f(X)=10 ( D - sum(cos(2 pi z_i)) ) + ||z||^2 + f_opt
 
-        where z = Λ^10 * T_asy(0.2, T_osz(x - x_opt)).
+        where z = Λ^10 * T_asy(0.2, T_osz(x - x_opt)) if adequate global structure is false.
+        where z = R * Λ^10 * Q * T_asy(0.2, T_osz(R * (x - x_opt))) if adequate global structure is true.
 
         Parameters:
             input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Rastrigin function.
@@ -85,10 +99,14 @@ class Rastrigin(Benchmark):
         if input_vector.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
-        z = input_vector - self.x_opt
-        z = self.T_osz(z)
-        z = np.matmul(
-            self.create_diagonal_matrix(10), self.T_asy_beta(0.2, z))
+        if self.adequate_global_structure:
+            z = self.R @ self.diagonal_matrix @ self.Q @ self.T_asy_beta(
+                0.2, self.T_osz(self.R @ (input_vector - self.x_opt)))
+        else:
+            z = input_vector - self.x_opt
+            z = self.T_osz(z)
+            z = np.matmul(
+                self.create_diagonal_matrix(10), self.T_asy_beta(0.2, z))
         result = self.raw(z) + self.euclidean_norm(z) + self.f_opt
 
         return result
