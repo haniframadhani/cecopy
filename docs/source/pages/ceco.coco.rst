@@ -56,6 +56,14 @@ ceco.coco.rosenbrock module
    :undoc-members:
    :show-inheritance:
 
+ceco.coco.schaffer_f7 module
+----------------------------
+
+.. automodule:: ceco.coco.schaffer_f7
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.schwefel module
 -------------------------
 
