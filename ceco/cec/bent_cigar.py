@@ -50,5 +50,5 @@ class Bent_cigar(Benchmark):
         sum_term = np.sum(shifted_rotated_vector[1:] ** 2)
 
         total_sum = shifted_rotated_vector[0] ** 2 + \
-            np.pow(10, 6) * sum_term + self.f_bias
+            (10 ** 6) * sum_term + self.f_bias
         return total_sum

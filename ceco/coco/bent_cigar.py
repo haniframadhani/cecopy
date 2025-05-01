@@ -64,7 +64,7 @@ class Bent_cigar(Benchmark):
 
         sum_term = np.sum(x[1:] ** 2)
 
-        total_sum = x[0] ** 2 + np.pow(10, 6) * sum_term
+        total_sum = x[0] ** 2 + (10 ** 6) * sum_term
 
         return total_sum
 

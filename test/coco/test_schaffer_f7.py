@@ -22,7 +22,6 @@ class Test_schaffer_f7(unittest.TestCase):
         self.assertAlmostEqual(test_func.f_opt, expected_f_opt, places=6)
 
         # Check the specific values of x_opt for reproducibility
-        print(test_func.x_opt)
         expected_x_opt = np.array(
             [1.87270059, 4.75357153, 3.65996971, 2.99329242, 0.7800932])
         self.assertTrue(np.allclose(test_func.x_opt,
