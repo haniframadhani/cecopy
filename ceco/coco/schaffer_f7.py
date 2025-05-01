@@ -77,7 +77,7 @@ class Schaffer_f7(Benchmark):
             raise ValueError(
                 "all element in Input vector must be non-negative after transformation")
         sqrt_x_i = np.sqrt(x_i)
-        x_i_pow = np.power(x_i, 0.2)
+        x_i_pow = x_i ** 0.2
         sin_term = np.sin(50 * x_i_pow)
         inner_term = sqrt_x_i + sqrt_x_i * np.square(sin_term)
         total_sum = np.sum(inner_term)
@@ -105,7 +105,7 @@ class Schaffer_f7(Benchmark):
             raise ValueError(
                 "all element in Input vector must be non-negative after transformation")
         sqrt_s = np.sqrt(s)
-        s_pow = np.power(s, 0.2)
+        s_pow = s ** 0.2
         sin_term = np.sin(50 * s_pow)
         inner_term = sqrt_s + sqrt_s * np.square(sin_term)
         total_sum = np.sum(inner_term)

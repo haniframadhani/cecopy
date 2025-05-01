@@ -51,7 +51,7 @@ class Discus(Benchmark):
 
         sum_term = np.sum(shifted_rotated_vector[1:] ** 2)
 
-        total_sum = np.power(
-            10, 6) * shifted_rotated_vector[0] ** 2 + sum_term + self.f_bias
+        total_sum = (10 ** 6) * \
+            shifted_rotated_vector[0] ** 2 + sum_term + self.f_bias
 
         return total_sum

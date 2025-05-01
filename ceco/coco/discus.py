@@ -64,7 +64,7 @@ class Discus(Benchmark):
 
         sum_term = np.sum(x[1:] ** 2)
 
-        total_sum = np.power(10, 6) * x[0] ** 2 + sum_term
+        total_sum = (10 ** 6) * x[0] ** 2 + sum_term
 
         return total_sum
 

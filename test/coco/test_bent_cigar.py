@@ -54,7 +54,7 @@ class Test_bent_cigar(unittest.TestCase):
         z = np.matmul(test_func.R, z)
         sum_term = np.sum(z[1:] ** 2)
         expected_result = z[0] ** 2 + \
-            np.pow(10, 6) * sum_term + test_func.f_opt
+            (10 ** 6) * sum_term + test_func.f_opt
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_negative_values(self):
@@ -73,7 +73,7 @@ class Test_bent_cigar(unittest.TestCase):
         z = np.matmul(test_func.R, z)
         sum_term = np.sum(z[1:] ** 2)
         expected_result = z[0] ** 2 + \
-            np.pow(10, 6) * sum_term + test_func.f_opt
+            (10 ** 6) * sum_term + test_func.f_opt
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_dimension_1(self):
@@ -92,7 +92,7 @@ class Test_bent_cigar(unittest.TestCase):
         z = np.matmul(test_func.R, z)
         sum_term = np.sum(z[1:] ** 2)
         expected_result = z[0] ** 2 + \
-            np.pow(10, 6) * sum_term + test_func.f_opt
+            (10 ** 6) * sum_term + test_func.f_opt
         self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_with_empty_input_vector(self):
