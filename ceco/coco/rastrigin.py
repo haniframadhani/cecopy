@@ -99,14 +99,13 @@ class Rastrigin(Benchmark):
         if input_vector.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
+        shifted = input_vector - self.x_opt
         if self.adequate_global_structure:
             z = self.R @ self.diagonal_matrix @ self.Q @ self.T_asy_beta(
-                0.2, self.T_osz(self.R @ (input_vector - self.x_opt)))
+                0.2, self.T_osz(self.R @ shifted))
         else:
-            z = input_vector - self.x_opt
-            z = self.T_osz(z)
-            z = np.matmul(
-                self.create_diagonal_matrix(10), self.T_asy_beta(0.2, z))
+            z = self.T_osz(shifted)
+            z = self.create_diagonal_matrix(10) @ self.T_asy_beta(0.2, z)
         result = self.raw(z) + self.euclidean_norm(z) + self.f_opt
 
         return result

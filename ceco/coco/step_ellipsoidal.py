@@ -36,7 +36,20 @@ class Step_ellipsoidal(Benchmark):
         # Generate a random optimal solution vector x_opt within the range [-5, 5]
         self.x_opt = np.random.uniform(-5, 5, dimension)
 
+        if dimension == 1:
+            self.weight = np.array([1.0])
+        else:
+            exponents = 2 * (np.arange(dimension) - 1) / (dimension - 1)
+            self.weight = 10 ** exponents
+
         self.f_opt = self.raw(self.x_opt)
+
+        # Precompute rotation matrices
+        self.R = self.gram_schmidt(self.generate_random_matrix(dimension).T)
+        self.Q = self.gram_schmidt(self.generate_random_matrix(dimension).T)
+
+        # Precompute diagonal scaling matrix Λ^10
+        self.diag_matrix = self.create_diagonal_matrix(10)
 
     def raw(self, x: np.ndarray) -> float:
         """
@@ -59,17 +72,8 @@ class Step_ellipsoidal(Benchmark):
                 f"Input vector must have {self.dimension} elements")
 
         term1 = np.abs(x[0]) / 1e4
-
-        if self.dimension == 1:
-            exponents = 0
-        else:
-            exponents = 2 * (np.arange(self.dimension)-1)/(self.dimension - 1)
-        weight = 10 ** exponents
-        term2 = np.sum(weight * x ** 2)
-
-        result = 0.1 * max(term1, term2)
-
-        return result
+        term2 = np.sum(self.weight * x ** 2)
+        return 0.1 * max(term1, term2)
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
@@ -96,29 +100,18 @@ class Step_ellipsoidal(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        # Shift the input vector
-        R = self.gram_schmidt(self.generate_random_matrix(self.dimension).T)
-        z_hat = np.matmul(self.create_diagonal_matrix(
-            10), np.matmul(R, input_vector - self.x_opt))
+        diff = input_vector - self.x_opt
+        z_hat = self.diag_matrix @ (self.R @ diff)
 
-        z_tilde = np.zeros_like(z_hat)
-        for i in range(z_hat.shape[0]):
-            if np.abs(z_hat[i]) > 0.5:
-                z_tilde[i] = np.floor(0.5+z_hat[i])
-            else:
-                z_tilde[i] = np.floor(0.5+10*z_hat[i])/10
-
-        Q = self.gram_schmidt(self.generate_random_matrix(self.dimension).T)
-        z = np.matmul(Q, z_tilde)
-
+        abs_z_hat = np.abs(z_hat)
+        z_tilde = np.where(
+            abs_z_hat > 0.5,
+            np.floor(0.5 + z_hat),
+            np.floor(0.5 + 10 * z_hat) / 10
+        )
+        z = self.Q @ z_tilde
         term1 = np.abs(z_hat[0]) / 1e4
-
-        if self.dimension == 1:
-            exponents = 0
-        else:
-            exponents = 2 * (np.arange(self.dimension)-1)/(self.dimension - 1)
-        weight = 10 ** exponents
-        term2 = np.sum(weight * z ** 2)
+        term2 = np.sum(self.weight * z ** 2)
 
         result = 0.1 * max(term1, term2) + \
             self.f_pen(input_vector) + self.f_opt

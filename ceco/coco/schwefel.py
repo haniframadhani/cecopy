@@ -37,7 +37,8 @@ class Schwefel(Benchmark):
         # Generate random sign vector (±1) to be used in transformations
         self.sign_vector = np.random.choice([-1, 1], dimension)
         # Generate the true optimal point as defined in the formula
-        self.true_x_opt = 4.209687463 / 2 * self.sign_vector
+        self.true_x_opt = 4.2096874633 / 2 * self.sign_vector
+        self.x_opt_term = 2 * np.abs(self.true_x_opt)
 
         self.f_opt = self.raw(self.x_opt)
 
@@ -92,44 +93,27 @@ class Schwefel(Benchmark):
         if input_vector.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
-        # 1. Apply first transformation: x_hat = 2 × 1± ⊗ x
+
         x_hat = 2 * self.sign_vector * input_vector
 
-        # 2. Calculate z_hat values
-        z_hat = np.zeros(self.dimension)
-        z_hat[0] = x_hat[0]  # z_hat_1 = x_hat_1
+        z_hat = np.zeros(self.dimension, dtype=float)
+        z_hat[0] = x_hat[0]
 
         for i in range(self.dimension - 1):
-            # Calculate the term [x_i^opt → 2|x_i^opt|]
-            x_opt_term = 2 * np.abs(self.true_x_opt[i])
+            z_hat[i+1] = x_hat[i+1] + 0.25 * \
+                (x_hat[i] - self.x_opt_term[i])
 
-            # Calculate z_hat_{i+1} using the recursive formula
-            z_hat[i+1] = x_hat[i+1] + 0.25 * (x_hat[i] - x_opt_term)
+        diff_vector = z_hat - self.x_opt_term
 
-        # 3. Prepare the final transformation for z
-        # Calculate the vector [x^opt → 2|x^opt|]
-        x_opt_transformed = 2 * np.abs(self.true_x_opt)
-
-        # Calculate the difference: z_hat - [x^opt → 2|x^opt|]
-        diff_vector = z_hat - x_opt_transformed
-
-        # Apply the diagonal matrix A^10
         lambda_matrix = self.create_diagonal_matrix(10)
-
-        # Multiply the diagonal matrix by the difference vector
         matrix_result = np.matmul(lambda_matrix, diff_vector)
 
-        # Add 2|x^opt| to the result and scale by 100
-        z = 100 * (matrix_result + 2 * np.abs(self.true_x_opt))
+        z = 100 * (matrix_result + self.x_opt_term)
 
-        # 4. Calculate the penalty term: 100*f_pen(z/100)
-        z_scaled = z/100
-        penalty = 100 * self.f_pen(z_scaled)
+        penalty = 100 * self.f_pen(z / 100)
 
-        # 5. Calculate the raw Schwefel function value
         raw_value = self.raw(input_vector)
 
-        # 6. Combine all terms to get the final result
         result = raw_value + 4.189828872724339 + penalty + self.f_opt
 
         return result

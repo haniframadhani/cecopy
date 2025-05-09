@@ -34,8 +34,8 @@ class Katsuura(Benchmark):
         if not isinstance(dimension, int) or dimension <= 0:
             raise ValueError("Dimension must be a positive integer")
         super().__init__(dimension)
-        self.j_values = np.arange(1, 33)
-        self.powers_of_two = 2 ** self.j_values
+        self.powers_of_two = 2 ** np.arange(1, 33)
+        self.inverse_powers = 1 / self.powers_of_two
         self.exponent = 10 / (self.dimension ** 1.2)
         self.scale_factor = 10 / (self.dimension ** 2)
         # Generate a random optimal solution vector x_opt within the range [-5, 5]
@@ -69,22 +69,22 @@ class Katsuura(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        powers_of_2 = 2 ** np.arange(1, 33)
+        fractional_part = np.abs(
+            self.powers_of_two[:, None] * x -
+            np.round(self.powers_of_two[:, None] * x)
+        )
 
         # Compute sum term using vectorized operations
-        sum_terms = np.sum(np.abs(powers_of_2[:, None] * x - np.round(
-            powers_of_2[:, None] * x)) / powers_of_2[:, None], axis=0)
+        sum_terms = np.sum(fractional_part *
+                           self.inverse_powers[:, None], axis=0)
 
         # Compute product term efficiently
         indices = np.arange(1, self.dimension + 1)
-        product = np.prod((1 + indices * sum_terms) **
-                          (10 / (self.dimension ** 1.2)))
+        prod_terms = (1 + indices * sum_terms) ** self.exponent
 
-        # Compute final result
-        result = (10 / (self.dimension ** 2)) * product - \
-            (10 / (self.dimension ** 2))
+        product = np.prod(prod_terms)
 
-        return result
+        return self.scale_factor * product - self.scale_factor
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """

@@ -26,7 +26,6 @@ class Discus(Benchmark):
 
         Parameters:
             dimension (int): The number of dimensions for the input space. Must be a positive integer.
-            high_conditioning (bool, optional): If `True`, applies a Gram-Schmidt transformation to increase problem conditioning. Defaults to `False`.
 
         Raises:
             ValueError: If dimension is not a positive integer.

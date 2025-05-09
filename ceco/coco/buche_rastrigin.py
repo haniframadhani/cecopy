@@ -66,7 +66,7 @@ class Buche_rastrigin(Benchmark):
         result = 10 * (self.dimension - sum_cos) + sum_square + 100
         return result
 
-    def compute_s_i(self, z_i: np.ndarray) -> np.ndarray:
+    def compute_s_i(self, z: np.ndarray) -> np.ndarray:
         """
         Computes the scaling factors s_i for the input vector.
 
@@ -84,14 +84,14 @@ class Buche_rastrigin(Benchmark):
             - If the dimension is 1, the scaling factor is always 1.
         """
         i = np.arange(1, self.dimension + 1)
+        exp_component = 10 ** (0.5 * (i - 1) /
+                               max(self.dimension - 1, 1))  # handle dim=1
 
-        if self.dimension == 1:
-            return np.ones_like(z_i)
-
+        # If z_i > 0 and i is odd → 10 * exp_component; else → exp_component
         s_i = np.where(
-            (z_i > 0) & (i % 2 == 1),
-            10 * (10 ** (0.5 * (i - 1) / (self.dimension - 1))),
-            10 ** (0.5 * (i - 1) / (self.dimension - 1))
+            (z > 0) & (i % 2 == 1),
+            10 * exp_component,
+            exp_component
         )
         return s_i
 
@@ -120,19 +120,12 @@ class Buche_rastrigin(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        # Shift the input vector
-        z = input_vector - self.x_opt
+        z = self.T_osz(input_vector - self.x_opt)
 
-        # Apply T_osz transformation
-        z = self.T_osz(z)
-
-        # Compute scaling factors s_i
         s = self.compute_s_i(z)
-
-        # Element-wise multiplication
-        z = self.elementwise_multiply(z, s)
+        z_scaled = z * s
 
         # Compute final function value
-        result = self.raw(z) * self.f_pen(input_vector) + self.f_opt
+        result = self.raw(z_scaled) * self.f_pen(input_vector) + self.f_opt
 
         return result
