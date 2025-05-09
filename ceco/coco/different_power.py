@@ -38,7 +38,7 @@ class Different_power(Benchmark):
             self.exponents = 2 + 4 * \
                 (np.arange(self.dimension) / (self.dimension - 1))
         else:
-            self.exponents = None
+            self.exponents = np.array([2.0])
         # Generate a random optimal solution vector x_opt within the range [-5, 5]
         self.x_opt = np.random.uniform(-5, 5, dimension)
 
@@ -67,11 +67,8 @@ class Different_power(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        if self.dimension == 1:
-            return np.abs(x[0])
-
-        # Vectorized computation
-        total_sum = np.sum(np.abs(x) ** self.exponents)
+        abs_x = np.abs(x)
+        total_sum = np.sum(abs_x ** self.exponents)
         total_sum = np.sqrt(total_sum)
 
         return total_sum

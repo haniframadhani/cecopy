@@ -58,7 +58,7 @@ class Sphere(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
         # Calculate the sum of squares
-        total_sum_of_squares = np.sum(x ** 2)
+        total_sum_of_squares = np.dot(x, x)
         return total_sum_of_squares
 
     def evaluate(self, input_vector: np.ndarray) -> float:

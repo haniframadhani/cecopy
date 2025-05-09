@@ -40,7 +40,7 @@ class Schaffer_f7(Benchmark):
         # Generate a random optimal solution vector x_opt within the range [-5, 5]
         self.x_opt = np.random.uniform(0, 5, dimension)
 
-        self.f_opt = self.raw(self.x_opt)
+        self.f_opt = self._schaffer_raw(self.x_opt[:-1])
 
         if not isinstance(ill_conditioned, bool):
             raise ValueError("ill_conditioned must be a boolean")
@@ -72,20 +72,12 @@ class Schaffer_f7(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        x_i = x[:-1]
-        if np.any(x_i < 0):
+        if np.any(x[:-1] < 0):
             raise ValueError(
-                "all element in Input vector must be non-negative after transformation")
-        sqrt_x_i = np.sqrt(x_i)
-        x_i_pow = x_i ** 0.2
-        sin_term = np.sin(50 * x_i_pow)
-        inner_term = sqrt_x_i + sqrt_x_i * np.square(sin_term)
-        total_sum = np.sum(inner_term)
-        result = (total_sum / (self.dimension - 1)) ** 2
+                "All elements in input vector must be non-negative")
+        return self._schaffer_raw(x[:-1])
 
-        return result
-
-    def raw_func(self, s: np.ndarray) -> float:
+    def _schaffer_raw(self, s: np.ndarray) -> float:
         """
         Evaluates the Schaffer f7 function at a given input vector after transformation.
 
@@ -128,6 +120,7 @@ class Schaffer_f7(Benchmark):
 
         Raises:
             ValueError: If the input vector does not match the expected dimension.
+            ValueError: If the input vector after transform is zero or negative.
         """
         if input_vector.shape[0] != self.dimension:
             raise ValueError(
@@ -137,9 +130,15 @@ class Schaffer_f7(Benchmark):
         z = self.diagonal_matrix @ self.Q @ self.T_asy_beta(
             0.5, self.R @ (input_vector - self.x_opt))
 
-        s = np.sqrt(z[:-1] ** 2 + z[1:] ** 2)
+        s = np.sqrt(np.square(z[:-1]) + np.square(z[1:]))
+
+        if np.any(s < 0):
+            raise ValueError(
+                "Elements in transformed vector must be non-negative")
+
+        schaffer_value = self._schaffer_raw(s)
 
         # Compute the raw Schaffer f7 function value
-        result = self.raw_func(s) + 10 * self.f_pen(input_vector) + self.f_opt
+        result = schaffer_value + 10 * self.f_pen(input_vector) + self.f_opt
 
         return result

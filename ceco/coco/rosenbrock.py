@@ -40,6 +40,14 @@ class Rosenbrock(Benchmark):
 
         self.f_opt = self.raw(self.x_opt)
 
+        self.identity_matrix = np.eye(dimension)
+        self.scaling_factor = max(1, dimension / 8)
+
+        if rotation is not None:
+            self.rotation = self.gram_schmidt(rotation)
+        else:
+            self.rotation = self.identity_matrix
+
         self.coco_init(rotation)
 
     def raw(self, x: np.ndarray) -> float:
@@ -63,10 +71,9 @@ class Rosenbrock(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        result = 0.0
-        for i in range(self.dimension - 1):
-            result += 100 * (x[i] ** 2 - x[i + 1]) ** 2 + (x[i] - 1) ** 2
-        return result
+        xi = x[:-1]
+        xi1 = x[1:]
+        return np.sum(100.0 * (xi**2 - xi1)**2 + (xi - 1)**2)
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
@@ -89,13 +96,12 @@ class Rosenbrock(Benchmark):
         if input_vector.shape[0] != self.dimension:
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
-        scaling_factor = max(1, self.dimension / 8)
+
         if np.allclose(self.rotation, np.eye(self.dimension)):
-            z = scaling_factor * (input_vector - self.x_opt) + 1
+            z = self.scaling_factor * (input_vector - self.x_opt) + 1
         else:
-            z = scaling_factor * \
-                np.matmul(self.gram_schmidt(self.rotation.T),
-                          input_vector) + 1 / 2
+            z = self.scaling_factor * \
+                self.gram_schmidt(self.rotation.T) @ input_vector + (1 / 2)
         result = self.raw(z) + self.f_opt
 
         return result

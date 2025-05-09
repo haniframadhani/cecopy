@@ -38,6 +38,12 @@ class Ellipsoidal(Benchmark):
         # Generate a random optimal solution vector x_opt within the range [-5, 5]
         self.x_opt = np.random.uniform(-5, 5, dimension)
 
+        if dimension == 1:
+            self.weights = np.array([1.0])
+        else:
+            i = np.arange(dimension)
+            self.weights = 10 ** (6 * i / (dimension - 1))
+
         self.f_opt = self.raw(self.x_opt)
 
         if not isinstance(high_conditioning, bool):
@@ -64,14 +70,7 @@ class Ellipsoidal(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        i = np.arange(1, self.dimension + 1)
-        if self.dimension == 1:
-            exponent = 0  # Handle the case when dimension = 1
-        else:
-            exponent = 6 * (i - 1) / (self.dimension - 1)
-        total_sum = np.sum((10 ** exponent) * (x ** 2))
-
-        return total_sum
+        return np.sum(self.weights * (x ** 2))
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
@@ -100,7 +99,7 @@ class Ellipsoidal(Benchmark):
         if not self.high_conditioning:
             z = self.T_osz(z)
         else:
-            z = self.T_osz(self.gram_schmidt(np.array([z]).T).ravel())
+            z = self.T_osz(self.gram_schmidt(z[:, np.newaxis]).ravel())
 
         # Compute the raw Ellipsoidal function value
         result = self.raw(z) + self.f_opt
