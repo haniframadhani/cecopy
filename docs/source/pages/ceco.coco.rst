@@ -87,3 +87,10 @@ ceco.coco.step_ellipsoidal module
    :members:
    :undoc-members:
    :show-inheritance:
+
+ceco.coco.weierstrass module
+----------------------------
+.. automodule:: ceco.coco.weierstrass
+   :members:
+   :undoc-members:
+   :show-inheritance:
