@@ -74,6 +74,13 @@ ceco.coco.schwefel module
    :undoc-members:
    :show-inheritance:
 
+ceco.coco.sharp_ridge module
+----------------------------
+.. automodule:: ceco.coco.sharp_ridge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.sphere module
 -----------------------
 .. automodule:: ceco.coco.sphere
