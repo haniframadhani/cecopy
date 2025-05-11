@@ -18,6 +18,16 @@ ceco.coco.buche_rastrigin module
    :undoc-members:
    :show-inheritance:
 
+ceco.coco.composite_griewank_rosenbrock_function_f8f2 module
+------------------------------------------------------------
+
+**1 TEST NOT PASSED AT EVALUATE WITH OPTIMUM VALUE!**
+
+.. automodule:: ceco.coco.composite_griewank_rosenbrock_function_f8f2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.different_power module
 --------------------------------
 .. automodule:: ceco.coco.different_power
