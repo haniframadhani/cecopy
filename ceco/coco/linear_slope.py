@@ -2,14 +2,14 @@ import numpy as np
 from ceco.benchmark import Benchmark
 
 
-class Composite_griewank_rosenbrock_function_f8f2(Benchmark):
+class Linear_slope(Benchmark):
     """
-    A class representing the Composite griewank-rosenbrock function f8f2 function, which is a benchmark function
+    A class representing the Linear slope function, which is a benchmark function
     for optimization.
 
-    The Composite griewank-rosenbrock function f8f2 function is defined as:
+    The Linear slope function is defined as:
 
-        f(x) = \frac{10}{D-1}\sum_{i=1}^{D-1}\left( \frac{x_i}{4000}-\cos\left( x_i \right) \right)+10
+        f(x) = sum_{i=1}^{D}5| s_i |-s_iz_i
 
     where x is an input vector of dimension D.
 
@@ -22,7 +22,7 @@ class Composite_griewank_rosenbrock_function_f8f2(Benchmark):
 
     def __init__(self, dimension: int) -> None:
         """
-        Initializes the Composite griewank-rosenbrock function f8f2 function with a given dimension.
+        Initializes the Linear slope function with a given dimension.
 
         Parameters:
             dimension (int): The number of dimensions for the input space. Must be a positive integer.
@@ -32,25 +32,23 @@ class Composite_griewank_rosenbrock_function_f8f2(Benchmark):
         """
         if not isinstance(dimension, int) or dimension <= 0:
             raise ValueError("Dimension must be a positive integer")
-        if dimension == 1:
-            raise ValueError("Dimension must be greater than 1")
         super().__init__(dimension)
         # Generate a random optimal solution vector x_opt within the range [-5, 5]
         self.x_opt = np.random.uniform(-5, 5, dimension)
+        if dimension == 1:
+            self.s = np.sign(self.x_opt) * 1.0
+        else:
+            self.s = np.sign(self.x_opt) * \
+                (10 ** (np.arange(dimension)/(dimension - 1)))
 
         self.f_opt = self.raw(self.x_opt)
 
-        self.alpha = max(1, np.sqrt(self.dimension)/8)
-
-        # Precompute rotation matrices
-        self.R = self.gram_schmidt(self.generate_random_matrix(dimension).T)
-
     def raw(self, x: np.ndarray) -> float:
         """
-        Evaluates the Composite griewank-rosenbrock function f8f2 function at a given input vector without any shift.
+        Evaluates the Linear slope function at a given input vector without any shift.
 
         The function is calculated as:
-            f(x) = \frac{10}{D-1}\sum_{i=1}^{D-1}\left( \frac{x_i}{4000}-\cos\left( x_i \right) \right)+10
+            f(x) = sum_{i=1}^{D}5| s_i |-s_iz_i
 
         Parameters:
             x (np.ndarray): A vector of real numbers representing a candidate solution.
@@ -65,23 +63,18 @@ class Composite_griewank_rosenbrock_function_f8f2(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        summation = np.sum((x[:-1]/4000)-np.cos(x[:-1]))
-        return (10 / (self.dimension - 1)) * summation + 10
+        result = np.sum(5 * np.abs(self.s) - self.s * x)
+        return result
 
     def evaluate(self, input_vector: np.ndarray) -> float:
         """
-        Evaluates the Composite griewank-rosenbrock function f8f2 function at a given input vector.
+        Evaluates the Linear slope function at a given input vector.
 
         The function is calculated as:
-            f(x) = frac{10}{D-1}\sum_{i=1}^{D-1}\left( frac{x_i}{4000}-\cos\left( x_i \right) \right)+10+ f_opt
-
-        where:
-          z_hat = Λ^10 * R * (x - x_opt)
-          z_tilde is obtained by applying a rounding transformation to z_hat
-          z = Q * z_tilde
+            f(x) = sum_{i=1}^{D}5| s_i |-s_iz_i+ f_opt
 
         Parameters:
-            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Composite griewank-rosenbrock function f8f2 function.
+            input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Linear slope function.
 
         Returns:
             float: The function value at the given input vector.
@@ -93,12 +86,8 @@ class Composite_griewank_rosenbrock_function_f8f2(Benchmark):
             raise ValueError(
                 f"Input vector must have {self.dimension} elements")
 
-        z = self.alpha * self.R @ input_vector + 0.5
-        z_i = z[:-1]
-        z_next = z[1:]
-        s = 100 * (z_i ** 2 - z_next) ** 2 + (z_i - 1) ** 2
-        summation = np.sum((s/4000)-np.cos(s))
-        raw_result = (10 / (self.dimension - 1)) * summation + 10
-        result = raw_result + self.f_opt
+        z = np.where((input_vector * self.x_opt) <
+                     5 ** 2, input_vector, self.x_opt)
+        result = self.raw(z) + self.f_opt
 
         return result
