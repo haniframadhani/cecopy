@@ -4,6 +4,13 @@ ceco.coco package
 COmparing Continous Optimizers (COCO) benchmark functions.
 ----------------------------------------------------------
 
+ceco.coco.attractive_sector module
+---------------------------
+.. automodule:: ceco.coco.attractive_sector
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.bent_cigar module
 ---------------------------
 .. automodule:: ceco.coco.bent_cigar
