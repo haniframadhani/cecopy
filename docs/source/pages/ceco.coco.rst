@@ -49,6 +49,24 @@ ceco.coco.ellipsoidal module
    :undoc-members:
    :show-inheritance:
 
+ceco.coco.katsuura module
+------------------------------------------------------------
+
+.. automodule:: ceco.coco.katsuura
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.linear_slope module
+-----------------------------
+
+**1 TEST NOT PASSED AT EVALUATE WITH OPTIMUM VALUE!**
+
+.. automodule:: ceco.coco.linear_slope
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ceco.coco.rastrigin module
 --------------------------
 .. automodule:: ceco.coco.rastrigin
