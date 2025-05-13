@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="cecopy",
-    version="0.0.1",
+    version="0.86.0",
     author="muhammad hanif ramadhani",
     author_email="mhaniframadhani985@gmail.com",
     url="https://github.com/haniframadhani/cecopy",
