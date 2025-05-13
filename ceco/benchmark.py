@@ -115,13 +115,13 @@ class Benchmark:
             - If alpha is 0, the matrix is a zero matrix.
         """
         if self.dimension == 1:
-            return np.array([[alpha ** 0]])
+            return np.array([[1.0]])
 
         if alpha == 0:
             return np.zeros((self.dimension, self.dimension))
 
-        diagonal = np.array([alpha ** (0.5 * (i - 1) / (self.dimension - 1))
-                             for i in range(1, self.dimension + 1)])
+        exponents = 0.5 * np.arange(self.dimension) / (self.dimension - 1)
+        diagonal = alpha ** exponents
         return np.diag(diagonal)
 
     def generate_random_matrix(self, D: int) -> np.ndarray:
@@ -194,23 +194,13 @@ class Benchmark:
             - The transformation is applied element-wise.
             - If x_i is 0, the result is 0.
         """
-        mask_zero = input_vector == 0
-        mask_positive = input_vector > 0
-
-        x_hat = np.where(mask_zero, 0, np.log(np.abs(input_vector)))
-
-        c1 = np.where(mask_positive, 10, 5.5)
-        c2 = np.where(mask_positive, 7.9, 3.1)
-
-        sine_term = 0.049 * (np.sin(c1 * x_hat) + np.sin(c2 * x_hat))
-        transformed = np.exp(x_hat + sine_term)
-
-        result = np.where(mask_positive, transformed, -transformed)
-
-        # Set 0 where input was 0
-        result[mask_zero] = 0
-
-        return result
+        x_hat = np.where(input_vector == 0, 0, np.log(np.abs(input_vector)))
+        sign = np.sign(input_vector)
+        c1 = np.where(input_vector > 0, 10, 5.5)
+        c2 = np.where(input_vector > 0, 7.9, 3.1)
+        transformed = np.exp(
+            x_hat + 0.049 * (np.sin(c1 * x_hat) + np.sin(c2 * x_hat)))
+        return np.where(input_vector == 0, 0, sign * transformed)
 
     def elementwise_multiply(self, x: np.ndarray, y: np.ndarray) -> np.ndarray:
         """
@@ -261,21 +251,14 @@ class Benchmark:
             - If the input vectors are linearly dependent, the output will contain zero vectors for dependent columns.
             - Uses floating-point arithmetic, so results may have small numerical errors.
         """
+        matrix = np.array(matrix, dtype=np.float64)
+        Q = np.zeros_like(matrix)
 
-        matrix = np.copy(matrix).astype(np.float64)
+        for j in range(matrix.shape[1]):
+            v = matrix[:, j]
+            for i in range(j):
+                v -= np.dot(Q[:, i], v) * Q[:, i]
+            norm = np.linalg.norm(v)
+            Q[:, j] = v / norm if norm > 1e-14 else 0
 
-        num_vectors = matrix.shape[1]
-
-        for j in range(num_vectors):
-            for k in range(j):
-                projection = np.dot(matrix[:, k], matrix[:, j]) * matrix[:, k]
-                matrix[:, j] -= projection
-
-            norm = np.linalg.norm(matrix[:, j])
-
-            if np.isclose(norm, 0, rtol=1e-15, atol=1e-14, equal_nan=False):
-                matrix[:, j] = np.zeros(matrix.shape[0])
-            else:
-                matrix[:, j] /= norm
-
-        return matrix
+        return Q
