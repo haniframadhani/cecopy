@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="cecopy",
-    version="0.0.1",
+    version="1.0.0",
     author="muhammad hanif ramadhani",
     author_email="mhaniframadhani985@gmail.com",
     url="https://github.com/haniframadhani/cecopy",
@@ -10,5 +10,6 @@ setup(
     extras_require={
         "dev": ["pytest>=7.0", "twine>=4.0.2"],
     },
-    python_requires=">=3.7"
+    python_requires=">=3.6",
+    install_requires=['numpy>=1.19.0']
 )
