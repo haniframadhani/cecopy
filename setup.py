@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="cecopy",
+    name="ceco",
     version="1.0.0",
     author="muhammad hanif ramadhani",
     author_email="mhaniframadhani985@gmail.com",
