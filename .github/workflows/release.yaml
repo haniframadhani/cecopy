@@ -85,6 +85,10 @@ jobs:
       - name: Build source and wheel distribution
         run: |
           python setup.py sdist bdist_wheel
+          if [ ! -d "dist/" ] || [ -z "$(ls -A dist/)" ]; then
+            echo "Error: The dist/ directory is missing or empty after the build process."
+            exit 1
+          fi
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
