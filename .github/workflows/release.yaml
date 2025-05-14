@@ -94,7 +94,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dist-package-${{ matrix.python-version }}
+          name: dist
           path: dist/
 
   pypi_publish:
