@@ -27,9 +27,6 @@ ceco.coco.buche_rastrigin module
 
 ceco.coco.composite_griewank_rosenbrock_function_f8f2 module
 ------------------------------------------------------------
-
-**1 TEST NOT PASSED AT EVALUATE WITH OPTIMUM VALUE!**
-
 .. automodule:: ceco.coco.composite_griewank_rosenbrock_function_f8f2
    :members:
    :undoc-members:
@@ -66,9 +63,6 @@ ceco.coco.katsuura module
 
 ceco.coco.linear_slope module
 -----------------------------
-
-**1 TEST NOT PASSED AT EVALUATE WITH OPTIMUM VALUE!**
-
 .. automodule:: ceco.coco.linear_slope
    :members:
    :undoc-members:
@@ -83,9 +77,6 @@ ceco.coco.rastrigin module
 
 ceco.coco.rosenbrock module
 ---------------------------
-
-**1 TEST NOT PASSED AT ROTATED!**
-
 .. automodule:: ceco.coco.rosenbrock
    :members:
    :undoc-members:
@@ -101,9 +92,6 @@ ceco.coco.schaffer_f7 module
 
 ceco.coco.schwefel module
 -------------------------
-
-**2 TEST NOT PASSED!**
-
 .. automodule:: ceco.coco.schwefel
    :members:
    :undoc-members:
