@@ -120,6 +120,12 @@ jobs:
         run: |
           cd docs
           make SPHINXOPTS="-w /dev/null -W --keep-going" html || true
+      
+      - name: Upload Documentation Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sphinx-docs
+          path: docs/_build/html/
 
   pypi_publish:
     name: Upload release to PyPI
@@ -163,3 +169,26 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create ${{ needs.details.outputs.tag_name }} dist/* --title ${{ needs.details.outputs.tag_name }} --generate-notes
+  
+  deploy_docs:
+    name: Deploy Docs to GitHub Pages
+    needs: [build_docs]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download Documentation Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: sphinx-docs
+          path: public
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
