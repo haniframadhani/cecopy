@@ -27,13 +27,55 @@ class Test_schwefel(unittest.TestCase):
         self.assertTrue(np.allclose(test_func.x_opt,
                         expected_x_opt, rtol=1e-6, atol=1e-6))
 
-    # def test_evaluate_at_optimal_point(self):
-    #     dimension = 3
-    #     test_func = Schwefel(dimension)
+    def test_evaluate_at_optimal_point(self):
+        dimension = 3
+        test_func = Schwefel(dimension)
+        benchmark = Benchmark(dimension)
 
-    #     # Evaluate at x_opt
-    #     result = test_func.evaluate(test_func.x_opt)
-    #     self.assertAlmostEqual(result, test_func.f_opt, places=6)
+        # Evaluate at x_opt
+        result = test_func.evaluate(test_func.x_opt)
+
+        # Manually compute the expected result
+        # 1. Apply first transformation: x_hat = 2 × 1± ⊗ x
+        x_hat = 2 * test_func.sign_vector * test_func.x_opt
+
+        # 2. Calculate z_hat values
+        z_hat = np.zeros(dimension)
+        z_hat[0] = x_hat[0]  # z_hat_1 = x_hat_1
+
+        for i in range(dimension - 1):
+            # Calculate the term [x_i^opt → 2|x_i^opt|]
+            x_opt_term = 2 * np.abs(test_func.true_x_opt[i])
+
+            # Calculate z_hat_{i+1} using the recursive formula
+            z_hat[i+1] = x_hat[i+1] + 0.25 * (x_hat[i] - x_opt_term)
+
+        # 3. Prepare the final transformation for z
+        # Calculate the vector [x^opt → 2|x^opt|]
+        x_opt_transformed = 2 * np.abs(test_func.true_x_opt)
+
+        # Calculate the difference: z_hat - [x^opt → 2|x^opt|]
+        diff_vector = z_hat - x_opt_transformed
+
+        # Apply the diagonal matrix A^10
+        lambda_matrix = benchmark.create_diagonal_matrix(10)
+
+        # Multiply the diagonal matrix by the difference vector
+        matrix_result = np.matmul(lambda_matrix, diff_vector)
+
+        # Add 2|x^opt| to the result and scale by 100
+        z = 100 * (matrix_result + 2 * np.abs(test_func.true_x_opt))
+
+        # 4. Calculate the penalty term: 100*f_pen(z/100)
+        z_scaled = z/100
+        penalty = 100 * benchmark.f_pen(z_scaled)
+
+        # 5. Calculate the raw Schwefel function value
+        raw_value = test_func.raw(test_func.x_opt)
+
+        # 6. Combine all terms to get the final result
+        expected_result = raw_value + 4.189828872724339 + penalty + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

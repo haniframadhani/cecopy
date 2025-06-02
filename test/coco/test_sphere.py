@@ -32,7 +32,11 @@ class Test_sphere(unittest.TestCase):
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.x_opt - test_func.x_opt
+        expected_result = np.sum(z ** 2) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

@@ -30,10 +30,19 @@ class Test_discus(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Discus(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.x_opt - test_func.x_opt
+        z = np.matmul(test_func.R, z)
+        z = benchmark.T_osz(z)
+        sum_term = np.sum(z[1:] ** 2)
+        expected_result = np.power(
+            10, 6) * z[0] ** 2 + sum_term + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

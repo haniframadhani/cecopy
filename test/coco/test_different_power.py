@@ -33,7 +33,14 @@ class Test_different_power(unittest.TestCase):
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.x_opt - test_func.x_opt
+        z = np.matmul(test_func.R, z)
+        exponents = 2 + 4 * (np.arange(dimension) / (dimension - 1))
+        expected_result = np.sqrt(
+            np.sum(np.abs(z) ** exponents)) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

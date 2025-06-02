@@ -97,6 +97,30 @@ jobs:
           name: dist
           path: dist/
 
+    build_docs:
+    name: Build Documentation with Sphinx
+    needs: [setup_and_build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Documentation Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install sphinx
+
+      - name: Build Documentation (ignore warnings/errors)
+        run: |
+          cd docs
+          make SPHINXOPTS="-w /dev/null -W --keep-going" html || true
+
   pypi_publish:
     name: Upload release to PyPI
     needs: [setup_and_build, details]

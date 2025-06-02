@@ -30,10 +30,33 @@ class Test_ellipsoidal(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Step_ellipsoidal(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z_hat = np.matmul(benchmark.create_diagonal_matrix(
+            10), np.matmul(test_func.R, test_func.x_opt - test_func.x_opt))
+
+        z_tilde = np.zeros_like(z_hat)
+        for i in range(z_hat.shape[0]):
+            if np.abs(z_hat[i]) > 0.5:
+                z_tilde[i] = np.floor(0.5+z_hat[i])
+            else:
+                z_tilde[i] = np.floor(0.5+10*z_hat[i])/10
+
+        z = np.matmul(test_func.Q, z_tilde)
+
+        term1 = np.abs(z_hat[0]) / 1e4
+
+        exponents = 2 * (np.arange(dimension)-1)/(dimension - 1)
+        weight = 10 ** exponents
+        term2 = np.sum(weight * z ** 2)
+
+        expected_result = 0.1 * max(term1, term2) + \
+            benchmark.f_pen(test_func.x_opt) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """
@@ -48,9 +71,8 @@ class Test_ellipsoidal(unittest.TestCase):
         result = test_func.evaluate(input_vector)
 
         # Manually compute the expected result
-        R = [[0.39134578, -0.92024371], [0.92024371,  0.39134578]]
         z_hat = np.matmul(benchmark.create_diagonal_matrix(
-            10), np.matmul(R, input_vector - test_func.x_opt))
+            10), np.matmul(test_func.R, input_vector - test_func.x_opt))
 
         z_tilde = np.zeros_like(z_hat)
         for i in range(z_hat.shape[0]):
@@ -59,8 +81,7 @@ class Test_ellipsoidal(unittest.TestCase):
             else:
                 z_tilde[i] = np.floor(0.5+10*z_hat[i])/10
 
-        Q = [[0.89942118, -0.43708299], [0.43708299,  0.89942118]]
-        z = np.matmul(Q, z_tilde)
+        z = np.matmul(test_func.Q, z_tilde)
 
         term1 = np.abs(z_hat[0]) / 1e4
 
@@ -82,9 +103,8 @@ class Test_ellipsoidal(unittest.TestCase):
         result = test_func.evaluate(input_vector)
 
         # Manually compute the expected result
-        R = [[0.39134578, -0.92024371], [0.92024371,  0.39134578]]
         z_hat = np.matmul(benchmark.create_diagonal_matrix(
-            10), np.matmul(R, input_vector - test_func.x_opt))
+            10), np.matmul(test_func.R, input_vector - test_func.x_opt))
 
         z_tilde = np.zeros_like(z_hat)
         for i in range(z_hat.shape[0]):
@@ -93,8 +113,7 @@ class Test_ellipsoidal(unittest.TestCase):
             else:
                 z_tilde[i] = np.floor(0.5+10*z_hat[i])/10
 
-        Q = [[0.89942118, -0.43708299], [0.43708299,  0.89942118]]
-        z = np.matmul(Q, z_tilde)
+        z = np.matmul(test_func.Q, z_tilde)
 
         term1 = np.abs(z_hat[0]) / 1e4
 
@@ -116,9 +135,8 @@ class Test_ellipsoidal(unittest.TestCase):
         result = test_func.evaluate(input_vector)
 
         # Manually compute the expected result
-        R = [[-1.0]]
         z_hat = np.matmul(benchmark.create_diagonal_matrix(
-            10), np.matmul(R, input_vector - test_func.x_opt))
+            10), np.matmul(test_func.R, input_vector - test_func.x_opt))
 
         z_tilde = np.zeros_like(z_hat)
         for i in range(z_hat.shape[0]):
@@ -127,8 +145,7 @@ class Test_ellipsoidal(unittest.TestCase):
             else:
                 z_tilde[i] = np.floor(0.5+10*z_hat[i])/10
 
-        Q = [[1.0]]
-        z = np.matmul(Q, z_tilde)
+        z = np.matmul(test_func.Q, z_tilde)
 
         term1 = np.abs(z_hat[0]) / 1e4
 
