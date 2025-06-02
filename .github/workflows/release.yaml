@@ -97,7 +97,7 @@ jobs:
           name: dist
           path: dist/
 
-    build_docs:
+  build_docs:
     name: Build Documentation with Sphinx
     needs: [setup_and_build]
     runs-on: ubuntu-latest
