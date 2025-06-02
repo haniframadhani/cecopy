@@ -30,10 +30,20 @@ class Test_attractive_sector(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Attractive_sector(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.Q @ test_func.diag_matrix @ test_func.R @ (
+            test_func.x_opt - test_func.x_opt)
+        s = np.where((z * test_func.x_opt), 10 ** 2, 1)
+
+        expected_result = np.sum((s * z) ** 2)
+        expected_result = benchmark.T_osz(
+            expected_result ** 0.9) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="ceco",
-    version="1.0.9",
+    version="1.0.10",
     author="muhammad hanif ramadhani",
     author_email="mhaniframadhani985@gmail.com",
     url="https://github.com/haniframadhani/cecopy",

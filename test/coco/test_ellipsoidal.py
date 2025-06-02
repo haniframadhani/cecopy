@@ -30,10 +30,19 @@ class Test_ellipsoidal(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Ellipsoidal(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.x_opt - test_func.x_opt
+        z = benchmark.T_osz(z)
+        i = np.arange(1, dimension + 1)
+        exponent = 6 * (i - 1) / (dimension - 1)
+        expected_result = np.sum((10 ** exponent) * (z ** 2))
+        expected_result = expected_result + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

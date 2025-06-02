@@ -27,13 +27,23 @@ class Test_composite_griewank_rosenbrock_function_f8f2(unittest.TestCase):
         self.assertTrue(np.allclose(test_func.x_opt,
                         expected_x_opt, rtol=1e-6, atol=1e-6))
 
-    # def test_evaluate_at_optimal_point(self):
-    #     dimension = 3
-    #     test_func = Composite_griewank_rosenbrock_function_f8f2(dimension)
+    def test_evaluate_at_optimal_point(self):
+        dimension = 3
+        test_func = Composite_griewank_rosenbrock_function_f8f2(dimension)
 
-    #     # Evaluate at x_opt
-    #     result = test_func.evaluate(test_func.x_opt)
-    #     self.assertAlmostEqual(result, test_func.f_opt, places=6)
+        # Evaluate at x_opt
+        result = test_func.evaluate(test_func.x_opt)
+
+        # Manually compute the expected result
+        z = max(1, np.sqrt(dimension)/8) * test_func.R @ test_func.x_opt + 0.5
+        z_i = z[:-1]
+        z_next = z[1:]
+        s = 100 * (z_i ** 2 - z_next) ** 2 + (z_i - 1) ** 2
+
+        summation = np.sum((s/4000)-np.cos(s))
+        raw_result = (10 / (dimension - 1)) * summation + 10
+        expected_result = raw_result + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

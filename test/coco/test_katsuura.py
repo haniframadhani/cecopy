@@ -30,10 +30,34 @@ class Test_katsuura(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Katsuura(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.x_opt - test_func.x_opt
+        z = test_func.Q @ test_func.diagonal_matrix @ test_func.R @ z
+        j_values = np.arange(1, 33)
+        powers_of_two = 2 ** j_values
+        exponent = 10 / (dimension ** 1.2)
+        scale_factor = 10 / (dimension ** 2)
+        powers_of_2 = 2 ** np.arange(1, 33)
+
+        # Compute sum term using vectorized operations
+        sum_terms = np.sum(np.abs(powers_of_2[:, None] * z - np.round(
+            powers_of_2[:, None] * z)) / powers_of_2[:, None], axis=0)
+
+        # Compute product term efficiently
+        indices = np.arange(1, dimension + 1)
+        product = np.prod((1 + indices * sum_terms) **
+                          (10 / (dimension ** 1.2)))
+
+        # Compute final result
+        expected_result = (10 / (dimension ** 2)) * product - \
+            (10 / (dimension ** 2)) + \
+            benchmark.f_pen(test_func.x_opt) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

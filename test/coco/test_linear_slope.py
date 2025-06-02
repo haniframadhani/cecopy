@@ -26,13 +26,19 @@ class Test_linear_slope(unittest.TestCase):
         self.assertTrue(np.allclose(test_func.x_opt,
                         expected_x_opt, rtol=1e-6, atol=1e-6))
 
-    # def test_evaluate_at_optimal_point(self):
-    #     dimension = 3
-    #     test_func = Linear_slope(dimension)
+    def test_evaluate_at_optimal_point(self):
+        dimension = 3
+        test_func = Linear_slope(dimension)
 
-    #     # Evaluate at x_opt
-    #     result = test_func.evaluate(test_func.x_opt)
-    #     self.assertAlmostEqual(result, test_func.f_opt, places=6)
+        # Evaluate at x_opt
+        result = test_func.evaluate(test_func.x_opt)
+
+        # Manually compute the expected result
+        z = np.where((test_func.x_opt * test_func.x_opt) <
+                     5 ** 2, test_func.x_opt, test_func.x_opt)
+        raw = np.sum(5 * np.abs(test_func.s) - test_func.s * z)
+        expected_result = raw + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

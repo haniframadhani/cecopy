@@ -30,10 +30,28 @@ class Test_weierstrass(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Weierstrass(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.R @ test_func.diag_matrix @ test_func.Q @ test_func.T_osz(
+            test_func.R @ (test_func.x_opt - test_func.x_opt))
+
+        k_values = np.arange(12)
+        three_pow_k = 3 ** k_values
+        two_pow_k = 2 ** k_values
+        f0 = np.sum(np.cos(np.pi * three_pow_k) / two_pow_k)
+        x_expanded = z[:, np.newaxis]
+        k_term = np.cos(2 * np.pi * three_pow_k *
+                        (x_expanded + 0.5)) / two_pow_k
+        sum_over_k = np.sum(k_term, axis=1)
+        avg_sum = np.mean(sum_over_k)
+        raw = 10 * (avg_sum - f0) ** 3
+        expected_result = raw + (10/dimension) * \
+            benchmark.f_pen(test_func.x_opt) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

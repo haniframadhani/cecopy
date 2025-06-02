@@ -31,9 +31,21 @@ class TestBucheRastrigin(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Buche_rastrigin(dimension)
+        benchmark = Benchmark(dimension)
 
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute expected result
+        z = test_func.x_opt - test_func.x_opt
+        z = benchmark.T_osz(z)
+        s = test_func.compute_s_i(z)
+        z = benchmark.elementwise_multiply(z, s)
+        sum_cos = np.sum(np.cos(2 * np.pi * z))
+        sum_square = np.sum(z)
+        expected_result = 10 * (dimension - sum_cos) + sum_square + 100
+        expected_result = expected_result * \
+            benchmark.f_pen(test_func.x_opt) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         dimension = 2

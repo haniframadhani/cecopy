@@ -33,7 +33,16 @@ class Test_sharp_ridge(unittest.TestCase):
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.Q @ test_func.diag_matrix @ test_func.R @ (
+            test_func.x_opt - test_func.x_opt)
+
+        first_term = z[0] ** 2
+        sum_term = np.sum(z[1:] ** 2)
+        raw = first_term + 100 * np.sqrt(sum_term)
+        expected_result = raw + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

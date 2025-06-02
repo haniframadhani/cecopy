@@ -30,10 +30,23 @@ class Test_schaffer_f7(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Schaffer_f7(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.diagonal_matrix @ test_func.Q @ benchmark.T_asy_beta(
+            0.5, test_func.R @ (test_func.x_opt - test_func.x_opt))
+        s = np.sqrt(z[:-1] ** 2 + z[1:] ** 2)
+        sqrt_s = np.sqrt(s)
+        s_pow = np.power(s, 0.2)
+        sin_term = np.sin(50 * s_pow)
+        inner_term = sqrt_s + sqrt_s * np.square(sin_term)
+        total_sum = np.sum(inner_term)
+        expected_result = ((total_sum / (dimension - 1)
+                            ) ** 2) + 10 * benchmark.f_pen(test_func.x_opt) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """

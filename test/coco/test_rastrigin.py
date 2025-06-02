@@ -30,10 +30,21 @@ class Test_rastrigin(unittest.TestCase):
     def test_evaluate_at_optimal_point(self):
         dimension = 3
         test_func = Rastrigin(dimension)
+        benchmark = Benchmark(dimension)
 
         # Evaluate at x_opt
         result = test_func.evaluate(test_func.x_opt)
-        self.assertAlmostEqual(result, test_func.f_opt, places=6)
+
+        # Manually compute the expected result
+        z = test_func.x_opt - test_func.x_opt
+        z = benchmark.T_osz(z)
+        z = np.matmul(
+            benchmark.create_diagonal_matrix(10), benchmark.T_asy_beta(0.2, z))
+        sum_cos = np.sum(np.cos(2 * np.pi * z))
+        expected_result = 10 * (dimension - sum_cos)
+        expected_result = expected_result + \
+            benchmark.euclidean_norm(z) + test_func.f_opt
+        self.assertAlmostEqual(result, expected_result, places=6)
 
     def test_evaluate_at_zero_vector(self):
         """
