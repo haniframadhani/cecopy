@@ -1,0 +1,126 @@
+ceco.coco package
+=================
+
+COmparing Continous Optimizers (COCO) benchmark functions.
+----------------------------------------------------------
+
+ceco.coco.attractive_sector module
+---------------------------
+.. automodule:: ceco.coco.attractive_sector
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.bent_cigar module
+---------------------------
+.. automodule:: ceco.coco.bent_cigar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.buche_rastrigin module
+--------------------------------
+.. automodule:: ceco.coco.buche_rastrigin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.composite_griewank_rosenbrock_function_f8f2 module
+------------------------------------------------------------
+.. automodule:: ceco.coco.composite_griewank_rosenbrock_function_f8f2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.different_power module
+--------------------------------
+.. automodule:: ceco.coco.different_power
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
+ceco.coco.discus module
+-----------------------
+.. automodule:: ceco.coco.discus
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.ellipsoidal module
+----------------------------
+.. automodule:: ceco.coco.ellipsoidal
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.katsuura module
+------------------------------------------------------------
+
+.. automodule:: ceco.coco.katsuura
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.linear_slope module
+-----------------------------
+.. automodule:: ceco.coco.linear_slope
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.rastrigin module
+--------------------------
+.. automodule:: ceco.coco.rastrigin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.rosenbrock module
+---------------------------
+.. automodule:: ceco.coco.rosenbrock
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.schaffer_f7 module
+----------------------------
+
+.. automodule:: ceco.coco.schaffer_f7
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.schwefel module
+-------------------------
+.. automodule:: ceco.coco.schwefel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.sharp_ridge module
+----------------------------
+.. automodule:: ceco.coco.sharp_ridge
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.sphere module
+-----------------------
+.. automodule:: ceco.coco.sphere
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.step_ellipsoidal module
+---------------------------------
+.. automodule:: ceco.coco.step_ellipsoidal
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+ceco.coco.weierstrass module
+----------------------------
+.. automodule:: ceco.coco.weierstrass
+   :members:
+   :undoc-members:
+   :show-inheritance:

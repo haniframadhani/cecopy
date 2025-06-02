@@ -1,0 +1,1746 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ceco.cec package &mdash; ceco 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ceco.coco package" href="ceco.coco.html" />
+    <link rel="prev" title="Base Class" href="base_class.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ceco
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_class.html">Base Class</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ceco.cec package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conference-of-evolutional-computation-cec-benchmark-functions">Conference of Evolutional Computation (CEC) benchmark functions.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.ackley">ceco.cec.ackley module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.ackley.Ackley"><code class="docutils literal notranslate"><span class="pre">Ackley</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.ackley.Ackley.__init__"><code class="docutils literal notranslate"><span class="pre">Ackley.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.ackley.Ackley.evaluate"><code class="docutils literal notranslate"><span class="pre">Ackley.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.bent_cigar">ceco.cec.bent_cigar module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.bent_cigar.Bent_cigar"><code class="docutils literal notranslate"><span class="pre">Bent_cigar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.bent_cigar.Bent_cigar.__init__"><code class="docutils literal notranslate"><span class="pre">Bent_cigar.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.bent_cigar.Bent_cigar.evaluate"><code class="docutils literal notranslate"><span class="pre">Bent_cigar.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.different_power">ceco.cec.different_power module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.different_power.Different_power"><code class="docutils literal notranslate"><span class="pre">Different_power</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.different_power.Different_power.__init__"><code class="docutils literal notranslate"><span class="pre">Different_power.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.different_power.Different_power.evaluate"><code class="docutils literal notranslate"><span class="pre">Different_power.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.discus">ceco.cec.discus module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.discus.Discus"><code class="docutils literal notranslate"><span class="pre">Discus</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.discus.Discus.__init__"><code class="docutils literal notranslate"><span class="pre">Discus.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.discus.Discus.evaluate"><code class="docutils literal notranslate"><span class="pre">Discus.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.ellipsoid">ceco.cec.ellipsoid module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.ellipsoid.Ellipsoid"><code class="docutils literal notranslate"><span class="pre">Ellipsoid</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.ellipsoid.Ellipsoid.__init__"><code class="docutils literal notranslate"><span class="pre">Ellipsoid.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.ellipsoid.Ellipsoid.evaluate"><code class="docutils literal notranslate"><span class="pre">Ellipsoid.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.elliptic">ceco.cec.elliptic module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.elliptic.Elliptic"><code class="docutils literal notranslate"><span class="pre">Elliptic</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.elliptic.Elliptic.__init__"><code class="docutils literal notranslate"><span class="pre">Elliptic.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.elliptic.Elliptic.evaluate"><code class="docutils literal notranslate"><span class="pre">Elliptic.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.expanded_schaffer_f6">ceco.cec.expanded_schaffer_f6 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6"><code class="docutils literal notranslate"><span class="pre">Expanded_schaffer_f6</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.__init__"><code class="docutils literal notranslate"><span class="pre">Expanded_schaffer_f6.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.evaluate"><code class="docutils literal notranslate"><span class="pre">Expanded_schaffer_f6.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.schaffer_base"><code class="docutils literal notranslate"><span class="pre">Expanded_schaffer_f6.schaffer_base()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.griewank">ceco.cec.griewank module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.griewank.Griewank"><code class="docutils literal notranslate"><span class="pre">Griewank</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.griewank.Griewank.__init__"><code class="docutils literal notranslate"><span class="pre">Griewank.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.griewank.Griewank.evaluate"><code class="docutils literal notranslate"><span class="pre">Griewank.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.happycat">ceco.cec.happycat module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.happycat.Happycat"><code class="docutils literal notranslate"><span class="pre">Happycat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.happycat.Happycat.__init__"><code class="docutils literal notranslate"><span class="pre">Happycat.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.happycat.Happycat.evaluate"><code class="docutils literal notranslate"><span class="pre">Happycat.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.hgbat">ceco.cec.hgbat module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.hgbat.Hgbat"><code class="docutils literal notranslate"><span class="pre">Hgbat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.hgbat.Hgbat.__init__"><code class="docutils literal notranslate"><span class="pre">Hgbat.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.hgbat.Hgbat.evaluate"><code class="docutils literal notranslate"><span class="pre">Hgbat.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.katsuura">ceco.cec.katsuura module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.katsuura.Katsuura"><code class="docutils literal notranslate"><span class="pre">Katsuura</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.katsuura.Katsuura.__init__"><code class="docutils literal notranslate"><span class="pre">Katsuura.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.katsuura.Katsuura.evaluate"><code class="docutils literal notranslate"><span class="pre">Katsuura.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.levy">ceco.cec.levy module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.levy.Levy"><code class="docutils literal notranslate"><span class="pre">Levy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.levy.Levy.__init__"><code class="docutils literal notranslate"><span class="pre">Levy.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.levy.Levy.evaluate"><code class="docutils literal notranslate"><span class="pre">Levy.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.rastrigin">ceco.cec.rastrigin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.rastrigin.Rastrigin"><code class="docutils literal notranslate"><span class="pre">Rastrigin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.rastrigin.Rastrigin.__init__"><code class="docutils literal notranslate"><span class="pre">Rastrigin.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.rastrigin.Rastrigin.evaluate"><code class="docutils literal notranslate"><span class="pre">Rastrigin.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.rosenbrock">ceco.cec.rosenbrock module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.rosenbrock.Rosenbrock"><code class="docutils literal notranslate"><span class="pre">Rosenbrock</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.rosenbrock.Rosenbrock.__init__"><code class="docutils literal notranslate"><span class="pre">Rosenbrock.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.rosenbrock.Rosenbrock.evaluate"><code class="docutils literal notranslate"><span class="pre">Rosenbrock.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.schwefel1_2">ceco.cec.schwefel1_2 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.schwefel1_2.Schwefel1_2"><code class="docutils literal notranslate"><span class="pre">Schwefel1_2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel1_2.Schwefel1_2.__init__"><code class="docutils literal notranslate"><span class="pre">Schwefel1_2.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel1_2.Schwefel1_2.evaluate"><code class="docutils literal notranslate"><span class="pre">Schwefel1_2.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.schwefel2_13">ceco.cec.schwefel2_13 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.schwefel2_13.Schwefel2_13"><code class="docutils literal notranslate"><span class="pre">Schwefel2_13</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel2_13.Schwefel2_13.__init__"><code class="docutils literal notranslate"><span class="pre">Schwefel2_13.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel2_13.Schwefel2_13.compute_A"><code class="docutils literal notranslate"><span class="pre">Schwefel2_13.compute_A()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel2_13.Schwefel2_13.compute_B"><code class="docutils literal notranslate"><span class="pre">Schwefel2_13.compute_B()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel2_13.Schwefel2_13.evaluate"><code class="docutils literal notranslate"><span class="pre">Schwefel2_13.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel2_13.Schwefel2_13.generate_random_alpha"><code class="docutils literal notranslate"><span class="pre">Schwefel2_13.generate_random_alpha()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.schwefel2_13.Schwefel2_13.generate_random_matrix"><code class="docutils literal notranslate"><span class="pre">Schwefel2_13.generate_random_matrix()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.shubert">ceco.cec.shubert module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.shubert.Shubert"><code class="docutils literal notranslate"><span class="pre">Shubert</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.shubert.Shubert.__init__"><code class="docutils literal notranslate"><span class="pre">Shubert.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.shubert.Shubert.evaluate"><code class="docutils literal notranslate"><span class="pre">Shubert.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.sphere">ceco.cec.sphere module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.sphere.Sphere"><code class="docutils literal notranslate"><span class="pre">Sphere</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.sphere.Sphere.__init__"><code class="docutils literal notranslate"><span class="pre">Sphere.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.sphere.Sphere.evaluate"><code class="docutils literal notranslate"><span class="pre">Sphere.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.step_function">ceco.cec.step_function module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.step_function.Step_function"><code class="docutils literal notranslate"><span class="pre">Step_function</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.step_function.Step_function.__init__"><code class="docutils literal notranslate"><span class="pre">Step_function.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.step_function.Step_function.evaluate"><code class="docutils literal notranslate"><span class="pre">Step_function.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.vincent">ceco.cec.vincent module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.vincent.Vincent"><code class="docutils literal notranslate"><span class="pre">Vincent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.vincent.Vincent.__init__"><code class="docutils literal notranslate"><span class="pre">Vincent.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.vincent.Vincent.evaluate"><code class="docutils literal notranslate"><span class="pre">Vincent.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.weierstrass">ceco.cec.weierstrass module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.weierstrass.Weierstrass"><code class="docutils literal notranslate"><span class="pre">Weierstrass</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.weierstrass.Weierstrass.__init__"><code class="docutils literal notranslate"><span class="pre">Weierstrass.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.weierstrass.Weierstrass.evaluate"><code class="docutils literal notranslate"><span class="pre">Weierstrass.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.cec.zakharov">ceco.cec.zakharov module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.cec.zakharov.Zakharov"><code class="docutils literal notranslate"><span class="pre">Zakharov</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.zakharov.Zakharov.__init__"><code class="docutils literal notranslate"><span class="pre">Zakharov.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.cec.zakharov.Zakharov.evaluate"><code class="docutils literal notranslate"><span class="pre">Zakharov.evaluate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ceco.coco.html">ceco.coco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ceco.rw.html">ceco.rw package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ceco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ceco.cec package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/ceco.cec.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ceco-cec-package">
+<h1>ceco.cec package<a class="headerlink" href="#ceco-cec-package" title="Link to this heading"></a></h1>
+<section id="conference-of-evolutional-computation-cec-benchmark-functions">
+<h2>Conference of Evolutional Computation (CEC) benchmark functions.<a class="headerlink" href="#conference-of-evolutional-computation-cec-benchmark-functions" title="Link to this heading"></a></h2>
+</section>
+<section id="module-ceco.cec.ackley">
+<span id="ceco-cec-ackley-module"></span><h2>ceco.cec.ackley module<a class="headerlink" href="#module-ceco.cec.ackley" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.ackley.Ackley">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.ackley.</span></span><span class="sig-name descname"><span class="pre">Ackley</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/ackley.html#Ackley"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.ackley.Ackley" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Ackley function, which is a benchmark function for optimization.</p>
+<p>The Ackley function is commonly used to test optimization algorithms due to its complex and multi-modal nature. The function is defined as:</p>
+<p>F(X) = -20 * exp(-0.2 * sqrt((1/D) * sum_{i=1}^D x_i^2)) - exp((1/D) * sum_{i=1}^D cos(2 * pi * x_i)) + 20 + e,</p>
+<p>where D is the dimensionality of the problem, and e is Euler’s number (~2.71828).</p>
+<p>The class inherits from the <cite>Benchmark</cite> class and applies rotation and shift transformations to the input vector before evaluating the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.ackley.Ackley.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/ackley.html#Ackley.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.ackley.Ackley.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Ackley class with a rotation matrix and a shift vector.</p>
+<p>Ensures that the rotation matrix and shift vector have the same length. If their lengths do not match, a ValueError is raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.ackley.Ackley.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/ackley.html#Ackley.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.ackley.Ackley.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Ackley function at a given input vector after applying rotation and shift transformations.</p>
+<p>The function first applies the rotation matrix and shift vector to the input vector. Then, it computes the Ackley function:
+F(X) = -20 * exp(-0.2 * sqrt((1/D) * sum_{i=1}^D x_i^2)) - exp((1/D) * sum_{i=1}^D cos(2 * pi * x_i)) + 20 + e.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Ackley function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.bent_cigar">
+<span id="ceco-cec-bent-cigar-module"></span><h2>ceco.cec.bent_cigar module<a class="headerlink" href="#module-ceco.cec.bent_cigar" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.bent_cigar.Bent_cigar">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.bent_cigar.</span></span><span class="sig-name descname"><span class="pre">Bent_cigar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/bent_cigar.html#Bent_cigar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.bent_cigar.Bent_cigar" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Bent Cigar benchmark function, used for optimization problems.</p>
+<p>The Bent Cigar function is a unimodal, non-separable, and highly conditioned function.
+It is defined as:
+f(X) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2
+where ( X = [x_1, x_2, …, x_D] ) is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Bent Cigar function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.bent_cigar.Bent_cigar.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/bent_cigar.html#Bent_cigar.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.bent_cigar.Bent_cigar.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Bent_ciger class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.bent_cigar.Bent_cigar.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/bent_cigar.html#Bent_cigar.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.bent_cigar.Bent_cigar.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Bent Cigar function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Bent Cigar function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.different_power">
+<span id="ceco-cec-different-power-module"></span><h2>ceco.cec.different_power module<a class="headerlink" href="#module-ceco.cec.different_power" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.different_power.Different_power">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.different_power.</span></span><span class="sig-name descname"><span class="pre">Different_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/different_power.html#Different_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.different_power.Different_power" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Different Power benchmark function, used for optimization problems.</p>
+<p>The Different Power function is a unimodal, non-separable, and scalable function.
+It is defined as:
+f(X) = sqrt{sum_{i=1}^{D} left| x_i right|^{2 + 4 frac{i-1}{D-1}}}
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method
+to compute the value of the Discus function after applying shift and rotation
+transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.different_power.Different_power.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/different_power.html#Different_power.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.different_power.Different_power.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Different_power class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.different_power.Different_power.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/different_power.html#Different_power.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.different_power.Different_power.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Different power function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Different power function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.discus">
+<span id="ceco-cec-discus-module"></span><h2>ceco.cec.discus module<a class="headerlink" href="#module-ceco.cec.discus" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.discus.Discus">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.discus.</span></span><span class="sig-name descname"><span class="pre">Discus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/discus.html#Discus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.discus.Discus" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Discus benchmark function, used for optimization problems.</p>
+<p>The Discus function is a unimodal, non-separable, and highly conditioned function.
+It is defined as:
+f(X) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method
+to compute the value of the Discus function after applying shift and rotation
+transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.discus.Discus.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/discus.html#Discus.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.discus.Discus.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Discus class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.discus.Discus.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/discus.html#Discus.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.discus.Discus.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Discus function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Discus function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.ellipsoid">
+<span id="ceco-cec-ellipsoid-module"></span><h2>ceco.cec.ellipsoid module<a class="headerlink" href="#module-ceco.cec.ellipsoid" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.ellipsoid.Ellipsoid">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.ellipsoid.</span></span><span class="sig-name descname"><span class="pre">Ellipsoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/ellipsoid.html#Ellipsoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.ellipsoid.Ellipsoid" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Ellipsoid function, which is a benchmark function
+for optimization.</p>
+<p>The Ellipsoid function is defined as:</p>
+<p>F(X) = sum_{i=1}^{D} i * (x_i)^2</p>
+<p>where:
+- D is the dimension of the input vector.
+- x = (x1, x2, …, xD) is a D-dimensional row vector (i.e., a 1xD matrix).
+- The function is characterized by its elongated shape, which can make optimization algorithms struggle to find the global minimum.</p>
+<p>This class inherits from the Benchmark class and applies rotation and shift transformations to the input vector before evaluating the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.ellipsoid.Ellipsoid.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/ellipsoid.html#Ellipsoid.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.ellipsoid.Ellipsoid.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Ellipsoid class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.ellipsoid.Ellipsoid.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/ellipsoid.html#Ellipsoid.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.ellipsoid.Ellipsoid.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Ellipsoid function at a given input vector after applying
+rotation and shift transformations.</p>
+<p>The evaluation process involves the following steps:
+1. Apply the rotation matrix to the input vector to obtain the rotated vector.
+2. Apply the shift vector to the rotated vector to obtain the shifted vector.
+3. Calculate the Ellipsoid function using the shifted vector.</p>
+<p>The Ellipsoid function is computed as follows:</p>
+<p>F(X) = sum_{i=1}^{D} i * (x_i - shift_i)^2</p>
+<p>where:
+- x_i is the i-th element of the shifted vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Ellipsoid function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.elliptic">
+<span id="ceco-cec-elliptic-module"></span><h2>ceco.cec.elliptic module<a class="headerlink" href="#module-ceco.cec.elliptic" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.elliptic.Elliptic">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.elliptic.</span></span><span class="sig-name descname"><span class="pre">Elliptic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/elliptic.html#Elliptic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.elliptic.Elliptic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Elliptic function, which is a benchmark function
+for optimization.</p>
+<p>The Elliptic function is commonly used to test optimization algorithms due to its
+highly anisotropic and ill-conditioned nature. The function is defined as:
+F(X) = sum_{i=1 to D} (10^6)^((i-1)/(D-1)) * (x_i)^2,
+where D is the dimensionality of the problem.</p>
+<p>The class inherits from the <cite>Benchmark</cite> class and applies rotation and shift
+transformations to the input vector before evaluating the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.elliptic.Elliptic.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/elliptic.html#Elliptic.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.elliptic.Elliptic.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Elliptic class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.elliptic.Elliptic.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/elliptic.html#Elliptic.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.elliptic.Elliptic.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Elliptic function at a given input vector after applying
+rotation and shift transformations.</p>
+<p>The function first applies the rotation matrix and shift vector to the input vector.
+Then, it computes the Elliptic function:
+F(X) = sum_{i=1 to D} (10^6)^((i-1)/(D-1)) * (x_i)^2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Elliptic function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.expanded_schaffer_f6">
+<span id="ceco-cec-expanded-schaffer-f6-module"></span><h2>ceco.cec.expanded_schaffer_f6 module<a class="headerlink" href="#module-ceco.cec.expanded_schaffer_f6" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.expanded_schaffer_f6.</span></span><span class="sig-name descname"><span class="pre">Expanded_schaffer_f6</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/expanded_schaffer_f6.html#Expanded_schaffer_f6"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Expanded Schaffer F6 function, which is a benchmark function for optimization problems.</p>
+<p>The Expanded Schaffer F6 function is defined as:</p>
+<p>F(X) = sum_{i=1}^{D-1} SchafferBase(x_i, x_{i+1}) + SchafferBase(x_D, x_1)</p>
+<p>where:
+- SchafferBase(x, y) = 0.5 + (sin(sqrt(x^2 + y^2))^2 - 0.5) / (1 + 0.001 * (x^2 + y^2))^2
+- X = (x_1, x_2, …, x_D) is a D-dimensional input vector.</p>
+<p>This class inherits from the Benchmark class and applies rotation and shift transformations to the input vector before evaluating the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/expanded_schaffer_f6.html#Expanded_schaffer_f6.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Expanded Schaffer F6 class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/expanded_schaffer_f6.html#Expanded_schaffer_f6.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Expanded Schaffer F6 function at a given input vector after applying rotation and shift transformations.</p>
+<p>The evaluation process involves the following steps:
+1. Apply the rotation matrix to the input vector to obtain the rotated vector.
+2. Apply the shift vector to the rotated vector to obtain the shifted vector.
+3. Calculate the Expanded Schaffer F6 function using the shifted vector.</p>
+<p>The function is computed as:</p>
+<p>F(X) = sum_{i=1}^{D-1} SchafferBase(x_i, x_{i+1}) + SchafferBase(x_D, x_1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Expanded Schaffer F6 function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.schaffer_base">
+<span class="sig-name descname"><span class="pre">schaffer_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/expanded_schaffer_f6.html#Expanded_schaffer_f6.schaffer_base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.expanded_schaffer_f6.Expanded_schaffer_f6.schaffer_base" title="Link to this definition"></a></dt>
+<dd><p>Computes the Schaffer base function for two variables.</p>
+<p>The Schaffer base function is defined as:</p>
+<p>SchafferBase(x, y) = 0.5 + (sin(sqrt(x^2 + y^2))^2 - 0.5) / (1 + 0.001 * (x^2 + y^2))^2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – The first variable.</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – The second variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Schaffer base function.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.griewank">
+<span id="ceco-cec-griewank-module"></span><h2>ceco.cec.griewank module<a class="headerlink" href="#module-ceco.cec.griewank" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.griewank.Griewank">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.griewank.</span></span><span class="sig-name descname"><span class="pre">Griewank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/griewank.html#Griewank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.griewank.Griewank" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Griewank function, a commonly used benchmark function
+in optimization problems. It inherits from the Benchmark class and applies
+rotation and shift transformations before evaluation.</p>
+<p>The Griewank function is defined as:</p>
+<blockquote>
+<div><p>f(x) = (1/4000) * sum(x_i^2) - prod(cos(x_i / sqrt(i+1))) + 1</p>
+</div></blockquote>
+<dl class="simple">
+<dt>where:</dt><dd><ul class="simple">
+<li><p>The first term represents the sum of squared components divided by 4000.</p></li>
+<li><p>The second term is the product of cosine terms applied to each component.</p></li>
+<li><p>The final term is a constant used to adjust the function’s range.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.griewank.Griewank.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/griewank.html#Griewank.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.griewank.Griewank.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Griewank function with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.griewank.Griewank.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/griewank.html#Griewank.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.griewank.Griewank.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the rotated and shifted Griewank function at a given input vector.</p>
+<p>The function first applies a rotation transformation followed by a shift
+transformation to the input vector before computing the Griewank function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed Griewank function value after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.happycat">
+<span id="ceco-cec-happycat-module"></span><h2>ceco.cec.happycat module<a class="headerlink" href="#module-ceco.cec.happycat" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.happycat.Happycat">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.happycat.</span></span><span class="sig-name descname"><span class="pre">Happycat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/happycat.html#Happycat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.happycat.Happycat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Happycat benchmark function, used for optimization problems.</p>
+<p>The Happycat function is a highly multimodal, non-separable, and scalable function.
+It is defined as:
+f(X)=| sum_{i=1}^{D}x_i^2-D |^{1/4}+(0.5 sum_{i=1}^{D}x_i^2+ sum_{i=1}^{D}x_i)/D+0.5
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.happycat.Happycat.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/happycat.html#Happycat.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.happycat.Happycat.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Happycat class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.happycat.Happycat.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/happycat.html#Happycat.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.happycat.Happycat.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Happycat function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Happycat function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.hgbat">
+<span id="ceco-cec-hgbat-module"></span><h2>ceco.cec.hgbat module<a class="headerlink" href="#module-ceco.cec.hgbat" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.hgbat.Hgbat">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.hgbat.</span></span><span class="sig-name descname"><span class="pre">Hgbat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/hgbat.html#Hgbat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.hgbat.Hgbat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Hgbat benchmark function, used for optimization problems.</p>
+<p>The Hgbat function is a highly multimodal, non-separable, and scalable function.
+It is defined as:
+f(X)=| (sum_{i=1}^{D}x_i^2)^2-(sum_{i=1}^{D}x_i)^2 |^{1/2}+(0.5 sum_{i=1}^{D}x_i^2 + sum_{i=1}^{D}x_i)/ D+0.5
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.hgbat.Hgbat.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/hgbat.html#Hgbat.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.hgbat.Hgbat.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Hgbat class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.hgbat.Hgbat.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/hgbat.html#Hgbat.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.hgbat.Hgbat.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Hgbat function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Hgbat function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.katsuura">
+<span id="ceco-cec-katsuura-module"></span><h2>ceco.cec.katsuura module<a class="headerlink" href="#module-ceco.cec.katsuura" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.katsuura.Katsuura">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.katsuura.</span></span><span class="sig-name descname"><span class="pre">Katsuura</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/katsuura.html#Katsuura"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.katsuura.Katsuura" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Katsuura benchmark function, used for optimization problems.</p>
+<p>The Katsuura function is a highly multimodal, non-separable, and scalable function.
+It is defined as:
+f(X) = frac{10}{D^2} prod_{i=1}^D ( 1 + i sum_{j=1}^{32} frac{|2^j x_i - round(2^j x_i)|}{2^j} )^{frac{10}{D^{1.2}}} - frac{10}{D^2}
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.katsuura.Katsuura.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/katsuura.html#Katsuura.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.katsuura.Katsuura.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Katsuura class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.katsuura.Katsuura.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/katsuura.html#Katsuura.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.katsuura.Katsuura.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Katsuura function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Katsuura function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.levy">
+<span id="ceco-cec-levy-module"></span><h2>ceco.cec.levy module<a class="headerlink" href="#module-ceco.cec.levy" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.levy.Levy">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.levy.</span></span><span class="sig-name descname"><span class="pre">Levy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/levy.html#Levy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.levy.Levy" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Levy benchmark function, used for optimization problems.</p>
+<p>It is defined as:
+f(X)=sin^2(pi w_1)+ sum_{i=1}^{D-1}(w_i-1)^2[ 1+10 sin^2(pi w_i+1) ]+(w_D-1)^2[ 1+ sin^2(2 pi w_D) ]</p>
+<p>where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.levy.Levy.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/levy.html#Levy.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.levy.Levy.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Levy class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.levy.Levy.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/levy.html#Levy.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.levy.Levy.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Levy function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Levy function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.rastrigin">
+<span id="ceco-cec-rastrigin-module"></span><h2>ceco.cec.rastrigin module<a class="headerlink" href="#module-ceco.cec.rastrigin" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.rastrigin.Rastrigin">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.rastrigin.</span></span><span class="sig-name descname"><span class="pre">Rastrigin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/rastrigin.html#Rastrigin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.rastrigin.Rastrigin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Rastrigin function, which is a benchmark function
+for optimization.</p>
+<p>The Rastrigin function is defined as:
+F(X) = sum_{i=1}^{D} (x_i^2 - 10 * cos(2 * pi * x_i) + 10)</p>
+<p>The class inherits from the <cite>Benchmark</cite> class and applies rotation and shift
+transformations to the input vector before evaluating the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.rastrigin.Rastrigin.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/rastrigin.html#Rastrigin.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.rastrigin.Rastrigin.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Rastrigin class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.rastrigin.Rastrigin.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/rastrigin.html#Rastrigin.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.rastrigin.Rastrigin.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Rastrigin function at a given input vector after applying
+rotation and shift transformations.</p>
+<p>The function first applies the rotation matrix and shift vector to the input vector.
+Then, it computes the Rastrigin function:
+F(X) = sum_{i=1}^{D} (x_i^2 - 10 * cos(2 * pi * x_i) + 10).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Rastrigin function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.rosenbrock">
+<span id="ceco-cec-rosenbrock-module"></span><h2>ceco.cec.rosenbrock module<a class="headerlink" href="#module-ceco.cec.rosenbrock" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.rosenbrock.Rosenbrock">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.rosenbrock.</span></span><span class="sig-name descname"><span class="pre">Rosenbrock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/rosenbrock.html#Rosenbrock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.rosenbrock.Rosenbrock" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Rosenbrock function, which is a benchmark function
+for optimization.</p>
+<p>The Rosenbrock function is defined as:
+F(X) = sum_{i=1}^{D-1} [100 * (x_i^2 - x_{i+1})^2 + (x_i - 1)^2]</p>
+<p>The class inherits from the <cite>Benchmark</cite> class and applies rotation and shift
+transformations to the input vector before evaluating the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.rosenbrock.Rosenbrock.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/rosenbrock.html#Rosenbrock.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.rosenbrock.Rosenbrock.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Rosenbrock class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.rosenbrock.Rosenbrock.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/rosenbrock.html#Rosenbrock.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.rosenbrock.Rosenbrock.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Rosenbrock function at a given input vector after applying
+rotation and shift transformations.</p>
+<p>The function first applies the rotation matrix and shift vector to the input vector.
+Then, it computes the Rosenbrock function:
+F(X) = sum_{i=1}^{D-1} [100 * (x_i^2 - x_{i+1})^2 + (x_i - 1)^2].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Rosenbrock function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.schwefel1_2">
+<span id="ceco-cec-schwefel1-2-module"></span><h2>ceco.cec.schwefel1_2 module<a class="headerlink" href="#module-ceco.cec.schwefel1_2" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.schwefel1_2.Schwefel1_2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.schwefel1_2.</span></span><span class="sig-name descname"><span class="pre">Schwefel1_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/schwefel1_2.html#Schwefel1_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel1_2.Schwefel1_2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Schwefel 1.2 function, which is a benchmark function
+for optimization.</p>
+<p>Inherits from the Benchmark class and applies rotation and shift to the
+input vector before evaluating the Schwefel 1.2 function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel1_2.Schwefel1_2.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel1_2.html#Schwefel1_2.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel1_2.Schwefel1_2.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Schwefel1_2 class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel1_2.Schwefel1_2.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel1_2.html#Schwefel1_2.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel1_2.Schwefel1_2.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Schwefel 1.2 function at a given input vector after applying
+rotation and shift.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Schwefel 1.2 function after applying rotation
+and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.schwefel2_13">
+<span id="ceco-cec-schwefel2-13-module"></span><h2>ceco.cec.schwefel2_13 module<a class="headerlink" href="#module-ceco.cec.schwefel2_13" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.schwefel2_13.Schwefel2_13">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.schwefel2_13.</span></span><span class="sig-name descname"><span class="pre">Schwefel2_13</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/schwefel2_13.html#Schwefel2_13"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel2_13.Schwefel2_13" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Schwefel 2.13 function, which is a benchmark function
+for optimization.</p>
+<p>This function is commonly used to test optimization algorithms due to its complex
+and multi-modal nature. The class inherits from the <cite>Benchmark</cite> class and applies
+rotation and shift transformations to the input vector before evaluating the function.</p>
+<p>The Schwefel 2.13 function is defined as:
+F(X) = sum_{i=1 to D} (A_i - B_i(X))^2,
+where:
+- A_i = sum_{j=1 to D} (a_{ij} * sin(alpha_j) + b_{ij} * cos(alpha_j)),
+- B_i(X) = sum_{j=1 to D} (a_{ij} * sin(x_j) + b_{ij} * cos(x_j)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+<li><p><strong>a</strong> (<em>list</em><em> of </em><em>list</em><em> of </em><em>int</em>) – A D x D matrix of random integers in the range [-100, 100].</p></li>
+<li><p><strong>b</strong> (<em>list</em><em> of </em><em>list</em><em> of </em><em>int</em>) – A D x D matrix of random integers in the range [-100, 100].</p></li>
+<li><p><strong>alpha</strong> (<em>list</em><em> of </em><em>float</em>) – A vector of D random numbers in the range [-π, π].</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel2_13.Schwefel2_13.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel2_13.html#Schwefel2_13.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel2_13.Schwefel2_13.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Schwefel2_13 class with a rotation matrix, shift vector, and dimension.</p>
+<p>During initialization, random matrices <cite>a</cite> and <cite>b</cite> and a random vector <cite>alpha</cite> are
+generated. These are used to define the Schwefel 2.13 function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel2_13.Schwefel2_13.compute_A">
+<span class="sig-name descname"><span class="pre">compute_A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel2_13.html#Schwefel2_13.compute_A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel2_13.Schwefel2_13.compute_A" title="Link to this definition"></a></dt>
+<dd><p>Computes the A vector using the formula:
+A_i = sum_{j=1 to D} (a_{ij} * sin(alpha_j) + b_{ij} * cos(alpha_j)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>D</strong> (<em>int</em>) – The dimension of the problem.</p></li>
+<li><p><strong>a</strong> (<em>np.ndarray</em>) – The a matrix.</p></li>
+<li><p><strong>b</strong> (<em>np.ndarray</em>) – The b matrix.</p></li>
+<li><p><strong>alpha</strong> (<em>np.ndarray</em>) – The alpha vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed A vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel2_13.Schwefel2_13.compute_B">
+<span class="sig-name descname"><span class="pre">compute_B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel2_13.html#Schwefel2_13.compute_B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel2_13.Schwefel2_13.compute_B" title="Link to this definition"></a></dt>
+<dd><p>Computes the B vector using the formula:
+B_i(X) = sum_{j=1 to D} (a_{ij} * sin(x_j) + b_{ij} * cos(x_j)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>D</strong> (<em>int</em>) – The dimension of the problem.</p></li>
+<li><p><strong>a</strong> (<em>np.ndarray</em>) – The a matrix.</p></li>
+<li><p><strong>b</strong> (<em>np.ndarray</em>) – The b matrix.</p></li>
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – The input vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed B vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel2_13.Schwefel2_13.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel2_13.html#Schwefel2_13.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel2_13.Schwefel2_13.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Schwefel 2.13 function at a given input vector after applying
+rotation and shift transformations.</p>
+<p>The function first applies the rotation matrix and shift vector to the input vector.
+Then, it computes the A and B vectors and evaluates the Schwefel 2.13 function:
+F(X) = sum_{i=1 to D} (A_i - B_i(X))^2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Schwefel 2.13 function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel2_13.Schwefel2_13.generate_random_alpha">
+<span class="sig-name descname"><span class="pre">generate_random_alpha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel2_13.html#Schwefel2_13.generate_random_alpha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel2_13.Schwefel2_13.generate_random_alpha" title="Link to this definition"></a></dt>
+<dd><p>Generates a list of D random numbers in the range [-π, π].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>D</strong> (<em>int</em>) – The number of random numbers to generate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of D random numbers in the range [-π, π].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.schwefel2_13.Schwefel2_13.generate_random_matrix">
+<span class="sig-name descname"><span class="pre">generate_random_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/cec/schwefel2_13.html#Schwefel2_13.generate_random_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.schwefel2_13.Schwefel2_13.generate_random_matrix" title="Link to this definition"></a></dt>
+<dd><p>Generates a D x D matrix with random integers in the range [min_val, max_val].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>D</strong> (<em>int</em>) – The dimension of the matrix.</p></li>
+<li><p><strong>min_val</strong> (<em>int</em>) – The minimum value for random integers.</p></li>
+<li><p><strong>max_val</strong> (<em>int</em>) – The maximum value for random integers.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A D x D matrix of random integers.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of list of int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.shubert">
+<span id="ceco-cec-shubert-module"></span><h2>ceco.cec.shubert module<a class="headerlink" href="#module-ceco.cec.shubert" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.shubert.Shubert">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.shubert.</span></span><span class="sig-name descname"><span class="pre">Shubert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/shubert.html#Shubert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.shubert.Shubert" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Shubert benchmark function, used for optimization problems.</p>
+<p>The Shubert function is a multimodal, non-separable, and scalable function.
+It is defined as:
+f(X)=- prod_{i=1}^{D} sum_{j=1}^{5}j cos[ (j+1)x_i+j ]
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.shubert.Shubert.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/shubert.html#Shubert.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.shubert.Shubert.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Shubert class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.shubert.Shubert.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/shubert.html#Shubert.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.shubert.Shubert.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Shubert function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Shubert function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.sphere">
+<span id="ceco-cec-sphere-module"></span><h2>ceco.cec.sphere module<a class="headerlink" href="#module-ceco.cec.sphere" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.sphere.Sphere">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.sphere.</span></span><span class="sig-name descname"><span class="pre">Sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/sphere.html#Sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.sphere.Sphere" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Sphere function, which is a benchmark function
+for optimization.</p>
+<p>Inherits from the Benchmark class and applies rotation and shift to the
+standard sphere function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.sphere.Sphere.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/sphere.html#Sphere.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.sphere.Sphere.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Sphere class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.sphere.Sphere.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/sphere.html#Sphere.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.sphere.Sphere.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the rotated and shifted sphere function at a given input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the sphere function after applying rotation
+and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.step_function">
+<span id="ceco-cec-step-function-module"></span><h2>ceco.cec.step_function module<a class="headerlink" href="#module-ceco.cec.step_function" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.step_function.Step_function">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.step_function.</span></span><span class="sig-name descname"><span class="pre">Step_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/step_function.html#Step_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.step_function.Step_function" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Step function benchmark function, used for optimization problems.</p>
+<p>The Step function is a discontinuous, non-differentiable, and scalable function.</p>
+<p>It is defined as:
+f(X)=sum_{i=1}^{D} (lfloor x_i+0.5 rfloor)^2</p>
+<p>where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.step_function.Step_function.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/step_function.html#Step_function.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.step_function.Step_function.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Step function class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.step_function.Step_function.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/step_function.html#Step_function.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.step_function.Step_function.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Step function function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Step function function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.vincent">
+<span id="ceco-cec-vincent-module"></span><h2>ceco.cec.vincent module<a class="headerlink" href="#module-ceco.cec.vincent" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.vincent.Vincent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.vincent.</span></span><span class="sig-name descname"><span class="pre">Vincent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/vincent.html#Vincent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.vincent.Vincent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Vincent benchmark function, used for optimization problems.</p>
+<p>The Vincent function is defined as:</p>
+<p>F(X) = (1/D) * sum_{i=1}^{D} sin(10 * log(x_i))
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.vincent.Vincent.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/vincent.html#Vincent.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.vincent.Vincent.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Vincent class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.vincent.Vincent.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/vincent.html#Vincent.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.vincent.Vincent.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Vincent function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Vincent function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.weierstrass">
+<span id="ceco-cec-weierstrass-module"></span><h2>ceco.cec.weierstrass module<a class="headerlink" href="#module-ceco.cec.weierstrass" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.weierstrass.Weierstrass">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.weierstrass.</span></span><span class="sig-name descname"><span class="pre">Weierstrass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/weierstrass.html#Weierstrass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.weierstrass.Weierstrass" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Weierstrass function, a continuous but nowhere differentiable function
+used as a benchmark in optimization problems.</p>
+<p>Inherits from the Benchmark class and applies rotation and shift transformations to the
+standard Weierstrass function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – The decay factor, default is 0.5.</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – The frequency factor, default is 3.</p></li>
+<li><p><strong>k_max</strong> (<em>int</em>) – The maximum number of summation terms, default is 20.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.weierstrass.Weierstrass.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/weierstrass.html#Weierstrass.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.weierstrass.Weierstrass.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Weierstrass class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.weierstrass.Weierstrass.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/weierstrass.html#Weierstrass.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.weierstrass.Weierstrass.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the rotated and shifted Weierstrass function at a given input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Weierstrass function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.cec.zakharov">
+<span id="ceco-cec-zakharov-module"></span><h2>ceco.cec.zakharov module<a class="headerlink" href="#module-ceco.cec.zakharov" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.cec.zakharov.Zakharov">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.cec.zakharov.</span></span><span class="sig-name descname"><span class="pre">Zakharov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/cec/zakharov.html#Zakharov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.zakharov.Zakharov" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Zakharov benchmark function, used for optimization problems.</p>
+<p>The Zakharov function is a continuous, differentiable, and scalable function.
+It is defined as:
+f(X) = sum_{i=1}^{D} x_i^2 + ( sum_{i=1}^{D} 0.5 x_i )^2 + ( sum_{i=1}^{D} 0.5 x_i )^4
+where X = [x_1, x_2, …, x_D] is the input vector of dimension ( D ).</p>
+<p>This class inherits from the <cite>Benchmark</cite> class and implements the <cite>evaluate</cite> method to compute the value of the Discus function after applying shift and rotation transformations to the input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.zakharov.Zakharov.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/cec/zakharov.html#Zakharov.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.zakharov.Zakharov.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Zakharov class with a rotation matrix, a shift vector, and a bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.cec.zakharov.Zakharov.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/cec/zakharov.html#Zakharov.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.cec.zakharov.Zakharov.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Zakharov function for the given input vector after applying shift and rotation transformations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – The input vector [x1, x2, …, xD].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the Zakharov function after applying rotation and shift.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="base_class.html" class="btn btn-neutral float-left" title="Base Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ceco.coco.html" class="btn btn-neutral float-right" title="ceco.coco package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, muhammad hanif ramadhani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

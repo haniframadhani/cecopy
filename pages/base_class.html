@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base Class &mdash; ceco 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ceco.cec package" href="ceco.cec.html" />
+    <link rel="prev" title="Quick Start" href="quick_start.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ceco
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Base Class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ceco-benchmark-module">ceco.benchmark module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.benchmark.Benchmark"><code class="docutils literal notranslate"><span class="pre">Benchmark</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.T_asy_beta"><code class="docutils literal notranslate"><span class="pre">Benchmark.T_asy_beta()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.T_osz"><code class="docutils literal notranslate"><span class="pre">Benchmark.T_osz()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.__init__"><code class="docutils literal notranslate"><span class="pre">Benchmark.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.cec_init"><code class="docutils literal notranslate"><span class="pre">Benchmark.cec_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.coco_init"><code class="docutils literal notranslate"><span class="pre">Benchmark.coco_init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.create_diagonal_matrix"><code class="docutils literal notranslate"><span class="pre">Benchmark.create_diagonal_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.elementwise_multiply"><code class="docutils literal notranslate"><span class="pre">Benchmark.elementwise_multiply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.euclidean_norm"><code class="docutils literal notranslate"><span class="pre">Benchmark.euclidean_norm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.f_pen"><code class="docutils literal notranslate"><span class="pre">Benchmark.f_pen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.generate_random_matrix"><code class="docutils literal notranslate"><span class="pre">Benchmark.generate_random_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.gram_schmidt"><code class="docutils literal notranslate"><span class="pre">Benchmark.gram_schmidt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.benchmark.Benchmark.matrix_transpose"><code class="docutils literal notranslate"><span class="pre">Benchmark.matrix_transpose()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ceco.cec.html">ceco.cec package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ceco.coco.html">ceco.coco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ceco.rw.html">ceco.rw package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ceco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Base Class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/base_class.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="base-class">
+<h1>Base Class<a class="headerlink" href="#base-class" title="Link to this heading"></a></h1>
+<section id="ceco-benchmark-module">
+<h2>ceco.benchmark module<a class="headerlink" href="#ceco-benchmark-module" title="Link to this heading"></a></h2>
+<p>Base class for cec and coco/bbob benchmark function</p>
+<dl class="py class" id="module-ceco.benchmark">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.benchmark.</span></span><span class="sig-name descname"><span class="pre">Benchmark</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A base class for benchmark functions used in optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – A shift vector for adjusting the input vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.T_asy_beta">
+<span class="sig-name descname"><span class="pre">T_asy_beta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.T_asy_beta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.T_asy_beta" title="Link to this definition"></a></dt>
+<dd><p>Applies the T_asy^beta transformation to a given input vector.</p>
+<dl class="simple">
+<dt>The transformation is defined as:</dt><dd><p>T_asy^beta(x_i) = x_i^(1 + beta * (i / (D - 1)) * sqrt(x_i)) if x_i &gt; 0,
+T_asy^beta(x_i) = x_i otherwise.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>beta</strong> (<em>float</em>) – The beta parameter controlling the transformation.</p></li>
+<li><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transformed vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If the dimension is 1, the input vector is returned unchanged.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.T_osz">
+<span class="sig-name descname"><span class="pre">T_osz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.T_osz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.T_osz" title="Link to this definition"></a></dt>
+<dd><p>Applies the T_osz transformation to a given input vector.</p>
+<dl class="simple">
+<dt>The transformation is defined as:</dt><dd><p>T_osz(x_i) = sign(x_i) * exp(x_hat + 0.049 * (sin(c1 * x_hat) + sin(c2 * x_hat))),
+where x_hat = log(<a href="#id1"><span class="problematic" id="id2">|x_i|</span></a>) if x_i ≠ 0, and 0 otherwise.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transformed vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The transformation is applied element-wise.</p></li>
+<li><p>If x_i is 0, the result is 0.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Benchmark class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <cite>dimension</cite> is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.cec_init">
+<span class="sig-name descname"><span class="pre">cec_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.cec_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.cec_init" title="Link to this definition"></a></dt>
+<dd><p>Initializes the cec function class with a rotation matrix and a shift vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix.</p></li>
+<li><p><strong>shift</strong> (<em>np.ndarray</em>) – The shift vector.</p></li>
+<li><p><strong>f_bias</strong> (<em>float</em>) – A bias term added to the benchmark function’s output. Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.coco_init">
+<span class="sig-name descname"><span class="pre">coco_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.coco_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.coco_init" title="Link to this definition"></a></dt>
+<dd><p>Initializes the coco function class with a rotation matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rotation</strong> (<em>np.ndarray</em>) – The rotation matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.create_diagonal_matrix">
+<span class="sig-name descname"><span class="pre">create_diagonal_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.create_diagonal_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.create_diagonal_matrix" title="Link to this definition"></a></dt>
+<dd><p>Creates a diagonal matrix Λ^α, where the diagonal elements are powers of α.</p>
+<dl class="simple">
+<dt>The diagonal elements are defined as:</dt><dd><p>Λ_ii = alpha^(0.5 * (i - 1) / (D - 1)) for i = 1, 2, …, D,
+where D is the dimension.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>alpha</strong> (<em>float</em>) – The base value for the diagonal elements.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A diagonal matrix of shape (D, D), where D is the dimension.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If the dimension is 1, the matrix is [[1]].</p></li>
+<li><p>If alpha is 0, the matrix is a zero matrix.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.elementwise_multiply">
+<span class="sig-name descname"><span class="pre">elementwise_multiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.elementwise_multiply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.elementwise_multiply" title="Link to this definition"></a></dt>
+<dd><p>Performs element-wise multiplication of two vectors or matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – The first input array.</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – The second input array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The element-wise product of x and y.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the shapes of x and y do not match.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.euclidean_norm">
+<span class="sig-name descname"><span class="pre">euclidean_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.euclidean_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.euclidean_norm" title="Link to this definition"></a></dt>
+<dd><p>Computes the Euclidean norm (L2 norm) of a given input vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Euclidean norm of the input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector is empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.f_pen">
+<span class="sig-name descname"><span class="pre">f_pen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.f_pen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.f_pen" title="Link to this definition"></a></dt>
+<dd><p>Computes the penalty function for a given input vector.</p>
+<dl class="simple">
+<dt>The penalty function is defined as:</dt><dd><p>f_pen(x) = sum(max(0, <a href="#id3"><span class="problematic" id="id4">|x_i|</span></a> - 5)^2).</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The penalty value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.generate_random_matrix">
+<span class="sig-name descname"><span class="pre">generate_random_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.generate_random_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.generate_random_matrix" title="Link to this definition"></a></dt>
+<dd><p>Generates a random matrix with elements drawn from a standard normal distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>D</strong> (<em>int</em>) – The size of the matrix (D x D).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A random matrix of shape (D, D).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.gram_schmidt">
+<span class="sig-name descname"><span class="pre">gram_schmidt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.gram_schmidt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.gram_schmidt" title="Link to this definition"></a></dt>
+<dd><p>Applies the Gram-Schmidt process to a set of vectors.</p>
+<p>This method orthogonalizes the input vectors (columns of the matrix) and normalizes them to unit length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>matrix</strong> (<em>np.ndarray</em>) – A 2D array where each column is a vector.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2D array with orthogonal and normalized vectors as columns.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If the input vectors are linearly dependent, the output will contain zero vectors for dependent columns.</p></li>
+<li><p>Uses floating-point arithmetic, so results may have small numerical errors.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.benchmark.Benchmark.matrix_transpose">
+<span class="sig-name descname"><span class="pre">matrix_transpose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/benchmark.html#Benchmark.matrix_transpose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.benchmark.Benchmark.matrix_transpose" title="Link to this definition"></a></dt>
+<dd><p>Computes the transpose of a given matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>matrix</strong> (<em>np.ndarray</em>) – A matrix of shape (M, N).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transpose of the matrix, of shape (N, M).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quick_start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ceco.cec.html" class="btn btn-neutral float-right" title="ceco.cec package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, muhammad hanif ramadhani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

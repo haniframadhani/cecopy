@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ceco.cec.discus &mdash; ceco 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ceco
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/base_class.html">Base Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/ceco.cec.html">ceco.cec package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/ceco.coco.html">ceco.coco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pages/ceco.rw.html">ceco.rw package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ceco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ceco.cec.discus</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ceco.cec.discus</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ceco.benchmark</span><span class="w"> </span><span class="kn">import</span> <span class="n">Benchmark</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<div class="viewcode-block" id="Discus">
+<a class="viewcode-back" href="../../../pages/ceco.cec.html#ceco.cec.discus.Discus">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Discus</span><span class="p">(</span><span class="n">Benchmark</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class representing the Discus benchmark function, used for optimization problems.</span>
+
+<span class="sd">    The Discus function is a unimodal, non-separable, and highly conditioned function.</span>
+<span class="sd">    It is defined as:</span>
+<span class="sd">    f(X) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2</span>
+<span class="sd">    where X = [x_1, x_2, ..., x_D] is the input vector of dimension ( D ).</span>
+
+<span class="sd">    This class inherits from the `Benchmark` class and implements the `evaluate` method</span>
+<span class="sd">    to compute the value of the Discus function after applying shift and rotation</span>
+<span class="sd">    transformations to the input vector.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        dimension (int): The number of dimensions for the input space. Must be a positive integer.</span>
+<span class="sd">        rotation (np.ndarray): A rotation matrix for transforming the input vector.</span>
+<span class="sd">        shift (np.ndarray): A shift vector for adjusting the input vector.</span>
+<span class="sd">        f_bias (float): A bias term added to the benchmark function&#39;s output. Defaults to 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Discus.__init__">
+<a class="viewcode-back" href="../../../pages/ceco.cec.html#ceco.cec.discus.Discus.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">rotation</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">shift</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">f_bias</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the Discus class with a rotation matrix, a shift vector, and a bias term.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            dimension (int): The number of dimensions for the input space. Must be a positive integer.</span>
+<span class="sd">            rotation (np.ndarray): The rotation matrix for transforming the input vector.</span>
+<span class="sd">            shift (np.ndarray): The shift vector for adjusting the input vector.</span>
+<span class="sd">            f_bias (float): A bias term added to the benchmark function&#39;s output. Defaults to 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cec_init</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">f_bias</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Discus.evaluate">
+<a class="viewcode-back" href="../../../pages/ceco.cec.html#ceco.cec.discus.Discus.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_vector</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates the Discus function for the given input vector after applying shift and rotation transformations.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            input_vector (np.ndarray): The input vector [x1, x2, ..., xD].</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The result of the Discus function after applying rotation and shift.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Apply shift and rotation</span>
+        <span class="n">shifted_rotated_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span><span class="p">,</span> <span class="n">input_vector</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span>
+
+        <span class="n">sum_term</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">shifted_rotated_vector</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">total_sum</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span> <span class="o">*</span> \
+            <span class="n">shifted_rotated_vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">sum_term</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_bias</span>
+
+        <span class="k">return</span> <span class="n">total_sum</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, muhammad hanif ramadhani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

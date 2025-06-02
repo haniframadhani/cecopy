@@ -1,0 +1,1846 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ceco.coco package &mdash; ceco 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ceco.rw package" href="ceco.rw.html" />
+    <link rel="prev" title="ceco.cec package" href="ceco.cec.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ceco
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_class.html">Base Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ceco.cec.html">ceco.cec package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ceco.coco package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#comparing-continous-optimizers-coco-benchmark-functions">COmparing Continous Optimizers (COCO) benchmark functions.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ceco-coco-attractive-sector-module">ceco.coco.attractive_sector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.attractive_sector.Attractive_sector"><code class="docutils literal notranslate"><span class="pre">Attractive_sector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.attractive_sector.Attractive_sector.__init__"><code class="docutils literal notranslate"><span class="pre">Attractive_sector.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.attractive_sector.Attractive_sector.evaluate"><code class="docutils literal notranslate"><span class="pre">Attractive_sector.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.attractive_sector.Attractive_sector.raw"><code class="docutils literal notranslate"><span class="pre">Attractive_sector.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.bent_cigar">ceco.coco.bent_cigar module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.bent_cigar.Bent_cigar"><code class="docutils literal notranslate"><span class="pre">Bent_cigar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.bent_cigar.Bent_cigar.__init__"><code class="docutils literal notranslate"><span class="pre">Bent_cigar.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.bent_cigar.Bent_cigar.evaluate"><code class="docutils literal notranslate"><span class="pre">Bent_cigar.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.bent_cigar.Bent_cigar.raw"><code class="docutils literal notranslate"><span class="pre">Bent_cigar.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.buche_rastrigin">ceco.coco.buche_rastrigin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.buche_rastrigin.Buche_rastrigin"><code class="docutils literal notranslate"><span class="pre">Buche_rastrigin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.__init__"><code class="docutils literal notranslate"><span class="pre">Buche_rastrigin.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.compute_s_i"><code class="docutils literal notranslate"><span class="pre">Buche_rastrigin.compute_s_i()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.evaluate"><code class="docutils literal notranslate"><span class="pre">Buche_rastrigin.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.raw"><code class="docutils literal notranslate"><span class="pre">Buche_rastrigin.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.composite_griewank_rosenbrock_function_f8f2">ceco.coco.composite_griewank_rosenbrock_function_f8f2 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2"><code class="docutils literal notranslate"><span class="pre">Composite_griewank_rosenbrock_function_f8f2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.__init__"><code class="docutils literal notranslate"><span class="pre">Composite_griewank_rosenbrock_function_f8f2.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.evaluate"><code class="docutils literal notranslate"><span class="pre">Composite_griewank_rosenbrock_function_f8f2.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.raw"><code class="docutils literal notranslate"><span class="pre">Composite_griewank_rosenbrock_function_f8f2.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.different_power">ceco.coco.different_power module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.different_power.Different_power"><code class="docutils literal notranslate"><span class="pre">Different_power</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.different_power.Different_power.__init__"><code class="docutils literal notranslate"><span class="pre">Different_power.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.different_power.Different_power.evaluate"><code class="docutils literal notranslate"><span class="pre">Different_power.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.different_power.Different_power.raw"><code class="docutils literal notranslate"><span class="pre">Different_power.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.discus">ceco.coco.discus module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.discus.Discus"><code class="docutils literal notranslate"><span class="pre">Discus</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.discus.Discus.__init__"><code class="docutils literal notranslate"><span class="pre">Discus.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.discus.Discus.evaluate"><code class="docutils literal notranslate"><span class="pre">Discus.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.discus.Discus.raw"><code class="docutils literal notranslate"><span class="pre">Discus.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.ellipsoidal">ceco.coco.ellipsoidal module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.ellipsoidal.Ellipsoidal"><code class="docutils literal notranslate"><span class="pre">Ellipsoidal</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.ellipsoidal.Ellipsoidal.__init__"><code class="docutils literal notranslate"><span class="pre">Ellipsoidal.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.ellipsoidal.Ellipsoidal.evaluate"><code class="docutils literal notranslate"><span class="pre">Ellipsoidal.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.ellipsoidal.Ellipsoidal.raw"><code class="docutils literal notranslate"><span class="pre">Ellipsoidal.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.katsuura">ceco.coco.katsuura module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.katsuura.Katsuura"><code class="docutils literal notranslate"><span class="pre">Katsuura</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.katsuura.Katsuura.__init__"><code class="docutils literal notranslate"><span class="pre">Katsuura.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.katsuura.Katsuura.evaluate"><code class="docutils literal notranslate"><span class="pre">Katsuura.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.katsuura.Katsuura.raw"><code class="docutils literal notranslate"><span class="pre">Katsuura.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.linear_slope">ceco.coco.linear_slope module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.linear_slope.Linear_slope"><code class="docutils literal notranslate"><span class="pre">Linear_slope</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.linear_slope.Linear_slope.__init__"><code class="docutils literal notranslate"><span class="pre">Linear_slope.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.linear_slope.Linear_slope.evaluate"><code class="docutils literal notranslate"><span class="pre">Linear_slope.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.linear_slope.Linear_slope.raw"><code class="docutils literal notranslate"><span class="pre">Linear_slope.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.rastrigin">ceco.coco.rastrigin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.rastrigin.Rastrigin"><code class="docutils literal notranslate"><span class="pre">Rastrigin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.rastrigin.Rastrigin.__init__"><code class="docutils literal notranslate"><span class="pre">Rastrigin.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.rastrigin.Rastrigin.evaluate"><code class="docutils literal notranslate"><span class="pre">Rastrigin.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.rastrigin.Rastrigin.raw"><code class="docutils literal notranslate"><span class="pre">Rastrigin.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.rosenbrock">ceco.coco.rosenbrock module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.rosenbrock.Rosenbrock"><code class="docutils literal notranslate"><span class="pre">Rosenbrock</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.rosenbrock.Rosenbrock.__init__"><code class="docutils literal notranslate"><span class="pre">Rosenbrock.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.rosenbrock.Rosenbrock.evaluate"><code class="docutils literal notranslate"><span class="pre">Rosenbrock.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.rosenbrock.Rosenbrock.raw"><code class="docutils literal notranslate"><span class="pre">Rosenbrock.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.schaffer_f7">ceco.coco.schaffer_f7 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.schaffer_f7.Schaffer_f7"><code class="docutils literal notranslate"><span class="pre">Schaffer_f7</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.schaffer_f7.Schaffer_f7.__init__"><code class="docutils literal notranslate"><span class="pre">Schaffer_f7.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.schaffer_f7.Schaffer_f7._schaffer_raw"><code class="docutils literal notranslate"><span class="pre">Schaffer_f7._schaffer_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.schaffer_f7.Schaffer_f7.evaluate"><code class="docutils literal notranslate"><span class="pre">Schaffer_f7.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.schaffer_f7.Schaffer_f7.raw"><code class="docutils literal notranslate"><span class="pre">Schaffer_f7.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.schwefel">ceco.coco.schwefel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.schwefel.Schwefel"><code class="docutils literal notranslate"><span class="pre">Schwefel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.schwefel.Schwefel.__init__"><code class="docutils literal notranslate"><span class="pre">Schwefel.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.schwefel.Schwefel.evaluate"><code class="docutils literal notranslate"><span class="pre">Schwefel.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.schwefel.Schwefel.raw"><code class="docutils literal notranslate"><span class="pre">Schwefel.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.sharp_ridge">ceco.coco.sharp_ridge module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.sharp_ridge.Sharp_ridge"><code class="docutils literal notranslate"><span class="pre">Sharp_ridge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.sharp_ridge.Sharp_ridge.__init__"><code class="docutils literal notranslate"><span class="pre">Sharp_ridge.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.sharp_ridge.Sharp_ridge.evaluate"><code class="docutils literal notranslate"><span class="pre">Sharp_ridge.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.sharp_ridge.Sharp_ridge.raw"><code class="docutils literal notranslate"><span class="pre">Sharp_ridge.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.sphere">ceco.coco.sphere module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.sphere.Sphere"><code class="docutils literal notranslate"><span class="pre">Sphere</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.sphere.Sphere.__init__"><code class="docutils literal notranslate"><span class="pre">Sphere.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.sphere.Sphere.evaluate"><code class="docutils literal notranslate"><span class="pre">Sphere.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.sphere.Sphere.raw"><code class="docutils literal notranslate"><span class="pre">Sphere.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.step_ellipsoidal">ceco.coco.step_ellipsoidal module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal"><code class="docutils literal notranslate"><span class="pre">Step_ellipsoidal</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal.__init__"><code class="docutils literal notranslate"><span class="pre">Step_ellipsoidal.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal.evaluate"><code class="docutils literal notranslate"><span class="pre">Step_ellipsoidal.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal.raw"><code class="docutils literal notranslate"><span class="pre">Step_ellipsoidal.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ceco.coco.weierstrass">ceco.coco.weierstrass module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ceco.coco.weierstrass.Weierstrass"><code class="docutils literal notranslate"><span class="pre">Weierstrass</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.weierstrass.Weierstrass.__init__"><code class="docutils literal notranslate"><span class="pre">Weierstrass.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.weierstrass.Weierstrass.evaluate"><code class="docutils literal notranslate"><span class="pre">Weierstrass.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ceco.coco.weierstrass.Weierstrass.raw"><code class="docutils literal notranslate"><span class="pre">Weierstrass.raw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ceco.rw.html">ceco.rw package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ceco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ceco.coco package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/ceco.coco.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ceco-coco-package">
+<h1>ceco.coco package<a class="headerlink" href="#ceco-coco-package" title="Link to this heading"></a></h1>
+<section id="comparing-continous-optimizers-coco-benchmark-functions">
+<h2>COmparing Continous Optimizers (COCO) benchmark functions.<a class="headerlink" href="#comparing-continous-optimizers-coco-benchmark-functions" title="Link to this heading"></a></h2>
+</section>
+<section id="ceco-coco-attractive-sector-module">
+<h2>ceco.coco.attractive_sector module<a class="headerlink" href="#ceco-coco-attractive-sector-module" title="Link to this heading"></a></h2>
+<dl class="py class" id="module-ceco.coco.attractive_sector">
+<dt class="sig sig-object py" id="ceco.coco.attractive_sector.Attractive_sector">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.attractive_sector.</span></span><span class="sig-name descname"><span class="pre">Attractive_sector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/attractive_sector.html#Attractive_sector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.attractive_sector.Attractive_sector" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Attractive sector function, which is a benchmark function
+for optimization.</p>
+<p>The Attractive sector function is defined as:</p>
+<blockquote>
+<div><p>f(x) = T_{text{osz}}( sum_{i=1}^{D}( s_iz_i )^2 )^{0.9}</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.attractive_sector.Attractive_sector.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/attractive_sector.html#Attractive_sector.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.attractive_sector.Attractive_sector.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Attractive sector function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.attractive_sector.Attractive_sector.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/attractive_sector.html#Attractive_sector.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.attractive_sector.Attractive_sector.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Attractive sector function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = T_{text{osz}}( sum_{i=1}^{D}( s_iz_i )^2 )^{0.9}+ f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Attractive sector function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.attractive_sector.Attractive_sector.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/attractive_sector.html#Attractive_sector.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.attractive_sector.Attractive_sector.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Attractive sector function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = T_{text{osz}}( sum_{i=1}^{D}( s_iz_i )^2 )^{0.9}</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.bent_cigar">
+<span id="ceco-coco-bent-cigar-module"></span><h2>ceco.coco.bent_cigar module<a class="headerlink" href="#module-ceco.coco.bent_cigar" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.bent_cigar.Bent_cigar">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.bent_cigar.</span></span><span class="sig-name descname"><span class="pre">Bent_cigar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/bent_cigar.html#Bent_cigar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.bent_cigar.Bent_cigar" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Bent cigar function, which is a benchmark function
+for optimization.</p>
+<p>The Bent cigar function is defined as:</p>
+<blockquote>
+<div><p>f(x) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2 for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.bent_cigar.Bent_cigar.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/bent_cigar.html#Bent_cigar.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.bent_cigar.Bent_cigar.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Bent cigar function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.bent_cigar.Bent_cigar.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/bent_cigar.html#Bent_cigar.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.bent_cigar.Bent_cigar.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Bent cigar function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2 + f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Bent cigar function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.bent_cigar.Bent_cigar.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/bent_cigar.html#Bent_cigar.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.bent_cigar.Bent_cigar.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Bent cigar function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = x_1^2 + 10^6 sum_{i=2}^{D} x_i^2 for i in [1, D]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.buche_rastrigin">
+<span id="ceco-coco-buche-rastrigin-module"></span><h2>ceco.coco.buche_rastrigin module<a class="headerlink" href="#module-ceco.coco.buche_rastrigin" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.buche_rastrigin.Buche_rastrigin">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.buche_rastrigin.</span></span><span class="sig-name descname"><span class="pre">Buche_rastrigin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/buche_rastrigin.html#Buche_rastrigin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.buche_rastrigin.Buche_rastrigin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Buche-Rastrigin function, which is a benchmark function
+for optimization.</p>
+<p>The Buche-Rastrigin function is defined as:</p>
+<blockquote>
+<div><p>f(X)=10 ( D - sum(cos(2 pi x_i)) ) + sum(x_i ** 2) + 100 for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.buche_rastrigin.Buche_rastrigin.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/buche_rastrigin.html#Buche_rastrigin.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Buche-Rastrigin function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.buche_rastrigin.Buche_rastrigin.compute_s_i">
+<span class="sig-name descname"><span class="pre">compute_s_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ceco/coco/buche_rastrigin.html#Buche_rastrigin.compute_s_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.compute_s_i" title="Link to this definition"></a></dt>
+<dd><p>Computes the scaling factors s_i for the input vector.</p>
+<dl class="simple">
+<dt>The scaling factors are defined as:</dt><dd><p>s_i = 10 * (10^(0.5 * (i - 1) / (D - 1)) if z_i &gt; 0 and i is odd,
+s_i = 10^(0.5 * (i - 1) / (D - 1) otherwise.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>z_i</strong> (<em>np.ndarray</em>) – A vector of real numbers.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The scaling factors for the input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If the dimension is 1, the scaling factor is always 1.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.buche_rastrigin.Buche_rastrigin.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/buche_rastrigin.html#Buche_rastrigin.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Buche-Rastrigin function at a given input vector.</p>
+<p>The function is calculated as:</p>
+<p>f(X)=10 ( D - sum(cos(2 pi z_i)) ) + sum(x_i ** 2) + 100 * f_pen(X) + f_opt</p>
+<p>where z = s_i * T_osz(x - x_opt).
+where s_i = 10 times 10^(0.5 times (i - 1) / (D - 1)),   if z_i &gt; 0 and i is odd (i = 1, 3, 5, …)</p>
+<blockquote>
+<div><p>10^(0.5 times (i - 1) / (D - 1)),        otherwise</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Buche-Rastrigin function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.buche_rastrigin.Buche_rastrigin.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/buche_rastrigin.html#Buche_rastrigin.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.buche_rastrigin.Buche_rastrigin.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Buche-Rastrigin function at a given input vector without any shift.</p>
+<p>The function is calculated as:</p>
+<p>f(X)=10 ( D - sum(cos(2 pi x_i)) ) + sum(x_i ** 2) + 100 for i in [1, D]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.composite_griewank_rosenbrock_function_f8f2">
+<span id="ceco-coco-composite-griewank-rosenbrock-function-f8f2-module"></span><h2>ceco.coco.composite_griewank_rosenbrock_function_f8f2 module<a class="headerlink" href="#module-ceco.coco.composite_griewank_rosenbrock_function_f8f2" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.composite_griewank_rosenbrock_function_f8f2.</span></span><span class="sig-name descname"><span class="pre">Composite_griewank_rosenbrock_function_f8f2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/composite_griewank_rosenbrock_function_f8f2.html#Composite_griewank_rosenbrock_function_f8f2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<blockquote>
+<div><p>A class representing the Composite griewank-rosenbrock function f8f2 function, which is a benchmark function
+for optimization.</p>
+<p>The Composite griewank-rosenbrock function f8f2 function is defined as:</p>
+<blockquote>
+<div><p>f(x) =</p>
+</div></blockquote>
+</div></blockquote>
+<p>rac{10}{D-1}sum_{i=1}^{D-1}left(
+rac{x_i}{4000}-cosleft( x_i
+ight)
+ight)+10</p>
+<blockquote>
+<div><p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>x_opt (np.ndarray): The optimal shift vector, randomly generated within [-5, 5].
+f_opt (float): The function value at x_opt.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/composite_griewank_rosenbrock_function_f8f2.html#Composite_griewank_rosenbrock_function_f8f2.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Composite griewank-rosenbrock function f8f2 function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/composite_griewank_rosenbrock_function_f8f2.html#Composite_griewank_rosenbrock_function_f8f2.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.evaluate" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Evaluates the Composite griewank-rosenbrock function f8f2 function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = frac{10}{D-1}sum_{i=1}^{D-1}left( frac{x_i}{4000}-cosleft( x_i</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>ight)
+ight)+10+ f_opt</p>
+<blockquote>
+<div><dl class="simple">
+<dt>where:</dt><dd><p>z_hat = Λ^10 * R * (x - x_opt)
+z_tilde is obtained by applying a rounding transformation to z_hat
+z = Q * z_tilde</p>
+</dd>
+<dt>Parameters:</dt><dd><p>input_vector (np.ndarray): A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Composite griewank-rosenbrock function f8f2 function.</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: The function value at the given input vector.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/composite_griewank_rosenbrock_function_f8f2.html#Composite_griewank_rosenbrock_function_f8f2.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.composite_griewank_rosenbrock_function_f8f2.Composite_griewank_rosenbrock_function_f8f2.raw" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Evaluates the Composite griewank-rosenbrock function f8f2 function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) =</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>rac{10}{D-1}sum_{i=1}^{D-1}left(
+rac{x_i}{4000}-cosleft( x_i
+ight)
+ight)+10</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>x (np.ndarray): A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt>Returns:</dt><dd><p>float: The function value at the given input vector.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.different_power">
+<span id="ceco-coco-different-power-module"></span><h2>ceco.coco.different_power module<a class="headerlink" href="#module-ceco.coco.different_power" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.different_power.Different_power">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.different_power.</span></span><span class="sig-name descname"><span class="pre">Different_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/different_power.html#Different_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.different_power.Different_power" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Different power function, which is a benchmark function
+for optimization.</p>
+<p>The Different power function is defined as:</p>
+<blockquote>
+<div><p>f(x) = sqrt{sum_{i=1}^{D} left| x_i right|^{2 + 4 frac{i-1}{D-1}}} for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.different_power.Different_power.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/different_power.html#Different_power.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.different_power.Different_power.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Different power function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>high_conditioning</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <cite>True</cite>, applies a Gram-Schmidt transformation to increase problem conditioning. Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.different_power.Different_power.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/different_power.html#Different_power.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.different_power.Different_power.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Different power function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = sqrt{sum_{i=1}^{D} left| x_i right|^{2 + 4 frac{i-1}{D-1}}} + f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Different power function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.different_power.Different_power.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/different_power.html#Different_power.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.different_power.Different_power.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Different power function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = sqrt{sum_{i=1}^{D} left| x_i right|^{2 + 4 frac{i-1}{D-1}}} for i in [1, D]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.discus">
+<span id="ceco-coco-discus-module"></span><h2>ceco.coco.discus module<a class="headerlink" href="#module-ceco.coco.discus" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.discus.Discus">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.discus.</span></span><span class="sig-name descname"><span class="pre">Discus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/discus.html#Discus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.discus.Discus" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Discus function, which is a benchmark function
+for optimization.</p>
+<p>The Discus function is defined as:</p>
+<blockquote>
+<div><p>f(x) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2 for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.discus.Discus.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/discus.html#Discus.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.discus.Discus.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Discus function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.discus.Discus.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/discus.html#Discus.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.discus.Discus.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Discus function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2 + f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Discus function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.discus.Discus.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/discus.html#Discus.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.discus.Discus.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Discus function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = 10^6 * x_1^2 + sum_{i=2}^{D} x_i^2 for i in [1, D]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.ellipsoidal">
+<span id="ceco-coco-ellipsoidal-module"></span><h2>ceco.coco.ellipsoidal module<a class="headerlink" href="#module-ceco.coco.ellipsoidal" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.ellipsoidal.Ellipsoidal">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.ellipsoidal.</span></span><span class="sig-name descname"><span class="pre">Ellipsoidal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high_conditioning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/ellipsoidal.html#Ellipsoidal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.ellipsoidal.Ellipsoidal" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Ellipsoidal function, which is a benchmark function
+for optimization.</p>
+<p>The Ellipsoidal function is defined as:</p>
+<blockquote>
+<div><p>f(x) = sum(10^(6 * (i-1)/(D-1) * (x_i)^2) for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+<li><p><strong>high_conditioning</strong> (<em>bool</em>) – If <cite>True</cite>, applies an additional Gram-Schmidt transformation to introduce high conditioning.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.ellipsoidal.Ellipsoidal.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high_conditioning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/ellipsoidal.html#Ellipsoidal.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.ellipsoidal.Ellipsoidal.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Ellipsoidal function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>high_conditioning</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <cite>True</cite>, applies a Gram-Schmidt transformation to increase problem conditioning. Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.ellipsoidal.Ellipsoidal.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/ellipsoidal.html#Ellipsoidal.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.ellipsoidal.Ellipsoidal.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Ellipsoidal function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = sum(10^(6 * (i-1)/(D-1) * (z_i)^2) + f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Ellipsoidal function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.ellipsoidal.Ellipsoidal.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/ellipsoidal.html#Ellipsoidal.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.ellipsoidal.Ellipsoidal.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Ellipsoidal function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = sum(10^(6 * (i-1)/(D-1) * (x_i)^2) for i in [1, D]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.katsuura">
+<span id="ceco-coco-katsuura-module"></span><h2>ceco.coco.katsuura module<a class="headerlink" href="#module-ceco.coco.katsuura" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.katsuura.Katsuura">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.katsuura.</span></span><span class="sig-name descname"><span class="pre">Katsuura</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/katsuura.html#Katsuura"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.katsuura.Katsuura" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Katsuura function, which is a benchmark function
+for optimization.</p>
+<p>The Katsuura function is defined as:</p>
+<blockquote>
+<div><p>f(x) = frac{10}{D^2} prod_{i=1}^D ( 1 + i sum_{j=1}^{32} frac{|2^j x_i - round(2^j x_i)|}{2^j} )^{frac{10}{D^{1.2}}} - frac{10}{D^2} for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.katsuura.Katsuura.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/katsuura.html#Katsuura.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.katsuura.Katsuura.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Katsuura function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>high_conditioning</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <cite>True</cite>, applies a Gram-Schmidt transformation to increase problem conditioning. Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.katsuura.Katsuura.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/katsuura.html#Katsuura.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.katsuura.Katsuura.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Katsuura function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = frac{10}{D^2} prod_{i=1}^D ( 1 + i sum_{j=1}^{32} frac{|2^j x_i - round(2^j x_i)|}{2^j} )^{frac{10}{D^{1.2}}} - frac{10}{D^2} + f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Katsuura function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.katsuura.Katsuura.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/katsuura.html#Katsuura.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.katsuura.Katsuura.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Katsuura function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = frac{10}{D^2} prod_{i=1}^D ( 1 + i sum_{j=1}^{32} frac{|2^j x_i - round(2^j x_i)|}{2^j} )^{frac{10}{D^{1.2}}} - frac{10}{D^2} for i in [1, D]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.linear_slope">
+<span id="ceco-coco-linear-slope-module"></span><h2>ceco.coco.linear_slope module<a class="headerlink" href="#module-ceco.coco.linear_slope" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.linear_slope.Linear_slope">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.linear_slope.</span></span><span class="sig-name descname"><span class="pre">Linear_slope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/linear_slope.html#Linear_slope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.linear_slope.Linear_slope" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Linear slope function, which is a benchmark function
+for optimization.</p>
+<p>The Linear slope function is defined as:</p>
+<blockquote>
+<div><p>f(x) = sum_{i=1}^{D}5| s_i <a href="#id1"><span class="problematic" id="id2">|</span></a>-s_iz_i</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.linear_slope.Linear_slope.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/linear_slope.html#Linear_slope.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.linear_slope.Linear_slope.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Linear slope function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.linear_slope.Linear_slope.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/linear_slope.html#Linear_slope.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.linear_slope.Linear_slope.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Linear slope function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = sum_{i=1}^{D}5| s_i <a href="#id3"><span class="problematic" id="id4">|</span></a>-s_iz_i+ f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Linear slope function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.linear_slope.Linear_slope.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/linear_slope.html#Linear_slope.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.linear_slope.Linear_slope.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Linear slope function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = sum_{i=1}^{D}5| s_i <a href="#id5"><span class="problematic" id="id6">|</span></a>-s_iz_i</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.rastrigin">
+<span id="ceco-coco-rastrigin-module"></span><h2>ceco.coco.rastrigin module<a class="headerlink" href="#module-ceco.coco.rastrigin" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.rastrigin.Rastrigin">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.rastrigin.</span></span><span class="sig-name descname"><span class="pre">Rastrigin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adequate_global_structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/rastrigin.html#Rastrigin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rastrigin.Rastrigin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Rastrigin function, which is a benchmark function
+for optimization.</p>
+<p>The Rastrigin function is defined as:</p>
+<blockquote>
+<div><p>f(X)=10 ( D - sum(cos(2 pi x_i)) ) for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.rastrigin.Rastrigin.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adequate_global_structure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/rastrigin.html#Rastrigin.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rastrigin.Rastrigin.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Rastrigin function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If dimension is not a positive integer.</p></li>
+<li><p><strong>ValueError</strong> – If adequate global structure is not a boolean</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.rastrigin.Rastrigin.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/rastrigin.html#Rastrigin.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rastrigin.Rastrigin.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Rastrigin function at a given input vector.</p>
+<p>The function is calculated as:</p>
+<p>f(X)=10 ( D - sum(cos(2 pi z_i)) ) + ||z||^2 + f_opt</p>
+<p>where z = Λ^10 * T_asy(0.2, T_osz(x - x_opt)) if adequate global structure is false.
+where z = R * Λ^10 * Q * T_asy(0.2, T_osz(R * (x - x_opt))) if adequate global structure is true.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Rastrigin function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.rastrigin.Rastrigin.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/rastrigin.html#Rastrigin.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rastrigin.Rastrigin.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Rastrigin function at a given input vector without any shift.</p>
+<p>The function is calculated as:</p>
+<p>f(X)=10 ( D - sum(cos(2 pi x_i)) ) for i in [1, D]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.rosenbrock">
+<span id="ceco-coco-rosenbrock-module"></span><h2>ceco.coco.rosenbrock module<a class="headerlink" href="#module-ceco.coco.rosenbrock" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.rosenbrock.Rosenbrock">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.rosenbrock.</span></span><span class="sig-name descname"><span class="pre">Rosenbrock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/rosenbrock.html#Rosenbrock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rosenbrock.Rosenbrock" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Rosenbrock function, which is a benchmark function
+for optimization.</p>
+<p>The Rosenbrock function is defined as:</p>
+<blockquote>
+<div><p>f(X)=sum_{i=1}^{D-1}( 100( z_i^2-z_{i+1} )^2+( z_i-1 )^2 )+f_opt</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.rosenbrock.Rosenbrock.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/rosenbrock.html#Rosenbrock.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rosenbrock.Rosenbrock.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Rosenbrock function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>rotation</strong> (<em>np.ndarray</em>) – A rotation matrix for transforming the input vector. Defaults to None (no rotation).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.rosenbrock.Rosenbrock.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/rosenbrock.html#Rosenbrock.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rosenbrock.Rosenbrock.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Rosenbrock function at a given input vector.</p>
+<p>The function is calculated as:</p>
+<p>f(X)=sum_{i=1}^{D-1}( 100( z_i^2-z_{i+1} )^2+( z_i-1 )^2 )+f_opt</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Rosenbrock function.</p></li>
+<li><p><strong>rotation_matrix</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – A rotation matrix to apply to the input vector. Required if <cite>rotation</cite> is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.rosenbrock.Rosenbrock.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/rosenbrock.html#Rosenbrock.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.rosenbrock.Rosenbrock.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Rosenbrock function at a given input vector without any shift.</p>
+<p>The function is calculated as:</p>
+<p>f(X)=sum_{i=1}^{D-1}( 100( x_i^2-x_i+1 )^2+( x_i-1 )^2 )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.schaffer_f7">
+<span id="ceco-coco-schaffer-f7-module"></span><h2>ceco.coco.schaffer_f7 module<a class="headerlink" href="#module-ceco.coco.schaffer_f7" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.schaffer_f7.Schaffer_f7">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.schaffer_f7.</span></span><span class="sig-name descname"><span class="pre">Schaffer_f7</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ill_conditioned</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/schaffer_f7.html#Schaffer_f7"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schaffer_f7.Schaffer_f7" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Schaffer f7 function, which is a benchmark function
+for optimization.</p>
+<p>The Schaffer f7 function is defined as:</p>
+<blockquote>
+<div><p>f(x) = ( frac{1}{D-1}sum_{i=1}^{D-1}( sqrt{x_i}+sqrt{x_i}sin^2( 50x_i^{0.2} ) ) )^2 for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+<li><p><strong>ill_conditioned</strong> (<em>bool</em>) – If <cite>True</cite>,</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.schaffer_f7.Schaffer_f7.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ill_conditioned</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/schaffer_f7.html#Schaffer_f7.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schaffer_f7.Schaffer_f7.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Schaffer f7 function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p></li>
+<li><p><strong>high_conditioning</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <cite>True</cite>, . Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.schaffer_f7.Schaffer_f7._schaffer_raw">
+<span class="sig-name descname"><span class="pre">_schaffer_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/schaffer_f7.html#Schaffer_f7._schaffer_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schaffer_f7.Schaffer_f7._schaffer_raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Schaffer f7 function at a given input vector after transformation.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = ( frac{1}{D-1}sum_{i=1}^{D-1}( sqrt{x_i}+sqrt{x_i}sin^2( 50x_i^{0.2} ) ) )^2 for i in [1, D]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.schaffer_f7.Schaffer_f7.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/schaffer_f7.html#Schaffer_f7.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schaffer_f7.Schaffer_f7.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Schaffer f7 function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = ( frac{1}{D-1}sum_{i=1}^{D-1}( sqrt{x_i}+sqrt{x_i}sin^2( 50x_i^{0.2} ) ) )^2 + f_opt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Schaffer f7 function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p></li>
+<li><p><strong>ValueError</strong> – If the input vector after transform is zero or negative.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.schaffer_f7.Schaffer_f7.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/schaffer_f7.html#Schaffer_f7.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schaffer_f7.Schaffer_f7.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Schaffer f7 function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = ( frac{1}{D-1}sum_{i=1}^{D-1}( sqrt{x_i}+sqrt{x_i}sin^2( 50x_i^{0.2} ) ) )^2 for i in [1, D]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.schwefel">
+<span id="ceco-coco-schwefel-module"></span><h2>ceco.coco.schwefel module<a class="headerlink" href="#module-ceco.coco.schwefel" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.schwefel.Schwefel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.schwefel.</span></span><span class="sig-name descname"><span class="pre">Schwefel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/schwefel.html#Schwefel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schwefel.Schwefel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Schwefel function, which is a benchmark function for optimization.</p>
+<p>The Schwefel function is defined as:</p>
+<blockquote>
+<div><p>f(X)= -frac{1}{100D}sum_{i=1}^{D}x_i sin(sqrt{| x_i <a href="#id7"><span class="problematic" id="id8">|</span></a>}) + 4.189828872724339 + 100f_{pen}(z/100) + f_{opt}
+where x is an input vector of dimension D.</p>
+</div></blockquote>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+<li><p><strong>sign_vector</strong> (<em>np.ndarray</em>) – Vector of random signs (±1) used in transformations.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.schwefel.Schwefel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/schwefel.html#Schwefel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schwefel.Schwefel.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Schwefel function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.schwefel.Schwefel.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/schwefel.html#Schwefel.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schwefel.Schwefel.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Schwefel function at a given input vector.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(X)=-frac{1}{100D}sum_{i=1}^{D}x_i sin(sqrt{| x_i <a href="#id9"><span class="problematic" id="id10">|</span></a>}) + 4.189828872724339 + 100f_{pen}(z/100) + f_{opt}</p>
+</div></blockquote>
+<dl class="simple">
+<dt>with the transformations:</dt><dd><p>widehat{X} = 2 times 1 pm otimesX
+widehat{z}_i = widehat{x}_i, widehat{z}_{i+1} = widehat{x}_{i+1} + 0.25(widehat{x}_i-[x_i^{opt}longrightarrow 2| x_i^{opt}|])
+z = 100(wedge^{10}(widehat{z}-[x^{opt}longrightarrow 2| x^{opt}|]) + 2| x^{opt}|)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Schwefel function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.schwefel.Schwefel.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/schwefel.html#Schwefel.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.schwefel.Schwefel.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Schwefel function at a given input vector without any shift.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(X)=-frac{1}{100D}sum_{i=1}^{D}x_i sin(sqrt{| x_i <a href="#id11"><span class="problematic" id="id12">|</span></a>})</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.sharp_ridge">
+<span id="ceco-coco-sharp-ridge-module"></span><h2>ceco.coco.sharp_ridge module<a class="headerlink" href="#module-ceco.coco.sharp_ridge" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.sharp_ridge.Sharp_ridge">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.sharp_ridge.</span></span><span class="sig-name descname"><span class="pre">Sharp_ridge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/sharp_ridge.html#Sharp_ridge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sharp_ridge.Sharp_ridge" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>Implements the Sharp ridge function, a common benchmark function for optimization problems.</p>
+<p>The Sharp ridge function is defined as:</p>
+<blockquote>
+<div><p>f(x) = z_1^2+100sqrt{sum_{i=2}^{D}z_i^2} for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.sharp_ridge.Sharp_ridge.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/sharp_ridge.html#Sharp_ridge.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sharp_ridge.Sharp_ridge.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Sharp ridge function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.sharp_ridge.Sharp_ridge.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/sharp_ridge.html#Sharp_ridge.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sharp_ridge.Sharp_ridge.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Sharp ridge function at a given input vector.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(x) = z_1^2+100sqrt{sum_{i=2}^{D}z_i^2} + frac{10}{D}f_pen(x) + f_opt</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Sharp ridge function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.sharp_ridge.Sharp_ridge.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/sharp_ridge.html#Sharp_ridge.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sharp_ridge.Sharp_ridge.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Sharp ridge function at a given input vector without any shift.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(x) = z_1^2+100sqrt{sum_{i=2}^{D}z_i^2} for i in [1, D]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.sphere">
+<span id="ceco-coco-sphere-module"></span><h2>ceco.coco.sphere module<a class="headerlink" href="#module-ceco.coco.sphere" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.sphere.Sphere">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.sphere.</span></span><span class="sig-name descname"><span class="pre">Sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/sphere.html#Sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sphere.Sphere" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>Implements the Sphere function, a common benchmark function for optimization problems.</p>
+<p>The Sphere function is defined as:</p>
+<blockquote>
+<div><p>f(x) = sum(x_i^2) for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.sphere.Sphere.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/sphere.html#Sphere.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sphere.Sphere.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Sphere function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.sphere.Sphere.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/sphere.html#Sphere.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sphere.Sphere.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Sphere function at a given input vector.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(x) = sum((x_i - x_opt_i)^2) + f_opt</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Sphere function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.sphere.Sphere.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/sphere.html#Sphere.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.sphere.Sphere.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Sphere function at a given input vector without any shift.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(x) = sum(x_i^2) for i in [1, D]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.step_ellipsoidal">
+<span id="ceco-coco-step-ellipsoidal-module"></span><h2>ceco.coco.step_ellipsoidal module<a class="headerlink" href="#module-ceco.coco.step_ellipsoidal" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.step_ellipsoidal.Step_ellipsoidal">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.step_ellipsoidal.</span></span><span class="sig-name descname"><span class="pre">Step_ellipsoidal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/step_ellipsoidal.html#Step_ellipsoidal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>A class representing the Step ellipsoidal function, which is a benchmark function
+for optimization.</p>
+<p>The Step ellipsoidal function is defined as:</p>
+<blockquote>
+<div><p>f(x) = 0.1 * max(<a href="#id13"><span class="problematic" id="id14">|x_1|</span></a> / 10^4, sum_{i=1}^{D} 10^(2 * (i-1) / (D-1)) * x_i^2)</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.step_ellipsoidal.Step_ellipsoidal.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/step_ellipsoidal.html#Step_ellipsoidal.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Step ellipsoidal function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.step_ellipsoidal.Step_ellipsoidal.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/step_ellipsoidal.html#Step_ellipsoidal.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Step ellipsoidal function at a given input vector.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = 0.1 * max(<a href="#id15"><span class="problematic" id="id16">|z_hat_1|</span></a> / 10^4, sum_{i=1}^{D} 10^(2 * (i-1) / (D-1)) * z_i^2) + f_pen(x) + f_opt</p>
+</dd>
+<dt>where:</dt><dd><p>z_hat = Λ^10 * R * (x - x_opt)
+z_tilde is obtained by applying a rounding transformation to z_hat
+z = Q * z_tilde</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Step ellipsoidal function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.step_ellipsoidal.Step_ellipsoidal.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/step_ellipsoidal.html#Step_ellipsoidal.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.step_ellipsoidal.Step_ellipsoidal.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Step ellipsoidal function at a given input vector without any shift.</p>
+<dl class="simple">
+<dt>The function is calculated as:</dt><dd><p>f(x) = 0.1 * max(<a href="#id17"><span class="problematic" id="id18">|x_1|</span></a> / 10^4, sum_{i=1}^{D} 10^(2 * (i-1) / (D-1)) * x_i^2)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ceco.coco.weierstrass">
+<span id="ceco-coco-weierstrass-module"></span><h2>ceco.coco.weierstrass module<a class="headerlink" href="#module-ceco.coco.weierstrass" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ceco.coco.weierstrass.Weierstrass">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ceco.coco.weierstrass.</span></span><span class="sig-name descname"><span class="pre">Weierstrass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ceco/coco/weierstrass.html#Weierstrass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.weierstrass.Weierstrass" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_class.html#ceco.benchmark.Benchmark" title="ceco.benchmark.Benchmark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Benchmark</span></code></a></p>
+<p>Implements the Weierstrass function, a common benchmark function for optimization problems.</p>
+<p>The Weierstrass function is defined as:</p>
+<blockquote>
+<div><p>f(x) = 10( frac{1}{D}sum_{i=1}^{D}sum_{k=0}^{11}1/2^kcos( 2pi 3^k( z_i + 1/2 ) ) -f_0 )^3 for i in [1, D]</p>
+</div></blockquote>
+<p>where x is an input vector of dimension D.</p>
+<p>This class inherits from <cite>Benchmark</cite> and applies a shift transformation to the input vector. The optimal solution (x_opt) is randomly generated within the range [-5, 5], and the function value at x_opt (f_opt) computed as f(x_opt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_opt</strong> (<em>np.ndarray</em>) – The optimal shift vector, randomly generated within [-5, 5].</p></li>
+<li><p><strong>f_opt</strong> (<em>float</em>) – The function value at x_opt.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.weierstrass.Weierstrass.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/ceco/coco/weierstrass.html#Weierstrass.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.weierstrass.Weierstrass.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Weierstrass function with a given dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dimension</strong> (<em>int</em>) – The number of dimensions for the input space. Must be a positive integer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If dimension is not a positive integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.weierstrass.Weierstrass.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/weierstrass.html#Weierstrass.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.weierstrass.Weierstrass.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Weierstrass function at a given input vector.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(x) = 10( frac{1}{D}sum_{i=1}^{D}sum_{k=0}^{11}1/2^kcos( 2pi 3^k( z_i + 1/2 ) ) -f_0 )^3 + frac{10}{D}f_pen(x) + f_opt</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vector</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution. Must have the same length as the dimension of the Weierstrass function.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ceco.coco.weierstrass.Weierstrass.raw">
+<span class="sig-name descname"><span class="pre">raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ceco/coco/weierstrass.html#Weierstrass.raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ceco.coco.weierstrass.Weierstrass.raw" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the Weierstrass function at a given input vector without any shift.</p>
+<p>The function is calculated as:</p>
+<blockquote>
+<div><p>f(x) = 10( frac{1}{D}sum_{i=1}^{D}sum_{k=0}^{11}1/2^kcos( 2pi 3^k( z_i + 1/2 ) ) -f_0 )^3 for i in [1, D]</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>np.ndarray</em>) – A vector of real numbers representing a candidate solution.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The function value at the given input vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input vector does not match the expected dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ceco.cec.html" class="btn btn-neutral float-left" title="ceco.cec package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ceco.rw.html" class="btn btn-neutral float-right" title="ceco.rw package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, muhammad hanif ramadhani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
